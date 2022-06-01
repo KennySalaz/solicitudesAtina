@@ -133,7 +133,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                 {
                     data?.celularTitular !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Celular con WSP del titular</div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Numero Telefono</div>
                             <div className="col-md-8 col-sm-6 col-xs-12">
                                 {
                                     data?.celularTitular
@@ -200,7 +200,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                 {
                     data?.celularTitular2 !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Celular con WSP del titular</div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Numero Telefono</div>
                             <div className="col-md-8 col-sm-6 col-xs-12">
                                 {
                                     data?.celularTitular2

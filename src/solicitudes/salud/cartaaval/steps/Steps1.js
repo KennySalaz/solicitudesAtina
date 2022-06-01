@@ -39,30 +39,7 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
 
     })
 
-    useEffect(() => {
 
-        console.log("AQUIIIIIIIIII",
-            initialValues.nombreTitularPoliza2,
-            initialValues.apellidoTitularPoliza2,
-            initialValues.cedulaTitular2,
-            initialValues.emailTitular2,
-            initialValues.celularTitular2,
-            initialValues.nombreTitularPoliza,
-            initialValues.apellidoTitularPoliza,
-            initialValues.cedulaTitular,
-            initialValues.emailTitular,
-            initialValues.celularTitular ,
-        )
-    }, [initialValues.nombreTitularPoliza2,
-    initialValues.apellidoTitularPoliza2,
-    initialValues.cedulaTitular2,
-    initialValues.emailTitular2,
-    initialValues.celularTitular2,
-    initialValues.nombreTitularPoliza,
-    initialValues.apellidoTitularPoliza,
-    initialValues.cedulaTitular,
-    initialValues.emailTitular,
-    initialValues.celularTitular,])
 
 
     return (
@@ -128,7 +105,7 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                             <div data-aos="fade-left" className="col-sm-6">
                                 <div className="form-group">
                                     <label class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
-                                        Nombre del Titular
+                                        Nombre y Apellido del Titular
                                     </label>
                                     <input
                                         name='nombreTitularPoliza'
@@ -149,7 +126,7 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                 </div>
 
                             </div>
-                            <div data-aos="fade-left" className="col-sm-6">
+                            {/*  <div data-aos="fade-left" className="col-sm-6">
                                 <div className="form-group">
                                     <label
                                         class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
@@ -171,11 +148,7 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                     }
                                 </div>
 
-                            </div>
-                        </div>
-
-
-                        <div className="row">
+                            </div> */}
                             <div data-aos="fade-left" className="col-sm-6">
                                 <div className="form-group">
                                     <label
@@ -201,6 +174,11 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                 </div>
 
                             </div>
+                        </div>
+
+
+                        <div className="row">
+
                             <div data-aos="fade-left" className="col-sm-6">
                                 <div className="form-group">
                                     <label
@@ -267,7 +245,7 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                     <label
                                         class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
 
-                                        Nombre del titular de la póliza
+                                        Nombre y Apellido del titular de la póliza
 
                                     </label>
                                     <input
@@ -289,7 +267,7 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                 </div>
 
                             </div>
-                            <div data-aos="fade-left" className="col-sm-6">
+                            {/* <div data-aos="fade-left" className="col-sm-6">
                                 <div className="form-group">
 
                                     <label
@@ -315,11 +293,7 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
 
                                 </div>
 
-                            </div>
-                        </div>
-
-
-                        <div className="row">
+                            </div> */}
                             <div data-aos="fade-left" className="col-sm-6">
                                 <div className="form-group">
                                     <label
@@ -344,6 +318,11 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
 
 
                             </div>
+                        </div>
+
+
+                        <div className="row">
+
                             <div data-aos="fade-left" className="col-sm-6">
                                 <div className="form-group">
                                     <label
@@ -400,7 +379,7 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                     <label
                                         class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
 
-                                        Nombre del beneficiario
+                                        Nombre y Apellido del beneficiario
 
                                     </label>
                                     <input
@@ -426,32 +405,6 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                     <label
                                         class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
 
-                                        Apellido del beneficiario de la póliza
-
-                                    </label>
-                                    <input
-                                        name='apellidoBeneficiarioPoliza'
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.apellidoBeneficiarioPoliza ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                        id="grid-last-name"
-                                        type="text"
-                                        placeholder="Apellido del beneficiario de la póliza"
-                                    />
-                                    {
-                                        errors.apellidoBeneficiarioPoliza && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.apellidoBeneficiarioPoliza}  </span>
-                                    }
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <div data-aos="fade-left" className="row">
-                            <div className="col-sm-6">
-                                <div className="form-group">
-                                    <label
-                                        class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
-
                                         Cédula de identidad del beneficiario
 
                                     </label>
@@ -470,6 +423,33 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                 </div>
 
                             </div>
+                            {/*  <div data-aos="fade-left" className="col-sm-6">
+                                <div className="form-group">
+                                    <label
+                                        class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
+
+                                        Apellido del beneficiario de la póliza
+
+                                    </label>
+                                    <input
+                                        name='apellidoBeneficiarioPoliza'
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.apellidoBeneficiarioPoliza ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                        id="grid-last-name"
+                                        type="text"
+                                        placeholder="Apellido del beneficiario de la póliza"
+                                    />
+                                    {
+                                        errors.apellidoBeneficiarioPoliza && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.apellidoBeneficiarioPoliza}  </span>
+                                    }
+
+                                </div>
+
+                            </div> */}
+                        </div>
+                        <div data-aos="fade-left" className="row">
+
                             <div className="col-sm-6">
                                 <div className="form-group">
                                     <label

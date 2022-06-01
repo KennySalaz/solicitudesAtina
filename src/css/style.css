@@ -1,6 +1,3 @@
-
-
-
 body {
     font-size: 13px;
     font-family: 'Open Sans', arial, helvetica, sans-serif;
@@ -8,9 +5,7 @@ body {
     background-color: white;
 }
 
-/*------------------------------------------------------------------
-[2.Input & Labels ]
-*/
+
 
 .form-group {
     margin-bottom: 19px;
@@ -129,9 +124,7 @@ body {
     font-size: 14px;
 }
 
-/*------------------------------------------------------------------
-[3. Buttons ]
-*/
+
 .btn {
     font-weight: 700;
     font-size: 15px;
@@ -178,9 +171,7 @@ body {
 }
 
 
-/*------------------------------------------------------------------
-[4. Loader / .luna-loader-container]
-*/
+
 .luna-loader-container {
     position: fixed;
     top: 0;
@@ -199,9 +190,9 @@ body {
     left: 50%;
     margin-left: -25px;
     border: 4px solid #f3f3f3;
-    /* Light grey */
+
     border-top: 4px solid #3498db;
-    /* Blue */
+
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -209,9 +200,6 @@ body {
 }
 
 
-/*------------------------------------------------------------------
-[5. Signup Container / .luna-signup-container]
-*/
 .luna-signup-container {
     display: none;
     position: relative;
@@ -220,9 +208,6 @@ body {
 }
 
 
-/*------------------------------------------------------------------
-[5.1 Left Panel / .luna-signup-left]
-*/
 .luna-signup-left {
     padding: 60px 30px 30px;
     background: #0f36e5;
@@ -343,18 +328,13 @@ body {
     bottom: 0;
 }
 
-/*------------------------------------------------------------------
-[5.1.1. Logo / .luna-signup-logo]
-*/
 .luna-signup-logo {
     margin-bottom: 20px;
     max-width: 200px;
     width: 100%;
 }
 
-/*------------------------------------------------------------------
-[5.2. Right Panel / .luna-signup-right]
-*/
+
 .luna-signup-right {
     position: relative;
     margin-left: 200px;
@@ -362,18 +342,13 @@ body {
     padding: 60px 30px 0 0
 }
 
-/*------------------------------------------------------------------
-[5.2.1 Steps Counts / .steps-count]
-*/
 .steps-count {
     font-weight: bold;
     font-size: 13px;
     text-align: right;
 }
 
-/*------------------------------------------------------------------
-[5.2.2 Steps / .luna-steps]
-*/
+
 .luna-steps {
     height: 500px;
     position: relative;
@@ -501,9 +476,7 @@ body {
     margin-bottom: 15px;
 }
 
-/*------------------------------------------------------------------
-[5.2.2.2 Confirm Step / .step-confirm]
-*/
+
 
 .step-confirm {
     height: 0;
@@ -601,7 +574,7 @@ body {
 
 .confirm-label,
 .confirm-text {
-    /*  font-size: 16px; */
+
     margin-bottom: 10px;
 }
 
@@ -611,9 +584,7 @@ body {
 
 .confirm-text {}
 
-/*------------------------------------------------------------------
-[5.2.3 Buttons / .button-container]
-*/
+
 .button-container {
     text-align: right;
     position: relative;
@@ -647,9 +618,7 @@ body {
     outline: none;
 }
 
-/*------------------------------------------------------------------
-[6. Animations]
-*/
+
 
 .luna_loading {
     width: 60px;
@@ -698,9 +667,6 @@ body {
 }
 
 
-/*------------------------------------------------------------------
-[9. BootStrap Select]
-*/
 .bootstrap-select.form-control {
     background: none;
     border-radius: 0;
@@ -773,7 +739,7 @@ body {
 }
 
 
-/* Luna Default Theme  */
+
 
 .luna-default .bootstrap-select button {
     border: 2px solid #c9c9c9;
@@ -824,12 +790,6 @@ body {
 }
 
 
-
-
-
-/*------------------------------------------------------------------
-[8. Responsive Styles]
-*/
 
 @media only screen and (max-width: 990px) {
     .luna-signup-left {

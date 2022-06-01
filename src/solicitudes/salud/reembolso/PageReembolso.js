@@ -28,6 +28,7 @@ const PageReembolso = () => {
     const [page, setPage] = useState(1)
     const [loadingModal, setLoadingModal] = useState(false)
     const [fileSelect, setFileSelect] = useState(new Array(3))
+    const [urlGET, setUrlGET] = useState([])
 
     const [errorFile, setErrorFile] = useState({
         errorInformeOp1: false,
@@ -131,58 +132,63 @@ const PageReembolso = () => {
     const sendData = async () => {
         setLoadingModal(true)
         const id = uuidv4()
-
-        try {
-            let urlFile = []
-            fileSelect.forEach(async (file, i) => {
-                console.log('map', urlFile)
+        await Promise.all(
+            fileSelect.map(async (file, i) => {
                 const storageRef = ref(storage, `/solicitudes/salud/reembolso/${id}/${file[0].name}`)
                 const uploadResult = await uploadBytes(storageRef, file[0])
-                urlFile.push(await getDownloadURL(uploadResult.ref))
-                if (urlFile.length >= 3) {
-                    setDoc(doc(db, '/solicitudes/salud-reembolso/historico/', id), {
-                        Tipodepóliza: formStep1.tipoPoliza,
-                        NombreDelTomador: data.nombreTomador,
-                        CompañíadeSeguros: data.selectSeguro,
-                        TitularOBeneficiario: formStep1.titularObeneficiario,
-                        Nombredeltitulardelapóliza: data.nombreTitularPoliza || data.nombreTitularPoliza2,
-                        /*    Appellidodeltitulardelapóliza: data.apellidoTitularPoliza || data.apellidoTitularPoliza2, */
-                        CéduladeidentidadTitular: data.cedulaTitular || data.cedulaTitular2,
-                        CorreoElectrónicoTitular: data.emailTitular || data.emailTitular2,
-                        NumeroTelefonoTitular: data.celularTitular || data.celularTitular2,
-                        NombredelBeneficiariodelapóliza: data.nombreBeneficiarioPoliza,
-                        /*  AppellidodelBeneficiariodelapóliza: data.apellidoBeneficiarioPoliza, */
-                        CéduladeidentidadBeneficiario: data.cedulaBeneficiario,
-                        CorreoElectrónicoBeneficiario: data.emailBeneficiario,
-                        NumeroTelefonoBeneficiario: data.celularBeneficiario,
-                        tipoReembolso: formStep1.tipoReembolso,
-                        PatologíaoDiagnóstico: data.patologiaDiagnostico,
-                        Fechadeocurrencia: startDate,
-                        Monto: data.montoTotal,
-                        /* RécipeEindicaciones: data.recipeIndicaciones,
-                        ExámenesRealizados: data.examenesRealizados,
-                        Facturas: data.facturas, */
-                        documentosPdf: urlFile,
-                    })
-                }
+                urlGET.push(await getDownloadURL(uploadResult.ref))
             })
+        )
+        setUrlGET(urlGET)
+        try {
+
+            setDoc(doc(db, '/solicitudes/salud-reembolso/historico/', id), {
+                Tipodepóliza: formStep1.tipoPoliza,
+                NombreDelTomador: data.nombreTomador,
+                CompañíadeSeguros: data.selectSeguro,
+                TitularOBeneficiario: formStep1.titularObeneficiario,
+                Nombredeltitulardelapóliza: data.nombreTitularPoliza || data.nombreTitularPoliza2,
+                /*    Appellidodeltitulardelapóliza: data.apellidoTitularPoliza || data.apellidoTitularPoliza2, */
+                CéduladeidentidadTitular: data.cedulaTitular || data.cedulaTitular2,
+                CorreoElectrónicoTitular: data.emailTitular || data.emailTitular2,
+                NumeroTelefonoTitular: data.celularTitular || data.celularTitular2,
+                NombredelBeneficiariodelapóliza: data.nombreBeneficiarioPoliza,
+                /*  AppellidodelBeneficiariodelapóliza: data.apellidoBeneficiarioPoliza, */
+                CéduladeidentidadBeneficiario: data.cedulaBeneficiario,
+                CorreoElectrónicoBeneficiario: data.emailBeneficiario,
+                NumeroTelefonoBeneficiario: data.celularBeneficiario,
+                tipoReembolso: formStep1.tipoReembolso,
+                PatologíaoDiagnóstico: data.patologiaDiagnostico,
+                Fechadeocurrencia: startDate,
+                Monto: data.montoTotal,
+                /* RécipeEindicaciones: data.recipeIndicaciones,
+                ExámenesRealizados: data.examenesRealizados,
+                Facturas: data.facturas, */
+                documentosPdf: urlGET,
+            })
+
 
         } catch (error) {
             alert(error)
         }
-        setLoadingModal(false)
-        Swal.fire(
-            'Solicitud enviada',
-            'You clicked the button!',
-        )
-        setFileSelect([''])
-        setErrorFile({
-            errorInformeOp1: false,
-            errorRecipeOp1: false,
-            errorExamenesOp1: false,
-            errorFacturaOp1: false,
-        })
-        window.location.href = 'https://atinaseguros.com/'
+        setTimeout(() => {
+            setLoadingModal(false)
+            Swal.fire(
+                'Solicitud enviada',
+                'You clicked the button!',
+            )
+
+            setFileSelect([''])
+            setErrorFile({
+                errorInformeOp1: false,
+                errorRecipeOp1: false,
+                errorExamenesOp1: false,
+                errorFacturaOp1: false,
+            })
+            window.location.href = 'https://atinaseguros.com/'
+        }, 3000);
+
+
 
     }
     useEffect(() => {

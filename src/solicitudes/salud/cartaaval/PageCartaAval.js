@@ -223,11 +223,11 @@ const PageCartaAval = () => {
                                     } else if (valores.nombreTitularPoliza !== '' && formStep1.titularObeneficiario === 'titular' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.nombreTitularPoliza)) {
                                         errores.nombreTitularPoliza = 'Solo letras y espacios'
                                     }
-                                    if (!valores.apellidoTitularPoliza && formStep1.titularObeneficiario === 'titular') {
-                                        errores.apellidoTitularPoliza = true
-                                    } else if (valores.apellidoTitularPoliza !== '' && formStep1.titularObeneficiario === 'titular' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.apellidoTitularPoliza)) {
-                                        errores.apellidoTitularPoliza = 'Solo letras y espacios'
-                                    }
+                                    /*  if (!valores.apellidoTitularPoliza && formStep1.titularObeneficiario === 'titular') {
+                                         errores.apellidoTitularPoliza = true
+                                     } else if (valores.apellidoTitularPoliza !== '' && formStep1.titularObeneficiario === 'titular' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.apellidoTitularPoliza)) {
+                                         errores.apellidoTitularPoliza = 'Solo letras y espacios'
+                                     } */
                                     if (!valores.cedulaTitular && formStep1.titularObeneficiario === 'titular') {
                                         errores.cedulaTitular = true
                                     } else if (valores.cedulaTitular !== '' && formStep1.titularObeneficiario === 'titular' && !/^\d*\.?\d*$/.test(valores.cedulaTitular)) {
@@ -252,11 +252,11 @@ const PageCartaAval = () => {
                                     } else if (valores.nombreTitularPoliza2 !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.nombreTitularPoliza2)) {
                                         errores.nombreTitularPoliza2 = 'Solo letras y espacios'
                                     }
-                                    if (!valores.apellidoTitularPoliza2 && formStep1.titularObeneficiario === 'beneficiario') {
-                                        errores.apellidoTitularPoliza2 = true
-                                    } else if (valores.nombreTitularPoliza2 !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.apellidoTitularPoliza2)) {
-                                        errores.apellidoTitularPoliza2 = 'Solo letras y espacios'
-                                    }
+                                    /*  if (!valores.apellidoTitularPoliza2 && formStep1.titularObeneficiario === 'beneficiario') {
+                                         errores.apellidoTitularPoliza2 = true
+                                     } else if (valores.nombreTitularPoliza2 !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.apellidoTitularPoliza2)) {
+                                         errores.apellidoTitularPoliza2 = 'Solo letras y espacios'
+                                     } */
                                     if (!valores.cedulaTitular2 && formStep1.titularObeneficiario === 'beneficiario') {
                                         errores.cedulaTitular2 = true
                                     } else if (valores.cedulaTitular2 !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^\d*\.?\d*$/.test(valores.cedulaTitular2)) {
@@ -277,11 +277,11 @@ const PageCartaAval = () => {
                                     } else if (valores.nombreBeneficiarioPoliza !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.nombreBeneficiarioPoliza)) {
                                         errores.nombreBeneficiarioPoliza = 'Solo letras y espacios'
                                     }
-                                    if (!valores.apellidoBeneficiarioPoliza && formStep1.titularObeneficiario === 'beneficiario') {
-                                        errores.apellidoBeneficiarioPoliza = true
-                                    } else if (valores.apellidoBeneficiarioPoliza !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.apellidoBeneficiarioPoliza)) {
-                                        errores.apellidoBeneficiarioPoliza = 'Solo letras y espacios'
-                                    }
+                                    /*  if (!valores.apellidoBeneficiarioPoliza && formStep1.titularObeneficiario === 'beneficiario') {
+                                         errores.apellidoBeneficiarioPoliza = true
+                                     } else if (valores.apellidoBeneficiarioPoliza !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.apellidoBeneficiarioPoliza)) {
+                                         errores.apellidoBeneficiarioPoliza = 'Solo letras y espacios'
+                                     } */
                                     if (!valores.cedulaBeneficiario && formStep1.titularObeneficiario === 'beneficiario') {
                                         errores.cedulaBeneficiario = true
                                     } else if (valores.cedulaBeneficiario !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^\d*\.?\d*$/.test(valores.cedulaBeneficiario)) {
