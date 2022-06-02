@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-
+import InputMask from "react-input-mask";
 const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, initialValues, errors }) => {
 
     const [formValue, setFormValue] = useState('')
@@ -61,7 +61,7 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                     onBlur={handleBlur}
 
                                     name="titularObeneficiario" />
-                                Soy el titular
+                                Soy el Titular
                             </label>
                             <label className="radio-inline">
                                 <input
@@ -116,6 +116,8 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                         type="text"
                                         placeholder="Nombre del titular de la póliza"
                                     />
+
+
                                     {
                                         errors.nombreTitularPoliza && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.nombreTitularPoliza}  </span>
                                     }
@@ -213,7 +215,7 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                         Numero de telefono del titular
 
                                     </label>
-                                    <input
+                                    {/*   <input
                                         name='celularTitular'
                                         onChange={handleChange}
                                         onBlur={handleBlur}
@@ -221,7 +223,15 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                         id="grid-last-name"
                                         type="text"
                                         placeholder="4240000000"
-                                    />
+                                    /> */}
+                                    <InputMask
+                                        className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.celularTitular ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                        mask="+5\8 999 999 9999"
+                                        placeholder="+58 000 000 0000"
+                                        onBlur={handleBlur}
+                                        maskPlaceholder={null}
+                                        name='celularTitular'
+                                        onChange={handleChange} />
 
 
                                     {
@@ -354,7 +364,7 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                         Celular del titular
 
                                     </label>
-                                    <input
+                                    {/* <input
                                         name='celularTitular2'
                                         onChange={handleChange}
                                         onBlur={handleBlur}
@@ -362,6 +372,18 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                         id="grid-last-name"
                                         type="text"
                                         placeholder="424000000"
+                                    /> */}
+                                    <InputMask
+                                        onChange={handleChange}
+                                        placeholder="+58 000 000 0000"
+                                        maskPlaceholder={null}
+                                        mask="+5\8 999 999 9999"
+                                        onBlur={handleBlur}
+
+                                        className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.celularTitular2 ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                        name='celularTitular2'
+
+
                                     />
                                     {
                                         errors.celularTitular2 && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.celularTitular2}  </span>
@@ -481,7 +503,7 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                         Celular del beneficiario
 
                                     </label>
-                                    <input
+                                    {/*  <input
                                         name='celularBeneficiario'
                                         onChange={handleChange}
                                         onBlur={handleBlur}
@@ -489,6 +511,15 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                         id="grid-last-name"
                                         type="text"
                                         placeholder="4240000000"
+                                    /> */}
+                                    <InputMask
+                                        onChange={handleChange}
+                                        placeholder="+58 000 000 0000"
+                                        maskPlaceholder={null}
+                                        name='celularBeneficiario'
+                                        mask="+5\8 999 999 9999"
+                                        onBlur={handleBlur}
+                                        className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.celularBeneficiario ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
                                     />
 
                                     {

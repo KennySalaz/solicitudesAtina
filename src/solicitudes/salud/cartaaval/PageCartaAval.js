@@ -17,30 +17,28 @@ import Steps2 from './steps/Steps2';
 import StepsConfirm from './steps/StepsConfirm';
 import Steps from './steps/Steps';
 import firebaseApp from '../../../firebase';
-import { Link, useNavigate } from "react-router-dom";
-
-
+import { useNavigate } from "react-router-dom";
 const db = getFirestore(firebaseApp)
 const storage = getStorage(firebaseApp)
+
 
 const PageCartaAval = () => {
     const Swal = require('sweetalert2')
     const [page, setPage] = useState(1)
     const [loadingModal, setLoadingModal] = useState(false)
     const [data, setData] = useState()
+    const [urlCartaAval, setUrlCartaAval] = useState([])
     const [startDate, setStartDate] = useState(new Date());
-    const [fileSelect, setFileSelect] = useState(new Array(3))
+    const [fileSelect, setFileSelect] = useState(new Array(2))
     const [errorFile, setErrorFile] = useState({
-        errorInformeOp1: false,
-        errorRecipeOp1: false,
-        errorExamenesOp1: false,
-        errorFacturaOp1: false,
+        errorInforme: false,
+        errorPresupuesto: false,
+        errorExamenes: false,
     })
     const [formStep1, setFormStep1] = useState({
         tipoPoliza: '',
         titularObeneficiario: '',
         tipoReembolso: '',
-
     })
     const navigate = useNavigate()
 
@@ -52,6 +50,7 @@ const PageCartaAval = () => {
     }
 
     const handleFile = (e, n) => {
+
         if (e.target.name === 'informeMedico') {
             let file = e.target.files
             if (file[0].type === 'application/pdf') {
@@ -64,87 +63,101 @@ const PageCartaAval = () => {
                 setErrorFile({ ...errorFile, errorInforme: false })
             } else {
                 setErrorFile({ ...errorFile, errorInforme: true })
-
             }
         }
         if (e.target.name === 'examenesRealizados') {
-            if (fileSelect) {
-                fileSelect.splice(n, 1, e.target.files)
-                console.log(fileSelect)
+            let file = e.target.files
+            if (file[0].type === 'application/pdf') {
+                if (fileSelect) {
+                    fileSelect.splice(n, 1, e.target.files)
+                    console.log(fileSelect)
+                } else {
+                    setFileSelect([...fileSelect[1], e.target.files])
+                }
+                setErrorFile({ ...errorFile, errorExamenes: false })
             } else {
-                setFileSelect([...fileSelect[1], e.target.files])
+                setErrorFile({ ...errorFile, errorExamenes: true })
             }
         }
+
+
+
         if (e.target.name === 'presupuestoSalud') {
-            if (fileSelect) {
-                fileSelect.splice(n, 1, e.target.files)
+            let file = e.target.files
+            if (file[0].type === 'application/pdf') {
+                if (fileSelect) {
+                    fileSelect.splice(n, 1, e.target.files)
+                } else {
+                    setFileSelect([...fileSelect[2], e.target.files])
+                    console.log('se ha agregado')
+                }
+                setErrorFile({ ...errorFile, errorPresupuesto: false })
             } else {
-                setFileSelect([...fileSelect[2], e.target.files])
-                console.log('se ha agregado')
+                setErrorFile({ ...errorFile, errorPresupuesto: true })
             }
         }
     }
     const onClickSplice = (n) => {
         fileSelect.splice()
-
     }
     const sendData = async () => {
         setLoadingModal(true)
         const id = uuidv4()
-        try {
-            let urlFile = []
-            fileSelect.forEach(async (file, i) => {
-                console.log('map', file)
+        await Promise.all(
+            fileSelect.map(async (file, i) => {
                 const storageRef = ref(storage, `/solicitudes/salud/cartaaval/${id}/${file[0].name}`)
                 const uploadResult = await uploadBytes(storageRef, file[0])
-                urlFile.push(await getDownloadURL(uploadResult.ref))
-                if (urlFile.length >= 3) {
-
-                    setDoc(doc(db, '/solicitudes/salud-cartaaval/historico/'), {
-                        Tipodepóliza: formStep1.tipoPoliza,
-                        NombreDelTomador: data.nombreTomador,
-                        CompañíadeSeguros: data.selectSeguro,
-                        TitularOBeneficiario: formStep1.titularObeneficiario,
-                        Nombredeltitulardelapóliza: data.nombreTitularPoliza || data.nombreTitularPoliza2,
-                        Appellidodeltitulardelapóliza: data.apellidoTitularPoliza || data.apellidoTitularPoliza2,
-                        CéduladeidentidadTitular: data.cedulaTitular || data.cedulaTitular2,
-                        CorreoElectrónicoTitular: data.emailTitular || data.emailTitular2,
-                        NumeroTelefonoTitular: data.celularTitular || data.celularTitular2,
-                        NombredelBeneficiariodelapóliza: data.nombreBeneficiarioPoliza,
-                        AppellidodelBeneficiariodelapóliza: data.apellidoBeneficiarioPoliza,
-                        CéduladeidentidadBeneficiario: data.cedulaBeneficiario,
-                        CorreoElectrónicoBeneficiario: data.emailBeneficiario,
-                        NumeroTelefonoBeneficiario: data.celularBeneficiario,
-                        tipoReembolso: formStep1.tipoReembolso,
-                        PatologíaoDiagnóstico: data.patologiaDiagnostico,
-                        Fechadeocurrencia: startDate,
-                        Monto: data.montoTotal,
-                        /*  RécipeEindicaciones: data.recipeIndicaciones,
-                         ExámenesRealizados: data.examenesRealizados,
-                         Facturas: data.facturas, */
-                        documentosPdf: urlFile,
-                    })
-                }
+                urlCartaAval.push(await getDownloadURL(uploadResult.ref))
+            })
+        )
+        setUrlCartaAval(urlCartaAval)
+        try {
+            setDoc(doc(db, '/solicitudes/salud-cartaaval/historico/', id), {
+                Tipodepóliza: formStep1.tipoPoliza,
+                NombreDelTomador: data.nombreTomador,
+                CompañíadeSeguros: data.selectSeguro,
+                TitularOBeneficiario: formStep1.titularObeneficiario,
+                Nombredeltitulardelapóliza: data.nombreTitularPoliza || data.nombreTitularPoliza2,
+                Appellidodeltitulardelapóliza: data.apellidoTitularPoliza || data.apellidoTitularPoliza2,
+                CéduladeidentidadTitular: data.cedulaTitular || data.cedulaTitular2,
+                CorreoElectrónicoTitular: data.emailTitular || data.emailTitular2,
+                NumeroTelefonoTitular: data.celularTitular || data.celularTitular2,
+                NombredelBeneficiariodelapóliza: data.nombreBeneficiarioPoliza,
+                AppellidodelBeneficiariodelapóliza: data.apellidoBeneficiarioPoliza,
+                CéduladeidentidadBeneficiario: data.cedulaBeneficiario,
+                CorreoElectrónicoBeneficiario: data.emailBeneficiario,
+                NumeroTelefonoBeneficiario: data.celularBeneficiario,
+                PatologíaoDiagnóstico: data.patologiaDiagnostico,
+                Fechadeocurrencia: startDate,
+                Monto: data.montoTotal,
+                documentosPdf: urlCartaAval,
             })
         } catch (error) {
             alert(error)
         }
-        setLoadingModal(false)
-        Swal.fire(
-            'Solicitud enviada',
-            'You clicked the button!',
-        )
-        navigate('/')
-
-
-
+        setTimeout(() => {
+            setLoadingModal(false)
+            Swal.fire(
+                'Solicitud enviada',
+                ` Gracias por iniciar el trámite de su solicitud, en Atina estaremos canalizando la misma y 
+                validando que todos los soportes estén bien. <br/> En caso de duda, alguna aclaración, o solicitud 
+                de información adicional, uno de nuestros asesores te estará contactando. Gracias`,
+            )
+            setFileSelect([''])
+            setErrorFile({
+                errorInformeOp1: false,
+                errorRecipeOp1: false,
+                errorExamenesOp1: false,
+                errorFacturaOp1: false,
+            })
+            window.location.href = 'https://atinaseguros.com/'
+        }, 5000);
     }
     useEffect(() => {
         console.log(
             page
         )
     }, [page])
-
     useEffect(() => {
         AOS.init({
             duration: 1000,
@@ -152,17 +165,12 @@ const PageCartaAval = () => {
             once: false
         });
     })
-
     useEffect(() => {
         console.log(' imagenes ', fileSelect)
     }, [fileSelect])
 
-
     return (
         <>
-            {/*  <div className="luna-loader-container">
-                <div className="luna-loader"></div>
-            </div> */}
             <div className='container mx-auto' >
                 <div className="h_total luna-signup-left-overlay" ></div>
                 <div className='container'>
@@ -191,7 +199,7 @@ const PageCartaAval = () => {
                                 celularBeneficiario: '',
                                 //Page 3
                                 tipoReembolso: '',
-                                informeMedico: false,
+                                informeMedico: '',
                                 examenesRealizados: '',
                                 presupuestoSalud: '',
                                 patologiaDiagnostico: '',
@@ -240,8 +248,8 @@ const PageCartaAval = () => {
                                     }
                                     if (!valores.celularTitular && formStep1.titularObeneficiario === 'titular') {
                                         errores.celularTitular = true
-                                    } else if (valores.celularTitular !== '' && formStep1.titularObeneficiario === 'titular' && !/^((\d{10})|(\d{14}))$/.test(valores.celularTitular)) {
-                                        errores.celularTitular = 'Ingrese un numero de telefono valido +58 000-000-0000'
+                                    } else if (formStep1.titularObeneficiario === 'titular' && valores.celularTitular.length < 16) {
+                                        errores.celularTitular = 'Ingrese un numero de telefono valido +58 424 000 0000'
                                     }
                                     /*  if (!formStep1.titularObeneficiario && formStep1.titularObeneficiario === 'beneficiario') {
                                          errores.titularObeneficiario = 'Obligatorio'
@@ -269,8 +277,8 @@ const PageCartaAval = () => {
                                     }
                                     if (!valores.celularTitular2 && formStep1.titularObeneficiario === 'beneficiario') {
                                         errores.celularTitular2 = true
-                                    } else if (valores.celularTitular2 !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^((\d{10})|(\d{14}))$/.test(valores.celularTitular2)) {
-                                        errores.celularTitular2 = 'Ingrese un numero de telefono valido 4240000000'
+                                    } else if (formStep1.titularObeneficiario === 'beneficiario' && valores.celularTitular2.length < 16) {
+                                        errores.celularTitular2 = 'Ingrese un numero de telefono valido +58 424 000 0000'
                                     }
                                     if (!valores.nombreBeneficiarioPoliza && formStep1.titularObeneficiario === 'beneficiario') {
                                         errores.nombreBeneficiarioPoliza = true
@@ -294,8 +302,8 @@ const PageCartaAval = () => {
                                     }
                                     if (!valores.celularBeneficiario && formStep1.titularObeneficiario === 'beneficiario') {
                                         errores.celularBeneficiario = true
-                                    } else if (valores.celularBeneficiario !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^((\d{10})|(\d{14}))$/.test(valores.celularBeneficiario)) {
-                                        errores.celularBeneficiario = 'Ingrese un numero de telefono valido +58 000-000-0000'
+                                    } else if (formStep1.titularObeneficiario === 'beneficiario' && valores.celularBeneficiario.length < 16) {
+                                        errores.celularBeneficiario = 'Ingrese un numero de telefono valido +58 424 000 0000'
                                     }
 
 
@@ -304,9 +312,50 @@ const PageCartaAval = () => {
 
                                 if (page === 3) {
 
-                                    if (!fileSelect) {
+                                    if (!fileSelect[0]) {
                                         errores.informeMedico = true
                                     }
+
+                                    if (fileSelect && errorFile.errorInforme) {
+                                        errores.informeMedico = false
+                                        setErrorFile({ ...errorFile, errorInforme: 'El tipo de archivo debe ser PDF' })
+                                    }
+
+
+                                    if (!fileSelect[1]) {
+                                        errores.examenesRealizados = true
+                                    }
+
+                                    if (errorFile.errorExamenes) {
+                                        errores.examenesRealizados = false
+                                        setErrorFile({ ...errorFile, errorExamenes: 'El tipo de archivo debe ser PDF' })
+                                    }
+
+
+                                    if (!fileSelect[2]) {
+                                        errores.presupuestoSalud = true
+                                    }
+
+                                    if (fileSelect && errorFile.errorPresupuesto) {
+                                        errores.presupuestoSalud = false
+                                        setErrorFile({ ...errorFile, errorPresupuesto: 'El tipo de archivo debe ser PDF' })
+                                    }
+
+
+                                    /*  if (fileSelect.length === 0) {
+                                         errores.informeMedico = true
+                                         errores.examenesRealizados = true
+                                         errores.informeMedico = true
+                                     } else if (fileSelect[0] && errorFile.errorInforme) {
+                                         setErrorFile({ ...errorFile, errorInforme: 'El tipo de archivo debe ser PDF' })
+                                     } else if (fileSelect[1] && errorFile.errorExamenes) {
+                                         setErrorFile({ ...errorFile, errorExamenes: 'El tipo de archivo debe ser PDF' })
+                                     } else if (fileSelect[2] && errorFile.errorPresupuesto) {
+                                         setErrorFile({ ...errorFile, errorPresupuesto: 'El tipo de archivo debe ser PDF' })
+                                     } */
+
+
+
 
                                     /*   if (!fileSelect || fileSelect.length < 3) {
                                           errores.informeMedico = true
@@ -324,8 +373,6 @@ const PageCartaAval = () => {
 
                                     if (!valores.montoTotal) {
                                         errores.montoTotal = true
-                                    } else if (valores.montoTotal !== "" && !/^\d*\.?\d*$/.test(valores.montoTotal)) {
-                                        errores.montoTotal = 'Ingrese un monto en bs'
                                     }
                                 }
                                 return errores
@@ -402,7 +449,6 @@ const PageCartaAval = () => {
                                             <div className='steps-count'>
                                                 Paso <span className="step-current"> {page} </span>/<span className="step-count"> 4 </span>
                                             </div>
-
                                             <div className="luna-steps">
                                                 {
                                                     page === 1 && (
@@ -442,6 +488,8 @@ const PageCartaAval = () => {
                                                             startDate={startDate}
                                                             handleFile={handleFile}
                                                             onClickSplice={onClickSplice}
+                                                            errorFile={errorFile}
+                                                            setErrorFile={setErrorFile}
 
                                                         />
                                                     )

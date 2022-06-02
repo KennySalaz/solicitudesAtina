@@ -46,23 +46,13 @@ const PageReembolso = () => {
         fileDataRecipeIndicaciones: '',
         fileDataExamenesRealizados: '',
         fileDataFacturas: '',
-
     })
     const prevSteps = () => {
-        if (page === 1) {
-            setPage((current) => current - 1)
-        }
-        if (page === 2) {
-            setPage((current) => current - 1)
-        }
-        if (page === 3) {
-            setPage((current) => current - 1)
-        }
-        if (page === 4) {
-            setPage((current) => current - 1)
-        }
+        if (page === 1) { setPage((current) => current - 1) }
+        if (page === 2) { setPage((current) => current - 1) }
+        if (page === 3) { setPage((current) => current - 1) }
+        if (page === 4) { setPage((current) => current - 1) }
     }
-
     const handleFile = (e, n) => {
         if (e.target.name === 'informeMedico') {
             let file = e.target.files
@@ -78,8 +68,6 @@ const PageReembolso = () => {
                 setErrorFile({ ...errorFile, errorInforme: true })
             }
         }
-
-
         if (e.target.name === 'recipeIndicaciones') {
             let file = e.target.files
             if (file[0].type === 'application/pdf') {
@@ -95,8 +83,6 @@ const PageReembolso = () => {
                 setErrorFile({ ...errorFile, errorRecipe: true })
             }
         }
-
-
         if (e.target.name === 'examenesRealizados') {
             let file = e.target.files
             if (file[0].type === 'application/pdf') {
@@ -111,7 +97,6 @@ const PageReembolso = () => {
                 setErrorFile({ ...errorFile, errorExamenes: true })
             }
         }
-
         if (e.target.name === 'facturas') {
             let file = e.target.files
             if (file[0].type === 'application/pdf') {
@@ -128,7 +113,6 @@ const PageReembolso = () => {
         }
     }
 
-
     const sendData = async () => {
         setLoadingModal(true)
         const id = uuidv4()
@@ -141,7 +125,6 @@ const PageReembolso = () => {
         )
         setUrlGET(urlGET)
         try {
-
             setDoc(doc(db, '/solicitudes/salud-reembolso/historico/', id), {
                 Tipodepóliza: formStep1.tipoPoliza,
                 NombreDelTomador: data.nombreTomador,
@@ -161,13 +144,8 @@ const PageReembolso = () => {
                 PatologíaoDiagnóstico: data.patologiaDiagnostico,
                 Fechadeocurrencia: startDate,
                 Monto: data.montoTotal,
-                /* RécipeEindicaciones: data.recipeIndicaciones,
-                ExámenesRealizados: data.examenesRealizados,
-                Facturas: data.facturas, */
                 documentosPdf: urlGET,
             })
-
-
         } catch (error) {
             alert(error)
         }
@@ -175,9 +153,10 @@ const PageReembolso = () => {
             setLoadingModal(false)
             Swal.fire(
                 'Solicitud enviada',
-                'You clicked the button!',
+                ` Gracias por iniciar el trámite de su solicitud, en Atina estaremos canalizando la misma y 
+                validando que todos los soportes estén bien. <br/> En caso de duda, alguna aclaración, o solicitud 
+                de información adicional, uno de nuestros asesores te estará contactando. Gracias`,
             )
-
             setFileSelect([''])
             setErrorFile({
                 errorInformeOp1: false,
@@ -186,10 +165,7 @@ const PageReembolso = () => {
                 errorFacturaOp1: false,
             })
             window.location.href = 'https://atinaseguros.com/'
-        }, 3000);
-
-
-
+        }, 5000);
     }
     useEffect(() => {
         AOS.init({
@@ -199,11 +175,16 @@ const PageReembolso = () => {
         });
     })
 
+    useEffect(() => {
+
+        console.log(startDate)
+
+
+    }, [startDate])
+
+
     return (
         <>
-            {/*  <div className="luna-loader-container">
-                <div className="luna-loader"></div>
-            </div> */}
             <div className='container mx-auto' >
                 <div className="h_total luna-signup-left-overlay" ></div>
                 <div className='container'>
@@ -294,10 +275,9 @@ const PageReembolso = () => {
 
                                     if (!valores.celularTitular && formStep1.titularObeneficiario === 'titular') {
                                         errores.celularTitular = true
-                                    } else if (valores.celularTitular !== '' && formStep1.titularObeneficiario === 'titular' && !/^((\d{10})|(\d{14}))$/.test(valores.celularTitular)) {
-                                        errores.celularTitular = 'Ingrese un numero de telefono valido 4240000000'
+                                    } else if (formStep1.titularObeneficiario === 'titular' && valores.celularTitular.length < 16) {
+                                        errores.celularTitular = 'Ingrese un numero de telefono valido +58 424 000 0000'
                                     }
-
 
 
                                     /*  if (!formStep1.titularObeneficiario && formStep1.titularObeneficiario === 'beneficiario') {
@@ -339,8 +319,8 @@ const PageReembolso = () => {
 
                                     if (!valores.celularTitular2 && formStep1.titularObeneficiario === 'beneficiario') {
                                         errores.celularTitular2 = true
-                                    } else if (valores.celularTitular2 !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^((\d{10})|(\d{14}))$/.test(valores.celularTitular2)) {
-                                        errores.celularTitular2 = 'Ingrese un numero de telefono valido 4240000000'
+                                    } else if (formStep1.titularObeneficiario === 'beneficiario' && valores.celularTitular2.length < 16) {
+                                        errores.celularTitular2 = 'Ingrese un numero de telefono valido +58 424 000 0000'
                                     }
 
 
@@ -380,8 +360,8 @@ const PageReembolso = () => {
 
                                     if (!valores.celularBeneficiario && formStep1.titularObeneficiario === 'beneficiario') {
                                         errores.celularBeneficiario = true
-                                    } else if (valores.celularBeneficiario !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^((\d{10})|(\d{14}))$/.test(valores.celularBeneficiario)) {
-                                        errores.celularBeneficiario = 'Ingrese un numero de telefono valido 4240000000'
+                                    } else if (formStep1.titularObeneficiario === 'beneficiario' && valores.celularBeneficiario.length < 16) {
+                                        errores.celularBeneficiario = 'Ingrese un numero de telefono valido +58 424 000 0000'
                                     }
 
 
@@ -412,8 +392,6 @@ const PageReembolso = () => {
 
                                         if (!valores.montoTotal) {
                                             errores.montoTotal = true
-                                        } else if (valores.montoTotal !== "" && !/^\d*\.?\d*$/.test(valores.montoTotal)) {
-                                            errores.montoTotal = 'Ingrese un monto en bs'
                                         }
                                     }
 
@@ -436,8 +414,6 @@ const PageReembolso = () => {
 
                                         if (!valores.montoTotal) {
                                             errores.montoTotal = true
-                                        } else if (valores.montoTotal !== "" && !/^\d*\.?\d*$/.test(valores.montoTotal)) {
-                                            errores.montoTotal = 'Ingrese un monto en bs'
                                         }
                                     }
                                     if (formStep1.tipoReembolso === 'Sesiones de rehabilitacion, terapias, fisioterapia') {
@@ -459,8 +435,6 @@ const PageReembolso = () => {
 
                                         if (!valores.montoTotal) {
                                             errores.montoTotal = true
-                                        } else if (valores.montoTotal !== "" && !/^\d*\.?\d*$/.test(valores.montoTotal)) {
-                                            errores.montoTotal = 'Ingrese un monto en bs'
                                         }
                                     }
 
@@ -485,8 +459,6 @@ const PageReembolso = () => {
  */
                                         if (!valores.montoTotal) {
                                             errores.montoTotal = true
-                                        } else if (valores.montoTotal !== "" && !/^\d*\.?\d*$/.test(valores.montoTotal)) {
-                                            errores.montoTotal = 'Ingrese un monto en bs'
                                         }
                                     }
                                 }
@@ -586,6 +558,7 @@ const PageReembolso = () => {
                                                             handleBlur={handleBlur}
                                                             errors={errors}
                                                             initialValues={initialValues}
+
                                                         />
                                                     )
                                                 }
@@ -605,6 +578,7 @@ const PageReembolso = () => {
                                                             errorFile={errorFile}
                                                             fileSelect={fileSelect}
                                                             setFileSelect={setFileSelect}
+
                                                         />
                                                     )
                                                 }

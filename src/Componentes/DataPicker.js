@@ -7,9 +7,9 @@ import range from "lodash/range";
 
 
 
-const DataPicker = ({startDate , setStartDate }) => {
+const DataPicker = ({ startDate, setStartDate }) => {
 
-    
+
     const years = range(1990, getYear(new Date()) + 1, 1);
 
     const months = [
@@ -29,13 +29,13 @@ const DataPicker = ({startDate , setStartDate }) => {
 
     useEffect(() => {
 
-        console.log('aqui esta la FECHA',startDate  )
-      
+        console.log('aqui esta la FECHA', startDate)
+
     }, [startDate])
-    
+
     return (
         <DatePicker
-          /*   withPortal */
+            /*   withPortal */
             renderCustomHeader={({
                 date,
                 changeYear,

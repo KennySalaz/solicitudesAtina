@@ -6,21 +6,16 @@ import '../../../../css/font.css'
 import '../../../../css/plugins.css'
 import '../../../../css/style.css'
 import DataPicker from '../../../../Componentes/DataPicker';
+import CurrencyFormat from 'react-currency-format';
 
 
-
-
-const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChange, handleBlur, errors, startDate, setStartDate, handleFile, setErrorFile, errorFile }) => {
+const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChange, handleBlur, errors, startDate, setStartDate, handleFile, setErrorFile, errorFile, initialValues }) => {
 
 
     const [options, setOptions] = useState(false)
     const [options2, setOptions2] = useState(false)
     const [options3, setOptions3] = useState(false)
     const [options4, setOptions4] = useState(false)
-
-
-
-
 
     useEffect(() => {
 
@@ -32,6 +27,10 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                 errorExamenesOp1: false,
                 errorFacturaOp1: false,
             })
+            initialValues.montoTotal = ''
+            initialValues.patologiaDiagnostico = ''
+
+
             setOptions(true)
         } else {
             setOptions(false)
@@ -46,7 +45,11 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                 errorExamenesOp1: false,
                 errorFacturaOp1: false,
             })
+            initialValues.montoTotal = ''
+            initialValues.patologiaDiagnostico = ''
+
             setOptions2(true)
+
         } else {
             setOptions2(false)
         }
@@ -58,6 +61,9 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                 errorExamenesOp1: false,
                 errorFacturaOp1: false,
             })
+            initialValues.montoTotal = ''
+            initialValues.patologiaDiagnostico = ''
+
             setOptions3(true)
         } else {
             setOptions3(false)
@@ -70,6 +76,9 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                 errorExamenesOp1: false,
                 errorFacturaOp1: false,
             })
+            initialValues.montoTotal = ''
+            initialValues.patologiaDiagnostico = ''
+
             setOptions4(true)
 
         } else {
@@ -87,15 +96,13 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
     })
 
     useEffect(() => {
+        console.log('aqui la  fechaaa', startDate)
 
-        console.log('Dataaaaaaaaaaaaa ',
-            formStep1.fileDatainformeMedico
-        )
+    }, [startDate])
 
-    }, [
 
-        formStep1.fileDatainformeMedico
-    ])
+
+
 
 
 
@@ -356,18 +363,17 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
 
                                         </label>
-                                        <input
-                                            name='montoTotal'
+
+                                        <CurrencyFormat
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                            id="grid-last-name"
-                                            type="text"
                                             placeholder="Bs"
+                                            name='montoTotal'
+                                            class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                            thousandSeparator={true} prefix={'BsF '}
                                         />
-                                        {
-                                            errors.montoTotal && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.montoTotal} </span>
-                                        }
+
+
                                     </div>
 
                                 </div>
@@ -577,15 +583,16 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
 
                                         </label>
-                                        <input
-                                            name='montoTotal'
+
+                                        <CurrencyFormat
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                            id="grid-last-name"
-                                            type="text"
                                             placeholder="Bs"
+                                            name='montoTotal'
+                                            class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                            thousandSeparator={true} prefix={'BsF '}
                                         />
+
 
                                     </div>
 
@@ -796,15 +803,15 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
 
                                         </label>
-                                        <input
-                                            name='montoTotal'
+                                        <CurrencyFormat
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                            id="grid-last-name"
-                                            type="text"
                                             placeholder="Bs"
+                                            name='montoTotal'
+                                            class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                            thousandSeparator={true} prefix={'BsF '}
                                         />
+
 
                                     </div>
 
@@ -1053,15 +1060,15 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
 
                                         </label>
-                                        <input
-                                            name='montoTotal'
+                                        <CurrencyFormat
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                            id="grid-last-name"
-                                            type="text"
                                             placeholder="Bs"
+                                            name='montoTotal'
+                                            class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                            thousandSeparator={true} prefix={'BsF '}
                                         />
+
 
                                     </div>
 

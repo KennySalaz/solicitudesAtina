@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import InputMask from "react-input-mask";
 
 const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, initialValues, errors }) => {
 
@@ -42,27 +43,10 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
     useEffect(() => {
 
         console.log("AQUIIIIIIIIII",
-            initialValues.nombreTitularPoliza2,
-            initialValues.apellidoTitularPoliza2,
-            initialValues.cedulaTitular2,
-            initialValues.emailTitular2,
-            initialValues.celularTitular2,
-            initialValues.nombreTitularPoliza,
-            initialValues.apellidoTitularPoliza,
-            initialValues.cedulaTitular,
-            initialValues.emailTitular,
-            initialValues.celularTitular ,
+            initialValues.celularTitular,
+            initialValues.nombreTitularPoliza
         )
-    }, [initialValues.nombreTitularPoliza2,
-    initialValues.apellidoTitularPoliza2,
-    initialValues.cedulaTitular2,
-    initialValues.emailTitular2,
-    initialValues.celularTitular2,
-    initialValues.nombreTitularPoliza,
-    initialValues.apellidoTitularPoliza,
-    initialValues.cedulaTitular,
-    initialValues.emailTitular,
-    initialValues.celularTitular,])
+    }, [initialValues.celularTitular, initialValues.nombreTitularPoliza])
 
 
     return (
@@ -236,15 +220,15 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                         Numero de telefono del titular
 
                                     </label>
-                                    <input
-                                        name='celularTitular'
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
+                                    <InputMask
                                         className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.celularTitular ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                        id="grid-last-name"
-                                        type="text"
-                                        placeholder="4240000000"
-                                    />
+                                        mask="+5\8 999 999 9999"
+                                        placeholder="+58 000 000 0000"
+                                        onBlur={handleBlur}
+                                        maskPlaceholder={null}
+                                        name='celularTitular'
+                                        onChange={handleChange} />
+
 
 
                                     {
@@ -252,6 +236,8 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                     }
 
                                 </div>
+
+
 
                             </div>
                         </div></>
@@ -377,15 +363,19 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                         Celular del titular
 
                                     </label>
-                                    <input
-                                        name='celularTitular2'
+                                    <InputMask
                                         onChange={handleChange}
+                                        placeholder="+58 000 000 0000"
+                                        maskPlaceholder={null}
+                                        mask="+5\8 999 999 9999"
                                         onBlur={handleBlur}
+
                                         className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.celularTitular2 ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                        id="grid-last-name"
-                                        type="text"
-                                        placeholder="424000000"
+                                        name='celularTitular2'
+
+
                                     />
+
                                     {
                                         errors.celularTitular2 && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.celularTitular2}  </span>
                                     }
@@ -504,15 +494,16 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                         Celular del beneficiario
 
                                     </label>
-                                    <input
-                                        name='celularBeneficiario'
+                                    <InputMask
                                         onChange={handleChange}
+                                        placeholder="+58 000 000 0000"
+                                        maskPlaceholder={null}
+                                        name='celularBeneficiario'
+                                        mask="+5\8 999 999 9999"
                                         onBlur={handleBlur}
                                         className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.celularBeneficiario ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                        id="grid-last-name"
-                                        type="text"
-                                        placeholder="4240000000"
                                     />
+
 
                                     {
                                         errors.celularBeneficiario && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.celularBeneficiario}  </span>

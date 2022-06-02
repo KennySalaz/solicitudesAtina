@@ -6,11 +6,11 @@ import '../../../../css/font.css'
 import '../../../../css/plugins.css'
 import '../../../../css/style.css'
 import DataPicker from '../../../../Componentes/DataPicker';
+import CurrencyFormat from 'react-currency-format';
 
 
 
-
-const Steps2 = ({ formStep1, setFormStep1, handleChange, handleBlur, errors, startDate, setStartDate, handleFile, handleFile2, handleFile3 }) => {
+const Steps2 = ({ formStep1, setFormStep1, handleChange, handleBlur, errors, startDate, setStartDate, handleFile, errorFile, setErrorFile }) => {
 
 
     const [options, setOptions] = useState(false)
@@ -86,9 +86,9 @@ const Steps2 = ({ formStep1, setFormStep1, handleChange, handleBlur, errors, sta
                                             file:border-0
                                             file:text-sm 
                                              file:font-semibold
-                                             file:bg-blue-700 
-                                             file:border-white 
                                              
+                                             file:border-white 
+                                             ${errorFile.errorInforme ? 'file:bg-red-700 ' : 'file:bg-blue-700 '}
                                              
                                              file:text-white
                                              hover:file:bg-violet-100
@@ -102,6 +102,12 @@ const Steps2 = ({ formStep1, setFormStep1, handleChange, handleBlur, errors, sta
                                     onChange={e => handleFile(e, 0)}
 
                                 />
+                                {
+                                    errorFile.errorInforme && <span data-aos="zoom-in" style={{ color: 'red', fontSize: '10px' }}>  {errorFile.errorInforme} </span>
+                                }
+                                {
+                                    errors.informeMedico && <span data-aos="zoom-in" style={{ color: 'red', fontSize: '10px' }}>  Obligatorio </span>
+                                }
                             </div>
                         </div>
                         <div data-aos="fade-left" data-aos-offset="100" data-aos-duration="1500" data-aos-easing="ease" className="col-sm-12">
@@ -124,7 +130,8 @@ const Steps2 = ({ formStep1, setFormStep1, handleChange, handleBlur, errors, sta
                                             file:text-sm 
                                              file:font-semibold
                                              file:border-white 
-                                             ${errors.examenesRealizados ? 'file:bg-red-700 ' : 'file:bg-blue-700 '}
+                                             ${errorFile.errorExamenes ? 'file:bg-red-700 ' : 'file:bg-blue-700 '}
+                                           
                                              
                                              file:text-white
                                              hover:file:bg-violet-100
@@ -139,6 +146,13 @@ const Steps2 = ({ formStep1, setFormStep1, handleChange, handleBlur, errors, sta
 
 
                                 />
+                                {
+                                    errorFile.errorExamenes && <span data-aos="zoom-in" style={{ color: 'red', fontSize: '10px' }}>  {errorFile.errorExamenes} </span>
+                                }
+
+                                {
+                                    errors.examenesRealizados && <span data-aos="zoom-in" style={{ color: 'red', fontSize: '10px' }}>  Obligatorio </span>
+                                }
 
                             </div>
 
@@ -165,7 +179,7 @@ const Steps2 = ({ formStep1, setFormStep1, handleChange, handleBlur, errors, sta
                                             file:text-sm 
                                              file:font-semibold
                                              file:border-white 
-                                             ${errors.presupuestoSalud ? 'file:bg-red-700 ' : 'file:bg-blue-700 '}
+                                             ${errorFile.errorPresupuesto ? 'file:bg-red-700 ' : 'file:bg-blue-700 '}
                                              
                                              file:text-white
                                              hover:file:bg-violet-100
@@ -179,12 +193,18 @@ const Steps2 = ({ formStep1, setFormStep1, handleChange, handleBlur, errors, sta
                                     onChange={e => handleFile(e, 2)}
 
                                 />
+                                {
+                                    errorFile.errorPresupuesto && <span data-aos="zoom-in" style={{ color: 'red', fontSize: '10px' }}>  {errorFile.errorPresupuesto} </span>
+                                }
+
+                                {
+                                    errors.presupuestoSalud && <span data-aos="zoom-in" style={{ color: 'red', fontSize: '10px' }}>  Obligatorio </span>
+                                }
+
                             </div>
 
                         </div>
-                        {
-                            errors.informeMedico && (<span style={{ color: 'red' }}> Debes ingresar los documentos requeridos </span>)
-                        }
+
 
                     </div>
                     <div className="col-sm-6">
@@ -249,14 +269,14 @@ const Steps2 = ({ formStep1, setFormStep1, handleChange, handleBlur, errors, sta
 
 
                                 </label>
-                                <input
-                                    name='montoTotal'
+
+                                <CurrencyFormat
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                    id="grid-last-name"
-                                    type="text"
                                     placeholder="Bs"
+                                    name='montoTotal'
+                                    class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                    thousandSeparator={true} prefix={'BsF '}
                                 />
                                 {
                                     errors.montoTotal && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.montoTotal} </span>

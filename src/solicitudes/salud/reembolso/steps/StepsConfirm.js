@@ -86,7 +86,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.nombreTitularPoliza !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Nombre del Titular de la Poliza</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.nombreTitularPoliza
                                 }
@@ -98,7 +98,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.apellidoTitularPoliza !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Apellido del titular de la póliza</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.apellidoTitularPoliza
                                 }
@@ -110,7 +110,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.cedulaTitular !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Cédula de identidad del titular</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.cedulaTitular
                                 }
@@ -122,7 +122,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.emailTitular !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Correo electrónico del titular</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.emailTitular
                                 }
@@ -134,7 +134,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.celularTitular !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Numero Telefono</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.celularTitular
                                 }
@@ -153,7 +153,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.nombreTitularPoliza2 !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Nombre del Titular de la Poliza</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.nombreTitularPoliza2
                                 }
@@ -165,7 +165,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.apellidoTitularPoliza2 !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Apellido del titular de la póliza</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.apellidoTitularPoliza2
                                 }
@@ -177,7 +177,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.cedulaTitular2 !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Cédula de identidad del titular</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.cedulaTitular2
                                 }
@@ -189,7 +189,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.emailTitular2 !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Correo electrónico del titular</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.emailTitular2
                                 }
@@ -201,7 +201,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.celularTitular2 !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Numero Telefono</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.celularTitular2
                                 }
@@ -215,7 +215,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.nombreBeneficiarioPoliza !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Nombre del beneficiario de la póliza </div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.nombreBeneficiarioPoliza
                                 }
@@ -227,7 +227,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.apellidoBeneficiarioPoliza !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Apellido del beneficiario de la póliza</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.apellidoBeneficiarioPoliza
                                 }
@@ -239,7 +239,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.cedulaBeneficiario !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Cédula de identidad del beneficiario</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.cedulaBeneficiario
                                 }
@@ -251,7 +251,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.emailBeneficiario !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Correo electrónico del beneficiario</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.emailBeneficiario
                                 }
@@ -263,7 +263,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.celularBeneficiario !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Celular con WSP del beneficiario</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.celularBeneficiario
                                 }
@@ -284,7 +284,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     formStep1?.tipoReembolso !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Tipo de Reembolso</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     formStep1?.tipoReembolso
                                 }
@@ -296,7 +296,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.informeMedico !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Informe médico</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.informeMedico
                                 }
@@ -308,7 +308,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.recipeIndicaciones !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Récipe e indicaciones</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.recipeIndicaciones
                                 }
@@ -320,7 +320,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.examenesRealizados !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Exámenes realizados</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.examenesRealizados
                                 }
@@ -332,7 +332,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.facturas !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Facturas </div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.facturas
                                 }
@@ -344,7 +344,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.patologiaDiagnostico !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Patología o Diagnóstico</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.patologiaDiagnostico
                                 }
@@ -352,23 +352,23 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                         </div>
                     )
                 }
-                {/* {
-                    newDate !== '' && (
-                        <div   className="row fadeTop">
+                {
+                    startDate !== '' && (
+                        <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Fecha de ocurrencia</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
-                                    newDate
+                                    startDate.toISOString().slice(0, 10)
                                 }
                             </div>
                         </div>
                     )
-                } */}
+                }
                 {
                     data?.montoTotal !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Monto</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12">
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.montoTotal
                                 }
