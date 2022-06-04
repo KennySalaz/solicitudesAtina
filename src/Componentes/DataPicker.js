@@ -13,18 +13,18 @@ const DataPicker = ({ startDate, setStartDate }) => {
     const years = range(1990, getYear(new Date()) + 1, 1);
 
     const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre",
     ];
 
     useEffect(() => {
@@ -35,6 +35,7 @@ const DataPicker = ({ startDate, setStartDate }) => {
 
     return (
         <DatePicker
+            className={`appearance-none block w-2/4 mr-4 text-xl bg-gray-200 text-gray-700  "border-2 border-red-500"   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
             /*   withPortal */
             renderCustomHeader={({
                 date,
@@ -47,6 +48,7 @@ const DataPicker = ({ startDate, setStartDate }) => {
 
             }) => (
                 <div
+
                     style={{
                         margin: 10,
                         display: "flex",

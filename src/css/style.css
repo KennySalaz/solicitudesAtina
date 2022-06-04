@@ -583,7 +583,13 @@ body {
 }
 
 .confirm-text {
-    text-transform: capitalize;
+    text-transform: lowercase;
+}
+
+.confirm-text:first-letter {
+
+    text-transform: uppercase;
+
 }
 
 

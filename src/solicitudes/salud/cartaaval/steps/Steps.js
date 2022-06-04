@@ -77,7 +77,7 @@ const Steps = ({ formStep1, setFormStep1, handleSend1, errorTipo, handleChange, 
                                     <label
                                         class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
 
-                                        Nombre
+                                        Nombre De La Empresa
 
                                     </label>
                                     <input
@@ -88,7 +88,7 @@ const Steps = ({ formStep1, setFormStep1, handleSend1, errorTipo, handleChange, 
                                         className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.nombreTomador && "border-2 border-red-500"} rounded py-5  px-4  leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
                                         id="grid-last-name"
                                         type="text"
-                                        placeholder="Nombre del Tomador"
+                                        placeholder="Nombre de la empresa"
                                     />
                                     {
                                         errors.nombreTomador && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.nombreTomador} </span>
@@ -112,6 +112,8 @@ const Steps = ({ formStep1, setFormStep1, handleSend1, errorTipo, handleChange, 
                         <option value={'Mercantil Seguros'}>Mercantil Seguros</option>
                         <option value={'Mapfre'}>Mapfre</option>
                         <option value={'Seguros Caracas'}>Seguros Caracas</option>
+                        <option value={'Banesco Seguros'}>Banesco Seguros</option>
+                        <option value={'Star Seguros'}>Star Seguros</option>
                         <option value={'Seguros Venezuela'}>Seguros Venezuela</option>
                         <option value={'Pirámide'}>Pirámide</option>
                         <option value={'Oceánica'}>Oceánica</option>

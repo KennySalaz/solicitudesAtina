@@ -6,10 +6,14 @@ import 'aos/dist/aos.css';
 
 const Card = () => {
 
-    const [isActive, setIsActive] = useState(false)
+    const [isActiveSalud, setIsActiveSalud] = useState(false)
+    const [isActiveVehiculo, setIsActiveVehiculo] = useState(false)
 
-    const selectOption = () => {
-        setIsActive(!isActive)
+    const selectOptionSalud = () => {
+        setIsActiveSalud(!isActiveSalud)
+    }
+    const selectOptionVehiculo = () => {
+        setIsActiveVehiculo(!isActiveVehiculo)
     }
     useEffect(() => {
         AOS.init({
@@ -26,20 +30,20 @@ const Card = () => {
                 <div className='row'>
                     <div className='col-md-4'>
 
-                        <div className="flex justify-center m-5" onClick={selectOption} >
+                        <div className="flex justify-center m-5" onClick={selectOptionSalud} >
                             <div className="card rounded-lg shadow-lg bg-white max-w-sm">
                                 <a href="#!">
                                     <img className=" p-4 rounded-t-lg" src="https://atinaseguros.com/wp-content/uploads/2022/03/polizas-de-salud.png" alt="" />
                                 </a>
                                 <div className="p-6">
 
-                                    <button type="button" onClick={selectOption} className=" w-full block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">SALUD</button>
+                                    <button type="button" onClick={selectOptionSalud} className=" w-full block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">SALUD</button>
                                 </div>
                             </div>
                         </div>
 
                         {
-                            isActive && (
+                            isActiveSalud && (
 
                                 <div className='row ' data-aos="fade-left" style={{ margin: '5px' }} >
                                     <div className='col-md-6'>
@@ -60,9 +64,10 @@ const Card = () => {
 
 
                     </div>
+
                     <div className='col-md-4'>
 
-                        <div className="flex justify-center m-5">
+                        <div className="flex justify-center m-5" >
                             <div className="card rounded-lg shadow-lg bg-white max-w-sm">
                                 <a href="#!">
                                     <img className="rounded-t-lg" src="https://atinaseguros.com/wp-content/uploads/2022/03/polizas-de-accidentes-P.png" alt="" />
@@ -74,8 +79,11 @@ const Card = () => {
                             </div>
                         </div>
                     </div>
+
+
+
                     <div className='col-md-4'>
-                        <div className="flex justify-center m-5">
+                        <div className="flex justify-center m-5" onClick={selectOptionVehiculo} >
                             <div className="card rounded-lg shadow-lg bg-white max-w-sm">
                                 <a href="#!">
                                     <img className="rounded-t-lg" src="https://atinaseguros.com/wp-content/uploads/2022/03/poliza-de-automobiles.png" alt="" />
@@ -85,7 +93,31 @@ const Card = () => {
                                 </div>
                             </div>
                         </div>
+                        {
+                            isActiveVehiculo && (
+
+                                <div className='row ' data-aos="fade-left" style={{ margin: '5px' }} >
+                                    <div className='col-md-6'>
+                                        <Link to={'/vehiculos/reparacion'}>
+                                            <button type="button" className=" w-full block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Reparacion Parcial</button>
+                                        </Link>
+
+                                    </div>
+                                    <div className='col-md-6'>
+                                        <Link to={'/salud/cartaAval'}>
+                                            <button type="button" className=" w-full block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Perdida Total</button>
+                                        </Link>
+                                    </div>
+
+                                </div>
+
+
+                            )
+                        }
+
                     </div>
+
+
 
                 </div>
             </div>

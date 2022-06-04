@@ -238,9 +238,9 @@ const PageCartaAval = () => {
                                      } */
                                     if (!valores.cedulaTitular && formStep1.titularObeneficiario === 'titular') {
                                         errores.cedulaTitular = true
-                                    } else if (valores.cedulaTitular !== '' && formStep1.titularObeneficiario === 'titular' && !/^\d*\.?\d*$/.test(valores.cedulaTitular)) {
+                                    } /* else if (valores.cedulaTitular !== '' && formStep1.titularObeneficiario === 'titular' && !/^\d*\.?\d*$/.test(valores.cedulaTitular)) {
                                         errores.cedulaTitular = 'Solo numeros'
-                                    }
+                                    } */
                                     if (!valores.emailTitular && formStep1.titularObeneficiario === 'titular') {
                                         errores.emailTitular = true
                                     } else if (valores.emailTitular !== '' && formStep1.titularObeneficiario === 'titular' && !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.emailTitular)) {
@@ -507,10 +507,11 @@ const PageCartaAval = () => {
                                                 }
                                             </div>
                                         </div>
-                                        <div class='button-container'>
-                                            <div style={{ display: page >= 4 && 'none' }} onClick={handleSubmit} className="btn btn-blue ">
-                                                Continuar
-                                            </div>
+
+                                    </div>
+                                    <div class='button-container'>
+                                        <div style={{ display: page >= 4 && 'none' }} onClick={handleSubmit} className="btn btn-blue ">
+                                            Continuar
                                         </div>
                                     </div>
                                 </>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import InputMask from "react-input-mask";
+import CurrencyFormat from 'react-currency-format';
 const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, initialValues, errors }) => {
 
     const [formValue, setFormValue] = useState('')
@@ -159,13 +160,18 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                         Cedula del titular
 
                                     </label>
-                                    <input
+
+
+                                    <CurrencyFormat
+
+                                        decimalScale={2}
                                         name='cedulaTitular'
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.cedulaTitular ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                        id="grid-last-name"
-                                        type="text"
+                                        decimalSeparator={false}
+                                        thousandSeparator={'.'}
+                                        prefix={'V'}
                                         placeholder="Cédula de identidad del titular"
                                     />
 

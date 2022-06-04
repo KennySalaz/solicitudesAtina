@@ -9,15 +9,13 @@ import DataPicker from '../../../../Componentes/DataPicker';
 import CurrencyFormat from 'react-currency-format';
 
 
-const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChange, handleBlur, errors, startDate, setStartDate, handleFile, setErrorFile, errorFile, initialValues }) => {
+const Steps4 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChange, handleBlur, errors, startDate, setStartDate, handleFile, setErrorFile, errorFile, initialValues }) => {
 
 
     const [options, setOptions] = useState(false)
     const [options2, setOptions2] = useState(false)
     const [options3, setOptions3] = useState(false)
     const [options4, setOptions4] = useState(false)
-    const [optionMoneda, setOptionMoneda] = useState(false)
-
 
     useEffect(() => {
 
@@ -118,16 +116,6 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
         console.log('aqui la  fechaaa', startDate)
 
     }, [startDate])
-
-    useEffect(() => {
-        if (formStep1.tipoDeMoneda === 'dolar') {
-            setOptionMoneda(true)
-
-        } else if (formStep1.tipoDeMoneda === 'bolivar') {
-            setOptionMoneda(false)
-        }
-
-    }, [formStep1.tipoDeMoneda])
 
 
 
@@ -391,11 +379,7 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
                                     </label>
 
-
                                     <DataPicker startDate={startDate} setStartDate={setStartDate} />
-
-
-
 
 
                                 </div>
@@ -412,36 +396,14 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
                                         </label>
 
-                                        <div class="flex">
-
-                                            <select
-                                                defaultValue={''}
-                                                onChange={e => setFormStep1({ ...formStep1, tipoDeMoneda: e.target.value })}
-                                                className={`appearance-none block w-1/6 mr-4 text-xl bg-gray-200 text-gray-700 ${errors.cedulaTitular ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                                aria-label="Default select example">
-
-                                                <option value="bolivar">BSF</option>
-                                                <option value="dolar">USD</option>
-
-                                            </select>
-
-
-                                            <CurrencyFormat
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                placeholder={optionMoneda ? '$' : 'Bsf'}
-                                                name='montoTotal'
-                                                class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                                thousandSeparator={true} prefix={optionMoneda ? '$ ' : 'BsF '}
-                                            />
-
-
-
-
-                                        </div>
-
-
-
+                                        <CurrencyFormat
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            placeholder="Bs"
+                                            name='montoTotal'
+                                            class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                            thousandSeparator={true} prefix={'BsF'}
+                                        />
 
 
                                     </div>
@@ -665,35 +627,14 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
                                         </label>
 
-                                        <div class="flex">
-
-                                            <select
-                                                defaultValue={''}
-                                                onChange={e => setFormStep1({ ...formStep1, tipoDeMoneda: e.target.value })}
-                                                className={`appearance-none block w-1/6 mr-4 text-xl bg-gray-200 text-gray-700 ${errors.cedulaTitular ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                                aria-label="Default select example">
-
-                                                <option value="bolivar">BSF</option>
-                                                <option value="dolar">USD</option>
-
-                                            </select>
-
-
-                                            <CurrencyFormat
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                placeholder={optionMoneda ? '$' : 'Bsf'}
-                                                name='montoTotal'
-                                                class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                                thousandSeparator={true} prefix={optionMoneda ? '$ ' : 'BsF '}
-                                            />
-
-
-
-
-                                        </div>
-
-
+                                        <CurrencyFormat
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            placeholder="Bs"
+                                            name='montoTotal'
+                                            class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                            thousandSeparator={true} prefix={'BsF '}
+                                        />
 
 
                                     </div>
@@ -916,33 +857,14 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
 
                                         </label>
-                                        <div class="flex">
-
-                                            <select
-                                                defaultValue={''}
-                                                onChange={e => setFormStep1({ ...formStep1, tipoDeMoneda: e.target.value })}
-                                                className={`appearance-none block w-1/6 mr-4 text-xl bg-gray-200 text-gray-700 ${errors.cedulaTitular ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                                aria-label="Default select example">
-
-                                                <option value="bolivar">BSF</option>
-                                                <option value="dolar">USD</option>
-
-                                            </select>
-
-
-                                            <CurrencyFormat
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                placeholder={optionMoneda ? '$ ' : 'Bsf '}
-                                                name='montoTotal'
-                                                class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                                thousandSeparator={true} prefix={optionMoneda ? '$' : 'BsF'}
-                                            />
-
-
-
-
-                                        </div>
+                                        <CurrencyFormat
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            placeholder="Bs"
+                                            name='montoTotal'
+                                            class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                            thousandSeparator={true} prefix={'BsF '}
+                                        />
 
 
                                     </div>
@@ -1123,13 +1045,6 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                             onChange={e => handleFile(e, 3)}
 
                                         />
-
-                                        {
-                                            errorFile.errorFactura && <span data-aos="zoom-in" style={{ color: 'red', fontSize: '10px' }}>  El tipo de archivo debe ser PDF </span>
-                                        }
-                                        {
-                                            errors.facturas && <span data-aos="zoom-in" style={{ color: 'red', fontSize: '10px' }}>  Obligatorio </span>
-                                        }
                                     </div>
 
                                 </div>
@@ -1206,33 +1121,15 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
 
                                         </label>
-                                        <div class="flex">
+                                        <CurrencyFormat
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            placeholder="Bs"
+                                            name='montoTotal'
+                                            class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                            thousandSeparator={true} prefix={'BsF '}
+                                        />
 
-                                            <select
-                                                defaultValue={''}
-                                                onChange={e => setFormStep1({ ...formStep1, tipoDeMoneda: e.target.value })}
-                                                className={`appearance-none block w-1/6 mr-4 text-xl bg-gray-200 text-gray-700 ${errors.cedulaTitular ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                                aria-label="Default select example">
-
-                                                <option value="bolivar">BSF</option>
-                                                <option value="dolar">USD</option>
-
-                                            </select>
-
-
-                                            <CurrencyFormat
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                placeholder={optionMoneda ? '$ ' : 'Bsf '}
-                                                name='montoTotal'
-                                                class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                                thousandSeparator={true} prefix={optionMoneda ? '$' : 'BsF'}
-                                            />
-
-
-
-
-                                        </div>
 
                                     </div>
 
@@ -1263,4 +1160,4 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
     )
 }
 
-export default Steps2
+export default Steps4

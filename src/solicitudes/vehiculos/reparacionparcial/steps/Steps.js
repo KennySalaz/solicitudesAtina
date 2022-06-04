@@ -40,7 +40,6 @@ const Steps = ({ formStep1, setFormStep1, handleSend1, errorTipo, handleChange, 
 
                             <label className="radio-inline">
                                 <input
-
                                     type="radio"
                                     value='Individual'
                                     name='tipoPoliza'
@@ -51,14 +50,13 @@ const Steps = ({ formStep1, setFormStep1, handleSend1, errorTipo, handleChange, 
                             </label>
                             <label className="radio-inline">
                                 <input
-
                                     type="radio"
                                     value='Colectiva'
                                     name='tipoPoliza'
                                     onChange={(e) => setFormStep1({ ...formStep1, tipoPoliza: e.target.value })}
                                     onBlur={handleBlur}
                                 />
-                                Colectiva
+                                Flota (Colectiva)
                             </label>
                             {
                                 errors.tipoPoliza &&
@@ -79,7 +77,7 @@ const Steps = ({ formStep1, setFormStep1, handleSend1, errorTipo, handleChange, 
                                     <label
                                         class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
 
-                                        Nombre De La Empresa
+                                        Nombre
 
                                     </label>
                                     <input
@@ -90,7 +88,7 @@ const Steps = ({ formStep1, setFormStep1, handleSend1, errorTipo, handleChange, 
                                         className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.nombreTomador && "border-2 border-red-500"} rounded py-5  px-4  leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
                                         id="grid-last-name"
                                         type="text"
-                                        placeholder="Nombre de la empresa"
+                                        placeholder="Nombre del Tomador"
                                     />
                                     {
                                         errors.nombreTomador && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.nombreTomador} </span>
@@ -116,13 +114,14 @@ const Steps = ({ formStep1, setFormStep1, handleSend1, errorTipo, handleChange, 
                         <option value={'Mapfre'}>Mapfre</option>
                         <option value={'Seguros Caracas'}>Seguros Caracas</option>
                         <option value={'Banesco Seguros'}>Banesco Seguros</option>
-                        <option value={'Star Seguros'}>Star Seguros</option>
                         <option value={'Seguros Venezuela'}>Seguros Venezuela</option>
                         <option value={'Pirámide'}>Pirámide</option>
                         <option value={'Oceánica'}>Oceánica</option>
                         <option value={'Real Seguros'}>Real Seguros</option>
-                        <option value={'La Internacional'}>La Internacional</option>
-                        <option value={'Asistensi'}>Asistensi</option>
+
+
+
+
                     </select>
                 </div>
 

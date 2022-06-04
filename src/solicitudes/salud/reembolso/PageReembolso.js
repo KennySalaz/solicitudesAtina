@@ -18,6 +18,7 @@ import Steps from './steps/Steps';
 import Steps2 from './steps/Steps2';
 import StepsConfirm from './steps/StepsConfirm';
 import { useNavigate, BrowserRouter } from "react-router-dom";
+import { async } from '@firebase/util';
 const db = getFirestore(firebaseApp)
 const storage = getStorage(firebaseApp)
 
@@ -31,13 +32,13 @@ const PageReembolso = () => {
     const [urlGET, setUrlGET] = useState([])
 
     const [errorFile, setErrorFile] = useState({
-        errorInformeOp1: false,
-        errorRecipeOp1: false,
-        errorExamenesOp1: false,
-        errorFacturaOp1: false,
+        errorInforme: false,
+        errorRecipe: false,
+        errorExamenes: false,
+        errorFactura: false,
     })
     const [data, setData] = useState()
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = useState('');
     const [formStep1, setFormStep1] = useState({
         tipoPoliza: '',
         titularObeneficiario: '',
@@ -46,6 +47,10 @@ const PageReembolso = () => {
         fileDataRecipeIndicaciones: '',
         fileDataExamenesRealizados: '',
         fileDataFacturas: '',
+        tipoDeCedula: '',
+        tipoDeCedulaTitular: '',
+        tipoDeCedulaBeneficiario: '',
+        tipoDeMoneda: '',
     })
     const prevSteps = () => {
         if (page === 1) { setPage((current) => current - 1) }
@@ -114,58 +119,141 @@ const PageReembolso = () => {
     }
 
     const sendData = async () => {
-        setLoadingModal(true)
-        const id = uuidv4()
-        await Promise.all(
-            fileSelect.map(async (file, i) => {
-                const storageRef = ref(storage, `/solicitudes/salud/reembolso/${id}/${file[0].name}`)
-                const uploadResult = await uploadBytes(storageRef, file[0])
-                urlGET.push(await getDownloadURL(uploadResult.ref))
+        /*  setLoadingModal(true)
+         const id = uuidv4()
+         await Promise.all(
+             fileSelect.map(async (file, i) => {
+                 const storageRef = ref(storage, `/solicitudes/salud/reembolso/${id}/${file[0].name}`)
+                 const uploadResult = await uploadBytes(storageRef, file[0])
+                 urlGET.push(await getDownloadURL(uploadResult.ref))
+             })
+         )
+         setUrlGET(urlGET)
+         try {
+             setDoc(doc(db, '/solicitudes/salud-reembolso/historico/', id), {
+                 Tipodepóliza: formStep1.tipoPoliza,
+                 NombreDelTomador: data.nombreTomador,
+                 CompañíadeSeguros: data.selectSeguro,
+                 TitularOBeneficiario: formStep1.titularObeneficiario,
+                 Nombredeltitulardelapóliza: data.nombreTitularPoliza || data.nombreTitularPoliza2,
+ 
+                 CéduladeidentidadTitular: data.cedulaTitular || data.cedulaTitular2,
+                 CorreoElectrónicoTitular: data.emailTitular || data.emailTitular2,
+                 NumeroTelefonoTitular: data.celularTitular || data.celularTitular2,
+                 NombredelBeneficiariodelapóliza: data.nombreBeneficiarioPoliza,
+ 
+                 CéduladeidentidadBeneficiario: data.cedulaBeneficiario,
+                 CorreoElectrónicoBeneficiario: data.emailBeneficiario,
+                 NumeroTelefonoBeneficiario: data.celularBeneficiario,
+                 tipoReembolso: formStep1.tipoReembolso,
+                 PatologíaoDiagnóstico: data.patologiaDiagnostico,
+                 Fechadeocurrencia: startDate,
+                 Monto: data.montoTotal,
+                 documentosPdf: urlGET,
+             }) 
+         } catch (error) {
+             alert(error)
+         } */
+
+
+        Swal.fire(
+            {
+                width: '400px',
+
+
+                icon: 'question',
+                title: 'Está seguro que todos los datos son correctos?',
+                showCancelButton: true,
+                confirmButtonText: "Sí",
+                confirmButtonColor: "blue",
+                cancelButtonText: "No",
+                cancelButtonColor: 'red',
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    console.log(result)
+                    setLoadingModal(true)
+                    const id = uuidv4()
+                    /* await Promise.all(
+                        fileSelect.map(async (file, i) => {
+                            const storageRef = ref(storage, `/solicitudes/salud/reembolso/${id}/${file[0].name}`)
+                            const uploadResult = await uploadBytes(storageRef, file[0])
+                            urlGET.push(await getDownloadURL(uploadResult.ref))
+                        })
+                    ) */
+                    setUrlGET(urlGET)
+                    try {
+                        /*  setDoc(doc(db, '/solicitudes/salud-reembolso/historico/', id), {
+                             Tipodepóliza: formStep1.tipoPoliza,
+                             NombreDelTomador: data.nombreTomador,
+                             CompañíadeSeguros: data.selectSeguro,
+                             TitularOBeneficiario: formStep1.titularObeneficiario,
+                             Nombredeltitulardelapóliza: data.nombreTitularPoliza || data.nombreTitularPoliza2,
+     
+                             CéduladeidentidadTitular: data.cedulaTitular || data.cedulaTitular2,
+                             CorreoElectrónicoTitular: data.emailTitular || data.emailTitular2,
+                             NumeroTelefonoTitular: data.celularTitular || data.celularTitular2,
+                             NombredelBeneficiariodelapóliza: data.nombreBeneficiarioPoliza,
+     
+                             CéduladeidentidadBeneficiario: data.cedulaBeneficiario,
+                             CorreoElectrónicoBeneficiario: data.emailBeneficiario,
+                             NumeroTelefonoBeneficiario: data.celularBeneficiario,
+                             tipoReembolso: formStep1.tipoReembolso,
+                             PatologíaoDiagnóstico: data.patologiaDiagnostico,
+                             Fechadeocurrencia: startDate,
+                             Monto: data.montoTotal,
+                             documentosPdf: urlGET,
+                         })
+      */
+                        setTimeout(() => {
+                            setLoadingModal(false)
+
+                            Swal.fire({
+                                width: '500px',
+                                icon: 'success',
+                                title: `Sus datos han sido enviados con éxito y entrarán en proceso de análisis.`,
+                                text: 'Desea agregar otra solicitud?',
+                                showCancelButton: true,
+                                confirmButtonText: "Sí",
+                                confirmButtonColor: "blue",
+                                cancelButtonText: "No",
+                                cancelButtonColor: 'red',
+                            }).then((result) => {
+                                console.log(result)
+                                if (result.isConfirmed) {
+                                    navigate('/')
+                                } else if (result.dismiss) {
+                                    /*   window.location.href = 'https://atinaseguros.com/' */
+
+                                }
+                            })
+                        }, 2000);
+                    } catch (error) {
+                        alert(error)
+                    }
+                } else if (result.isDenied) {
+                    Swal.fire('Changes are not saved', '', 'info')
+                }
             })
-        )
-        setUrlGET(urlGET)
-        try {
-            setDoc(doc(db, '/solicitudes/salud-reembolso/historico/', id), {
-                Tipodepóliza: formStep1.tipoPoliza,
-                NombreDelTomador: data.nombreTomador,
-                CompañíadeSeguros: data.selectSeguro,
-                TitularOBeneficiario: formStep1.titularObeneficiario,
-                Nombredeltitulardelapóliza: data.nombreTitularPoliza || data.nombreTitularPoliza2,
-                /*    Appellidodeltitulardelapóliza: data.apellidoTitularPoliza || data.apellidoTitularPoliza2, */
-                CéduladeidentidadTitular: data.cedulaTitular || data.cedulaTitular2,
-                CorreoElectrónicoTitular: data.emailTitular || data.emailTitular2,
-                NumeroTelefonoTitular: data.celularTitular || data.celularTitular2,
-                NombredelBeneficiariodelapóliza: data.nombreBeneficiarioPoliza,
-                /*  AppellidodelBeneficiariodelapóliza: data.apellidoBeneficiarioPoliza, */
-                CéduladeidentidadBeneficiario: data.cedulaBeneficiario,
-                CorreoElectrónicoBeneficiario: data.emailBeneficiario,
-                NumeroTelefonoBeneficiario: data.celularBeneficiario,
-                tipoReembolso: formStep1.tipoReembolso,
-                PatologíaoDiagnóstico: data.patologiaDiagnostico,
-                Fechadeocurrencia: startDate,
-                Monto: data.montoTotal,
-                documentosPdf: urlGET,
-            })
-        } catch (error) {
-            alert(error)
-        }
-        setTimeout(() => {
-            setLoadingModal(false)
-            Swal.fire(
-                'Solicitud enviada',
-                ` Gracias por iniciar el trámite de su solicitud, en Atina estaremos canalizando la misma y 
-                validando que todos los soportes estén bien. <br/> En caso de duda, alguna aclaración, o solicitud 
-                de información adicional, uno de nuestros asesores te estará contactando. Gracias`,
-            )
-            setFileSelect([''])
-            setErrorFile({
-                errorInformeOp1: false,
-                errorRecipeOp1: false,
-                errorExamenesOp1: false,
-                errorFacturaOp1: false,
-            })
-            window.location.href = 'https://atinaseguros.com/'
-        }, 5000);
+
+        /*  Swal.fire('Está seguro que todos los datos son correctos?',) */
+        /*   setTimeout(() => {
+              setLoadingModal(false)
+           
+               Swal.fire(
+                   'Solicitud enviada',
+                   ` Gracias por iniciar el trámite de su solicitud, en Atina estaremos canalizando la misma y 
+                   validando que todos los soportes estén bien. <br/> En caso de duda, alguna aclaración, o solicitud 
+                   de información adicional, uno de nuestros asesores te estará contactando. Gracias`,
+               )
+               setFileSelect([''])
+               setErrorFile({
+                   errorInformeOp1: false,
+                   errorRecipeOp1: false,
+                   errorExamenesOp1: false,
+                   errorFacturaOp1: false,
+               })
+               window.location.href = 'https://atinaseguros.com/'
+          }, 5000); */
     }
     useEffect(() => {
         AOS.init({
@@ -261,11 +349,11 @@ const PageReembolso = () => {
 
 
 
-                                    if (!valores.cedulaTitular && formStep1.titularObeneficiario === 'titular') {
+                                    if (!valores.cedulaTitular && formStep1.titularObeneficiario === 'titular' && formStep1.tipoDeCedula === '') {
                                         errores.cedulaTitular = true
-                                    } else if (valores.cedulaTitular !== '' && formStep1.titularObeneficiario === 'titular' && !/^\d*\.?\d*$/.test(valores.cedulaTitular)) {
+                                    }/*  else if (valores.cedulaTitular !== '' && formStep1.titularObeneficiario === 'titular' && !/^\d*\.?\d*$/.test(valores.cedulaTitular)) {
                                         errores.cedulaTitular = 'Solo numeros'
-                                    }
+                                    } */
                                     if (!valores.emailTitular && formStep1.titularObeneficiario === 'titular') {
                                         errores.emailTitular = true
                                     } else if (valores.emailTitular !== '' && formStep1.titularObeneficiario === 'titular' && !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.emailTitular)) {
@@ -301,11 +389,11 @@ const PageReembolso = () => {
 
 
 
-                                    if (!valores.cedulaTitular2 && formStep1.titularObeneficiario === 'beneficiario') {
+                                    if (!valores.cedulaTitular2 && formStep1.titularObeneficiario === 'beneficiario' && formStep1.tipoDeCedulaTitular === '') {
                                         errores.cedulaTitular2 = true
-                                    } else if (valores.cedulaTitular2 !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^\d*\.?\d*$/.test(valores.cedulaTitular2)) {
+                                    } /* else if (valores.cedulaTitular2 !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^\d*\.?\d*$/.test(valores.cedulaTitular2)) {
                                         errores.cedulaTitular2 = 'Solo letras y espacios'
-                                    }
+                                    } */
 
 
 
@@ -342,11 +430,11 @@ const PageReembolso = () => {
 
 
 
-                                    if (!valores.cedulaBeneficiario && formStep1.titularObeneficiario === 'beneficiario') {
+                                    if (!valores.cedulaBeneficiario && formStep1.titularObeneficiario === 'beneficiario' && formStep1.tipoDeCedulaBeneficiario === '') {
                                         errores.cedulaBeneficiario = true
-                                    } else if (valores.cedulaBeneficiario !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^\d*\.?\d*$/.test(valores.cedulaBeneficiario)) {
+                                    } /* else if (valores.cedulaBeneficiario !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^\d*\.?\d*$/.test(valores.cedulaBeneficiario)) {
                                         errores.cedulaBeneficiario = 'Solo numeros'
-                                    }
+                                    } */
 
 
 
@@ -371,19 +459,51 @@ const PageReembolso = () => {
                                 if (page === 3) {
 
                                     if (formStep1.tipoReembolso === 'Consulta medica') {
-                                        /* if (fileSelect[0] === 'empty') {
+                                        if (!fileSelect[0]) {
                                             errores.informeMedico = true
+                                        }
 
-                                        } else {
+                                        if (fileSelect && errorFile.errorInforme) {
                                             errores.informeMedico = false
-                                        } */
+                                            setErrorFile({ ...errorFile, errorInforme: 'El tipo de archivo debe ser PDF' })
+                                        }
+
+                                        if (!fileSelect[1]) {
+                                            errores.recipeIndicaciones = true
+                                        }
+
+                                        if (fileSelect && errorFile.errorRecipe) {
+                                            errores.recipeIndicaciones = false
+                                            setErrorFile({ ...errorFile, errorRecipe: 'El tipo de archivo debe ser PDF' })
+                                        }
+
+
+                                        if (!fileSelect[2]) {
+                                            errores.examenesRealizados = true
+                                        }
+
+                                        if (fileSelect && errorFile.errorExamenes) {
+                                            errores.examenesRealizados = false
+                                            setErrorFile({ ...errorFile, errorExamenes: 'El tipo de archivo debe ser PDF' })
+                                        }
+
+                                        if (!fileSelect[3]) {
+                                            errores.facturas = true
+                                        }
+
+                                        if (fileSelect && errorFile.errorFactura) {
+                                            errores.facturas = false
+                                            setErrorFile({ ...errorFile, errorFactura: 'El tipo de archivo debe ser PDF' })
+                                        }
 
 
                                         if (!valores.patologiaDiagnostico) {
                                             errores.patologiaDiagnostico = true
-                                        } else if (valores.patologiaDiagnostico !== '' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.patologiaDiagnostico)) {
+                                        } /* else if (valores.patologiaDiagnostico !== '' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.patologiaDiagnostico)) {
                                             errores.patologiaDiagnostico = 'Solo letras y espacios'
-                                        }
+                                        } */
+
+
 
 
                                         /*  if (!valores.fechaOcurrencia) {
@@ -396,17 +516,37 @@ const PageReembolso = () => {
                                     }
 
                                     if (formStep1.tipoReembolso === 'Farmacos') {
-                                        /* if (!fileSelect || fileSelect.length < 3) {
+                                        if (!fileSelect[0]) {
                                             errores.informeMedico = true
+                                        }
 
-                                        } */
+                                        if (fileSelect && errorFile.errorInforme) {
+                                            errores.informeMedico = false
+                                            setErrorFile({ ...errorFile, errorInforme: 'El tipo de archivo debe ser PDF' })
+                                        }
 
+                                        if (!fileSelect[1]) {
+                                            errores.recipeIndicaciones = true
+                                        }
+
+                                        if (fileSelect && errorFile.errorRecipe) {
+                                            errores.recipeIndicaciones = false
+                                            setErrorFile({ ...errorFile, errorRecipe: 'El tipo de archivo debe ser PDF' })
+                                        }
+                                        if (!fileSelect[2]) {
+                                            errores.facturas = true
+                                        }
+
+                                        if (fileSelect && errorFile.errorFacturaOp1) {
+                                            errores.facturas = false
+                                            setErrorFile({ ...errorFile, errorFactura: 'El tipo de archivo debe ser PDF' })
+                                        }
 
                                         if (!valores.patologiaDiagnostico) {
                                             errores.patologiaDiagnostico = true
-                                        } else if (valores.patologiaDiagnostico !== '' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.patologiaDiagnostico)) {
+                                        } /* else if (valores.patologiaDiagnostico !== '' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.patologiaDiagnostico)) {
                                             errores.patologiaDiagnostico = 'Solo letras y espacios'
-                                        }
+                                        } */
 
                                         /*   if(!valores.fechaOcurrencia){
                                               errores.fechaOcurrencia = 'Obligatorio'
@@ -419,15 +559,37 @@ const PageReembolso = () => {
                                     if (formStep1.tipoReembolso === 'Sesiones de rehabilitacion, terapias, fisioterapia') {
 
 
-                                        /* if (!fileSelect || fileSelect.length < 3) {
+                                        if (!fileSelect[0]) {
                                             errores.informeMedico = true
+                                        }
 
-                                        } */
+                                        if (fileSelect && errorFile.errorInforme) {
+                                            errores.informeMedico = false
+                                            setErrorFile({ ...errorFile, errorInforme: 'El tipo de archivo debe ser PDF' })
+                                        }
+
+                                        if (!fileSelect[1]) {
+                                            errores.recipeIndicaciones = true
+                                        }
+
+                                        if (fileSelect && errorFile.errorRecipe) {
+                                            errores.recipeIndicaciones = false
+                                            setErrorFile({ ...errorFile, errorRecipe: 'El tipo de archivo debe ser PDF' })
+                                        }
+                                        if (!fileSelect[2]) {
+                                            errores.facturas = true
+                                        }
+
+                                        if (fileSelect && errorFile.errorFactura) {
+                                            errores.facturas = false
+                                            setErrorFile({ ...errorFile, errorFactura: 'El tipo de archivo debe ser PDF' })
+                                        }
+
                                         if (!valores.patologiaDiagnostico) {
                                             errores.patologiaDiagnostico = true
-                                        } else if (valores.patologiaDiagnostico !== '' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.patologiaDiagnostico)) {
+                                        } /* else if (valores.patologiaDiagnostico !== '' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.patologiaDiagnostico)) {
                                             errores.patologiaDiagnostico = 'Solo letras y espacios'
-                                        }
+                                        } */
 
                                         /* if (!valores.fechaOcurrencia) {
                                             errores.fechaOcurrencia = 'Obligatorio'
@@ -442,15 +604,48 @@ const PageReembolso = () => {
 
 
 
-                                        /* if (!fileSelect || fileSelect.length < 4) {
+                                        if (!fileSelect[0]) {
                                             errores.informeMedico = true
+                                        }
 
-                                        } */
+                                        if (fileSelect && errorFile.errorInforme) {
+                                            errores.informeMedico = false
+                                            setErrorFile({ ...errorFile, errorInforme: 'El tipo de archivo debe ser PDF' })
+                                        }
+
+                                        if (!fileSelect[1]) {
+                                            errores.recipeIndicaciones = true
+                                        }
+
+                                        if (fileSelect && errorFile.errorRecipe) {
+                                            errores.recipeIndicaciones = false
+                                            setErrorFile({ ...errorFile, errorRecipe: 'El tipo de archivo debe ser PDF' })
+                                        }
+
+
+                                        if (!fileSelect[2]) {
+                                            errores.examenesRealizados = true
+                                        }
+
+                                        if (fileSelect && errorFile.errorExamenes) {
+                                            errores.examenesRealizados = false
+                                            setErrorFile({ ...errorFile, errorExamenes: 'El tipo de archivo debe ser PDF' })
+                                        }
+
+                                        if (!fileSelect[3]) {
+                                            errores.facturas = true
+                                        }
+
+                                        if (fileSelect && errorFile.errorFactura) {
+                                            errores.facturas = false
+                                            setErrorFile({ ...errorFile, errorFactura: 'El tipo de archivo debe ser PDF' })
+                                        }
+
                                         if (!valores.patologiaDiagnostico) {
                                             errores.patologiaDiagnostico = true
-                                        } else if (valores.patologiaDiagnostico !== '' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.patologiaDiagnostico)) {
+                                        } /* else if (valores.patologiaDiagnostico !== '' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.patologiaDiagnostico)) {
                                             errores.patologiaDiagnostico = 'Solo letras y espacios'
-                                        }
+                                        } */
 
 
                                         /* if (!valores.fechaOcurrencia) {
@@ -595,10 +790,11 @@ const PageReembolso = () => {
                                                 }
                                             </div>
                                         </div>
-                                        <div class='button-container'>
-                                            <div style={{ display: page >= 4 && 'none' }} onClick={handleSubmit} className="btn btn-blue ">
-                                                Continuar
-                                            </div>
+
+                                    </div>
+                                    <div class='button-container'>
+                                        <div style={{ display: page >= 4 && 'none' }} onClick={handleSubmit} className="btn btn-blue ">
+                                            Continuar
                                         </div>
                                     </div>
                                 </>
