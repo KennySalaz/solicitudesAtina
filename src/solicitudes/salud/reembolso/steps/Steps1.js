@@ -37,6 +37,8 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
             setIsActiveBeneficiario(false)
         }
     }, [formStep1.titularObeneficiario])
+
+
     useEffect(() => {
         if (formStep1.tipoDeCedula === 'extranjero') {
             setOptionCI(true)
@@ -82,16 +84,14 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
     }, [formStep1.tipoDeCedulaBeneficiario])
 
 
-
     useEffect(() => {
         AOS.init({
             duration: 1000,
             easing: 'ease',
             once: false
         });
+    }, [AOS])
 
-
-    })
 
     useEffect(() => {
 
@@ -113,7 +113,47 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                         <div className="form-group">
                             <div className="step-label">Es usted el titular de la póliza?</div>
 
-                            <label className="radio-inline">
+
+                            <ul class="grid grid-cols-2 gap-x-5 m-8  ml-0  ">
+                                <li class="relative">
+                                    <input
+                                        class="sr-only peer"
+                                        type="radio"
+                                        value='titular'
+                                        name='titularObeneficiario'
+                                        id="answer_yes"
+                                        onChange={(e) => setFormStep1({ ...formStep1, titularObeneficiario: e.target.value })}
+                                    />
+                                    <label class={` ${errors.titularObeneficiario ? 'border-red-500' : 'border-gray-300'} flex justify-center  p-5 ali bg-white border  rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-blue-700 peer-checked:ring-2 peer-checked:border-transparent`} for="answer_yes">
+                                    Soy el Titular
+                                    </label>
+
+
+                                </li>
+
+                                <li class="relative">
+                                    <input
+                                        class="sr-only peer"
+                                        type="radio"
+                                        value='beneficiario'
+                                        name='titularObeneficiario'
+                                        id="answer_no"
+                                        onChange={(e) => setFormStep1({ ...formStep1, titularObeneficiario: e.target.value })}
+                                    />
+                                    <label class={`${errors.titularObeneficiario ? 'border-red-500' : 'border-gray-300'} flex justify-center p-5 bg-white border  rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-blue-700 peer-checked:ring-2 peer-checked:border-transparent`} for="answer_no">
+                                    Soy Beneficiario
+                                    </label>
+
+
+                                </li>
+
+
+                            </ul>
+
+
+
+
+                           {/*  <label className="radio-inline">
                                 <input
                                     type="radio"
                                     value="titular"
@@ -139,7 +179,7 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                     Obligatorio
                                 </span>
                             }
-
+ */}
                         </div>
 
                     </div>

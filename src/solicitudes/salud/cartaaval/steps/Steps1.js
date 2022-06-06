@@ -11,6 +11,17 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
 
 
 
+    const [optionCI, setOptionCI] = useState(false)
+    const [optionCI2, setOptionCI2] = useState(false)
+
+    const [optionTitular, setOptionTitular] = useState(false)
+    const [optionTitular2, setOptionTitular2] = useState(false)
+
+    const [optionBeneficiario, setOptionBeneficiario] = useState(false)
+    const [optionBeneficiario2, setOptionBeneficiario2] = useState(false)
+
+
+
     useEffect(() => {
         if (formStep1.titularObeneficiario === 'titular') {
 
@@ -27,18 +38,58 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
             setIsActiveBeneficiario(false)
         }
     }, [formStep1.titularObeneficiario])
+    useEffect(() => {
+        if (formStep1.tipoDeCedula === 'extranjero') {
+            setOptionCI(true)
+        } else {
+            setOptionCI(false)
+        }
+        if (formStep1.tipoDeCedula === 'venezolano') {
+            setOptionCI2(true)
+        } else {
+            setOptionCI2(false)
+        }
+    }, [formStep1.tipoDeCedula])
+    useEffect(() => {
+        if (formStep1.tipoDeCedulaTitular === 'extranjero') {
+
+            setOptionTitular(true)
+        } else {
+            setOptionTitular(false)
+        }
+
+        if (formStep1.tipoDeCedulaTitular === 'venezolano') {
+
+            setOptionTitular2(true)
+        } else {
+            setOptionTitular2(false)
+        }
+    }, [formStep1.tipoDeCedulaTitular])
+
+    useEffect(() => {
+        if (formStep1.tipoDeCedulaBeneficiario === 'extranjero') {
+
+            setOptionBeneficiario(true)
+        } else {
+            setOptionBeneficiario(false)
+        }
+
+        if (formStep1.tipoDeCedulaBeneficiario === 'venezolano') {
+
+            setOptionBeneficiario2(true)
+        } else {
+            setOptionBeneficiario2(false)
+        }
+    }, [formStep1.tipoDeCedulaBeneficiario])
 
 
     useEffect(() => {
         AOS.init({
-
             duration: 1000,
             easing: 'ease',
             once: false
         });
-
-
-    })
+    }, [AOS])
 
 
 
@@ -54,7 +105,44 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                         <div className="form-group">
                             <div className="step-label">Es usted el titular de la póliza?</div>
 
-                            <label className="radio-inline">
+                            
+                            <ul class="grid grid-cols-2 gap-x-5 m-8  ml-0  ">
+                                <li class="relative">
+                                    <input
+                                        class="sr-only peer"
+                                        type="radio"
+                                        value='titular'
+                                        name='titularObeneficiario'
+                                        id="answer_yes"
+                                        onChange={(e) => setFormStep1({ ...formStep1, titularObeneficiario: e.target.value })}
+                                    />
+                                    <label class={` ${errors.titularObeneficiario ? 'border-red-500' : 'border-gray-300'} flex justify-center  p-5 ali bg-white border  rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-blue-700 peer-checked:ring-2 peer-checked:border-transparent`} for="answer_yes">
+                                    Soy el Titular
+                                    </label>
+
+
+                                </li>
+
+                                <li class="relative">
+                                    <input
+                                        class="sr-only peer"
+                                        type="radio"
+                                        value='beneficiario'
+                                        name='titularObeneficiario'
+                                        id="answer_no"
+                                        onChange={(e) => setFormStep1({ ...formStep1, titularObeneficiario: e.target.value })}
+                                    />
+                                    <label class={`${errors.titularObeneficiario ? 'border-red-500' : 'border-gray-300'} flex justify-center p-5 bg-white border  rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-blue-700 peer-checked:ring-2 peer-checked:border-transparent`} for="answer_no">
+                                    Soy Beneficiario
+                                    </label>
+
+
+                                </li>
+
+
+                            </ul>
+
+                           {/*  <label className="radio-inline">
                                 <input
                                     type="radio"
                                     value="titular"
@@ -80,29 +168,15 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                 <span style={{ color: 'red' }}>
                                     Obligatorio
                                 </span>
-                            }
+                            } */}
                         </div>
 
                     </div>
                 </div>
-                {/*  <div className="step-label_2">Datos del intermediario</div> */}
-                {/*  <div className="row">
-
-                    <div className="col-sm-6">
-                        <div className="form-group">
-                            <label className="formLabel" for="Codigo">Codigo</label>
-                            <input type="text" className="formInput" id='Codigo' name="Codigo"
-                            />
-                        </div>
-                    </div>
-                </div>
- */}
-
 
                 {
                     isActiveTitular && <>
                         <div className="row">
-
                             <div data-aos="fade-left" className="col-sm-6">
                                 <div className="form-group">
                                     <label class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
@@ -117,41 +191,12 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                         type="text"
                                         placeholder="Nombre del titular de la póliza"
                                     />
-
-
                                     {
                                         errors.nombreTitularPoliza && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.nombreTitularPoliza}  </span>
                                     }
-
-
-
-
                                 </div>
-
                             </div>
-                            {/*  <div data-aos="fade-left" className="col-sm-6">
-                                <div className="form-group">
-                                    <label
-                                        class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
 
-                                        Apellido del titular
-
-                                    </label>
-                                    <input
-                                        name='apellidoTitularPoliza'
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.apellidoTitularPoliza ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                        id="grid-last-name"
-                                        type="text"
-                                        placeholder="Apellido del titular de la póliza"
-                                    />
-                                    {
-                                        errors.apellidoTitularPoliza && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.apellidoTitularPoliza}  </span>
-                                    }
-                                </div>
-
-                            </div> */}
                             <div data-aos="fade-left" className="col-sm-6">
                                 <div className="form-group">
                                     <label
@@ -161,19 +206,34 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
 
                                     </label>
 
+                                    <div className='flex'>
 
-                                    <CurrencyFormat
+                                        <select
+                                            defaultValue={''}
+                                            onChange={e => setFormStep1({ ...formStep1, tipoDeCedula: e.target.value })}
+                                            className={`appearance-none block w-1/6 mr-4 text-xl bg-gray-200 text-gray-700 ${errors.cedulaTitular ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                            aria-label="Default select example">
 
-                                        decimalScale={2}
-                                        name='cedulaTitular'
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.cedulaTitular ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                        decimalSeparator={false}
-                                        thousandSeparator={'.'}
-                                        prefix={'V'}
-                                        placeholder="Cédula de identidad del titular"
-                                    />
+                                            <option value="venezolano">V</option>
+                                            <option value="extranjero">E</option>
+
+                                        </select>
+                                        <CurrencyFormat
+                                            decimalScale={2}
+                                            name='cedulaTitular'
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.cedulaTitular ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                            decimalSeparator={false}
+                                            thousandSeparator={'.'}
+                                            prefix={optionCI ? 'E ' : 'CI '}
+                                            placeholder="Cédula de identidad del titular"
+                                        />
+
+                                    </div>
+
+
+
 
                                     {
                                         errors.cedulaTitular && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.cedulaTitular}  </span>
@@ -318,15 +378,33 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                         Cédula del titular
 
                                     </label>
-                                    <input
-                                        name='cedulaTitular2'
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.cedulaTitular2 ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                        id="grid-last-name"
-                                        type="text"
-                                        placeholder="Cédula de identidad"
-                                    />
+
+
+                                    <div class="flex">
+
+                                        <select
+                                            defaultValue={''}
+                                            onChange={e => setFormStep1({ ...formStep1, tipoDeCedulaTitular: e.target.value })}
+                                            className={`appearance-none block w-1/6 mr-4 text-xl bg-gray-200 text-gray-700 ${errors.cedulaTitular2 ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                            aria-label="Default select example">
+
+                                            <option value="venezolano">V</option>
+                                            <option value="extranjero">E</option>
+
+                                        </select>
+                                        <CurrencyFormat
+                                            decimalScale={2}
+                                            name='cedulaTitular2'
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.cedulaTitular2 ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                            decimalSeparator={false}
+                                            thousandSeparator={'.'}
+                                            prefix={optionTitular ? 'E ' : 'CI '}
+                                            placeholder="Cédula de identidad del titular"
+                                        />
+                                    </div>
+
                                     {
                                         errors.cedulaTitular2 && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.cedulaTitular2}  </span>
                                     }
@@ -436,18 +514,32 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                         Cédula de identidad del beneficiario
 
                                     </label>
-                                    <input
-                                        name='cedulaBeneficiario'
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.cedulaBeneficiario ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                        id="grid-last-name"
-                                        type="text"
-                                        placeholder="Cédula de identidad del beneficiario"
-                                    />
-                                    {
-                                        errors.cedulaBeneficiario && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.cedulaBeneficiario}  </span>
-                                    }
+
+                                    <div class="flex">
+
+                                        <select
+                                            defaultValue={''}
+                                            onChange={e => setFormStep1({ ...formStep1, tipoDeCedulaBeneficiario: e.target.value })}
+                                            className={`appearance-none block w-1/6 mr-4 text-xl bg-gray-200 text-gray-700 ${errors.cedulaBeneficiario ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                            aria-label="Default select example">
+
+                                            <option value="venezolano">V</option>
+                                            <option value="extranjero">E</option>
+
+                                        </select>
+                                        <CurrencyFormat
+                                            decimalScale={2}
+                                            name='cedulaBeneficiario'
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.cedulaBeneficiario ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                            decimalSeparator={false}
+                                            thousandSeparator={'.'}
+                                            prefix={optionBeneficiario ? 'E ' : 'CI '}
+                                            placeholder="Cédula de identidad del titular"
+                                        />
+                                    </div>
+
                                 </div>
 
                             </div>

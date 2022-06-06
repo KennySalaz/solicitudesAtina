@@ -261,7 +261,8 @@ const PageReembolso = () => {
             easing: 'ease',
             once: false
         });
-    })
+    }, [AOS])
+
 
     useEffect(() => {
 
@@ -504,12 +505,9 @@ const PageReembolso = () => {
                                         } */
 
 
-
-
-                                        /*  if (!valores.fechaOcurrencia) {
-                                             errores.fechaOcurrencia = 'Obligatorio'
-                                         } */
-
+                                        if (startDate === '') {
+                                            errores.fechaOcurrencia = true
+                                        }
                                         if (!valores.montoTotal) {
                                             errores.montoTotal = true
                                         }
@@ -548,9 +546,10 @@ const PageReembolso = () => {
                                             errores.patologiaDiagnostico = 'Solo letras y espacios'
                                         } */
 
-                                        /*   if(!valores.fechaOcurrencia){
-                                              errores.fechaOcurrencia = 'Obligatorio'
-                                          } */
+
+                                        if (startDate === '') {
+                                            errores.fechaOcurrencia = true
+                                        }
 
                                         if (!valores.montoTotal) {
                                             errores.montoTotal = true
@@ -591,9 +590,10 @@ const PageReembolso = () => {
                                             errores.patologiaDiagnostico = 'Solo letras y espacios'
                                         } */
 
-                                        /* if (!valores.fechaOcurrencia) {
-                                            errores.fechaOcurrencia = 'Obligatorio'
-                                        } */
+
+                                        if (startDate === '') {
+                                            errores.fechaOcurrencia = true
+                                        }
 
                                         if (!valores.montoTotal) {
                                             errores.montoTotal = true
@@ -648,10 +648,10 @@ const PageReembolso = () => {
                                         } */
 
 
-                                        /* if (!valores.fechaOcurrencia) {
-                                            errores.fechaOcurrencia = 'Obligatorio'
+                                        if (startDate === '') {
+                                            errores.fechaOcurrencia = true
                                         }
- */
+
                                         if (!valores.montoTotal) {
                                             errores.montoTotal = true
                                         }

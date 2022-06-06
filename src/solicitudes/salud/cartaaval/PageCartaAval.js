@@ -28,7 +28,7 @@ const PageCartaAval = () => {
     const [loadingModal, setLoadingModal] = useState(false)
     const [data, setData] = useState()
     const [urlCartaAval, setUrlCartaAval] = useState([])
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = useState('');
     const [fileSelect, setFileSelect] = useState(new Array(2))
     const [errorFile, setErrorFile] = useState({
         errorInforme: false,
@@ -39,6 +39,10 @@ const PageCartaAval = () => {
         tipoPoliza: '',
         titularObeneficiario: '',
         tipoReembolso: '',
+        tipoDeCedula: '',
+        tipoDeCedulaTitular: '',
+        tipoDeCedulaBeneficiario: '',
+        tipoDeMoneda: '',
     })
     const navigate = useNavigate()
 
@@ -164,7 +168,8 @@ const PageCartaAval = () => {
             easing: 'ease',
             once: false
         });
-    })
+    }, [AOS])
+
     useEffect(() => {
         console.log(' imagenes ', fileSelect)
     }, [fileSelect])
@@ -267,9 +272,9 @@ const PageCartaAval = () => {
                                      } */
                                     if (!valores.cedulaTitular2 && formStep1.titularObeneficiario === 'beneficiario') {
                                         errores.cedulaTitular2 = true
-                                    } else if (valores.cedulaTitular2 !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^\d*\.?\d*$/.test(valores.cedulaTitular2)) {
+                                    } /* else if (valores.cedulaTitular2 !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^\d*\.?\d*$/.test(valores.cedulaTitular2)) {
                                         errores.cedulaTitular2 = 'Solo letras y espacios'
-                                    }
+                                    } */
                                     if (!valores.emailTitular2 && formStep1.titularObeneficiario === 'beneficiario') {
                                         errores.emailTitular2 = true
                                     } else if (valores.emailTitular2 !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.emailTitular2)) {
@@ -292,9 +297,9 @@ const PageCartaAval = () => {
                                      } */
                                     if (!valores.cedulaBeneficiario && formStep1.titularObeneficiario === 'beneficiario') {
                                         errores.cedulaBeneficiario = true
-                                    } else if (valores.cedulaBeneficiario !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^\d*\.?\d*$/.test(valores.cedulaBeneficiario)) {
+                                    }/*  else if (valores.cedulaBeneficiario !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^\d*\.?\d*$/.test(valores.cedulaBeneficiario)) {
                                         errores.cedulaBeneficiario = 'Solo numeros'
-                                    }
+                                    } */
                                     if (!valores.emailBeneficiario && formStep1.titularObeneficiario === 'beneficiario') {
                                         errores.emailBeneficiario = true
                                     } else if (valores.emailBeneficiario !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.emailBeneficiario)) {
@@ -363,13 +368,13 @@ const PageCartaAval = () => {
                                        */
                                     if (!valores.patologiaDiagnostico) {
                                         errores.patologiaDiagnostico = true
-                                    } else if (valores.patologiaDiagnostico !== '' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.patologiaDiagnostico)) {
+                                    } /* else if (valores.patologiaDiagnostico !== '' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.patologiaDiagnostico)) {
                                         errores.patologiaDiagnostico = 'Solo letras y espacios'
-                                    }
+                                    } */
 
-                                    /*   if(!valores.fechaOcurrencia){
-                                          errores.fechaOcurrencia = 'Obligatorio'
-                                      } */
+                                    if (startDate === '') {
+                                        errores.fechaOcurrencia = true
+                                    }
 
                                     if (!valores.montoTotal) {
                                         errores.montoTotal = true

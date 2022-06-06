@@ -3,6 +3,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import InputMask from "react-input-mask";
 import DataPicker from '../../../../Componentes/DataPicker';
+import CurrencyFormat from 'react-currency-format';
 
 const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, initialValues, errors, startDate, setStartDate }) => {
 
@@ -10,6 +11,16 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
     const [isActiveTitular, setIsActiveTitular] = useState(false)
     const [isActiveBeneficiario, setIsActiveBeneficiario] = useState(false)
 
+
+
+    const [optionCI, setOptionCI] = useState(false)
+    const [optionCI2, setOptionCI2] = useState(false)
+
+    const [optionTitular, setOptionTitular] = useState(false)
+    const [optionTitular2, setOptionTitular2] = useState(false)
+
+    const [optionBeneficiario, setOptionBeneficiario] = useState(false)
+    const [optionBeneficiario2, setOptionBeneficiario2] = useState(false)
 
 
     /* useEffect(() => {
@@ -31,15 +42,25 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
 
 
     useEffect(() => {
-        AOS.init({
+        if (formStep1.tipoDeCedula === 'extranjero') {
+            setOptionCI(true)
+        } else {
+            setOptionCI(false)
+        }
+        if (formStep1.tipoDeCedula === 'venezolano') {
+            setOptionCI2(true)
+        } else {
+            setOptionCI2(false)
+        }
+    }, [formStep1.tipoDeCedula])
 
+    useEffect(() => {
+        AOS.init({
             duration: 1000,
             easing: 'ease',
             once: false
         });
-
-
-    })
+    }, [AOS])
 
     useEffect(() => {
 
@@ -55,8 +76,6 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
 
             <div data-aos="fade-up">
                 <h2 className="step-title">Datos personales y del vehículo </h2>
-
-
                 <div className="row">
 
                     <div data-aos="fade-left" className="col-sm-6">
@@ -68,16 +87,16 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
 
                             </label>
                             <input
-                                name='nombreTitularPoliza2'
+                                name='nombreTitularPoliza'
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.nombreTitularPoliza2 ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.nombreTitularPoliza ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
                                 id="grid-last-name"
                                 type="text"
                                 placeholder="Nombre del titular de la póliza"
                             />
                             {
-                                errors.nombreTitularPoliza2 && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.nombreTitularPoliza2}  </span>
+                                errors.nombreTitularPoliza && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.nombreTitularPoliza}  </span>
                             }
 
 
@@ -95,18 +114,43 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                 Cédula de identidad
 
                             </label>
-                            <input
-                                name='cedulaTitular2'
+
+                            <div class="flex">
+
+                                <select
+                                    defaultValue={''}
+                                    onChange={e => setFormStep1({ ...formStep1, tipoDeCedula: e.target.value })}
+                                    className={`appearance-none block w-1/6 mr-4 text-xl bg-gray-200 text-gray-700 ${errors.cedulaIdentidad ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                    aria-label="Default select example">
+
+                                    <option value="venezolano">V</option>
+                                    <option value="extranjero">E</option>
+
+                                </select>
+                                <CurrencyFormat
+                                    decimalScale={2}
+                                    name='cedulaIdentidad'
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.cedulaIdentidad ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                    decimalSeparator={false}
+                                    thousandSeparator={'.'}
+                                    prefix={optionCI ? 'E ' : 'CI '}
+                                    placeholder="Cédula de identidad del titular"
+                                />
+                            </div>
+                            {/*  <input
+                                name='cedulaIdentidad'
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.cedulaTitular2 ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.cedulaIdentidad ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
                                 id="grid-last-name"
                                 type="text"
                                 placeholder="Cédula de identidad"
                             />
                             {
-                                errors.cedulaTitular2 && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.cedulaTitular2}  </span>
-                            }
+                                errors.cedulaIdentidad && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.cedulaIdentidad}  </span>
+                            } */}
                         </div>
 
 
@@ -115,27 +159,22 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                 <div className="row">
 
                     <div data-aos="fade-left" className="col-sm-6">
-
-
                         <label
-                            class="block mt-9 uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
-                            {
-                                errors.fechaOcurrencia ?
-                                    <span style={{ color: 'red' }}>
-                                        Obligatorio
-                                    </span>
-                                    :
-                                    <span >
-                                        Fecha de nacimiento
-                                    </span>
-                            }
+                            class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
 
+                            Fecha de nacimiento
                         </label>
 
-                        <DataPicker startDate={startDate} setStartDate={setStartDate} />
 
 
-
+                        <CurrencyFormat
+                            format="##/##/####"
+                            placeholder="DD/MM/AAAA"
+                            name='fechaNacimiento'
+                            mask={['D', 'D', 'M', 'M', 'A', 'A', 'A', 'A']}
+                            onChange={handleChange}
+                            className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.fechaNacimiento ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                        />
                     </div>
 
                     <div data-aos="fade-left" className="col-sm-6">
@@ -146,18 +185,18 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                 Grado de licencia
 
                             </label>
-                            <input
-                                name='cedulaTitular2'
+                            <select
+                                name='gradoLicencia'
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.cedulaTitular2 ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                id="grid-last-name"
-                                type="text"
-                                placeholder="Grado de licencia"
-                            />
-                            {
-                                errors.cedulaTitular2 && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.cedulaTitular2}  </span>
-                            }
+                                className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.gradoLicencia ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}>
+                                <option value={'Selecciona'}>Selecciona </option>
+                                <option value={'Segundo grado'}>Segundo grado</option>
+                                <option value={'Tercer grado'}>Tercer grado</option>
+                                <option value={'Cuarto grado'}>Cuarto grado</option>
+                                <option value={'Quinto grado'}>Quinto grado</option>
+                            </select>
+                            
                         </div>
 
 
@@ -174,16 +213,16 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
 
                             </label>
                             <input
-                                name='nombreTitularPoliza2'
+                                name='placaVehiculo'
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.nombreTitularPoliza2 ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.placaVehiculo ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
                                 id="grid-last-name"
                                 type="text"
                                 placeholder="Placa de vehiculo"
                             />
                             {
-                                errors.nombreTitularPoliza2 && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.nombreTitularPoliza2}  </span>
+                                errors.placaVehiculo && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.placaVehiculo}  </span>
                             }
 
 
@@ -202,16 +241,16 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
 
                             </label>
                             <input
-                                name='cedulaTitular2'
+                                name='modelo'
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.cedulaTitular2 ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.modelo ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
                                 id="grid-last-name"
                                 type="text"
                                 placeholder="Modelo"
                             />
                             {
-                                errors.cedulaTitular2 && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.cedulaTitular2}  </span>
+                                errors.modelo && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.modelo}  </span>
                             }
                         </div>
 
@@ -219,31 +258,54 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                     </div>
                 </div>
                 <div className="row">
-
                     <div data-aos="fade-left" className="col-sm-6">
+                        <div className="form-group">
+                            <label
+                                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
 
+                                Marca
 
-                        <label
-                            class="block mt-9 uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
+                            </label>
+                            <input
+                                name='marca'
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.marca ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                id="grid-last-name"
+                                type="text"
+                                placeholder="Marca"
+                            />
                             {
-                                errors.fechaOcurrencia ?
-                                    <span style={{ color: 'red' }}>
-                                        Obligatorio
-                                    </span>
-                                    :
-                                    <span >
-                                        Año
-                                    </span>
+                                errors.marca && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.marca}  </span>
                             }
-
-                        </label>
-
-                        <DataPicker startDate={startDate} setStartDate={setStartDate} />
-
+                        </div>
 
 
                     </div>
 
+                    <div data-aos="fade-left" className="col-sm-6">
+                        <label
+                            class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
+
+                            Año
+                        </label>
+
+
+                        <CurrencyFormat
+                            format="####"
+                            placeholder="Año del vehiculo"
+                            name='ano'
+
+                            onChange={handleChange}
+                            className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.ano ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                        />
+
+
+                    </div>
+
+
+                </div>
+                <div className="row">
                     <div data-aos="fade-left" className="col-sm-6">
                         <div className="form-group">
                             <label
@@ -253,24 +315,21 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
 
                             </label>
                             <input
-                                name='cedulaTitular2'
+                                name='emailTitular'
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.cedulaTitular2 ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.emailTitular ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
                                 id="grid-last-name"
                                 type="text"
-                                placeholder="Modelo"
+                                placeholder="Email"
                             />
                             {
-                                errors.cedulaTitular2 && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.cedulaTitular2}  </span>
+                                errors.emailTitular && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.emailTitular}  </span>
                             }
                         </div>
 
 
                     </div>
-                </div>
-                <div className="row">
-
 
                     <div className="col-sm-6">
                         <div className="form-group">
@@ -285,15 +344,15 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                 onChange={handleChange}
                                 placeholder="+58 000 000 0000"
                                 maskPlaceholder={null}
-                                name='celularBeneficiario'
+                                name='celularTitular'
                                 mask="+5\8 999 999 9999"
                                 onBlur={handleBlur}
-                                className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.celularBeneficiario ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.celularTitular ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
                             />
 
 
                             {
-                                errors.celularBeneficiario && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.celularBeneficiario}  </span>
+                                errors.celularTitular && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.celularTitular}  </span>
                             }
                         </div>
 

@@ -14,30 +14,63 @@ const Steps = ({ formStep1, setFormStep1, handleSend1, errorTipo, handleChange, 
             setIsActiveColective(false)
         }
     }, [formStep1.tipoPoliza])
-    useEffect(() => {
+
+
+       useEffect(() => {
         AOS.init({
             duration: 1000,
             easing: 'ease',
             once: false
         });
+    }, [AOS])
 
-
-    })
     useEffect(() => {
         console.log(errors.nombreTomador)
     }, [errors.nombreTomador])
 
     return (
         <>
-
-
             <div data-aos="fade-up" >
 
                 <h2 className="step-title">  Tipo de póliza y compañía de seguros</h2>
                 <div className="row">
                     <div className="col-sm-6">
-                        <div >
+                        <ul class="grid grid-cols-3 gap-x-5 m-8   ">
+                            <li class="relative">
+                                <input
+                                    class="sr-only peer"
+                                    type="radio"
+                                    value='Individual'
+                                    name='tipoPoliza'
+                                    id="answer_yes"
+                                    onChange={(e) => setFormStep1({ ...formStep1, tipoPoliza: e.target.value })}
+                                />
+                                <label class={` ${errors.tipoPoliza ? 'border-red-500' : 'border-gray-300'} flex justify-center  p-5 ali bg-white border  rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-blue-700 peer-checked:ring-2 peer-checked:border-transparent`} for="answer_yes">
+                                    Individual
+                                </label>
 
+
+                            </li>
+
+                            <li class="relative">
+                                <input
+                                    class="sr-only peer"
+                                    type="radio"
+                                    value='Colectiva'
+                                    name='tipoPoliza'
+                                    id="answer_no"
+                                    onChange={(e) => setFormStep1({ ...formStep1, tipoPoliza: e.target.value })}
+                                />
+                                <label class={`${errors.tipoPoliza ? 'border-red-500' : 'border-gray-300'} flex justify-center p-5 bg-white border  rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-blue-700 peer-checked:ring-2 peer-checked:border-transparent`} for="answer_no">
+                                    Colectiva
+                                </label>
+
+
+                            </li>
+
+
+                        </ul>
+                        {/*  <div >
                             <label className="radio-inline">
                                 <input
 
@@ -67,7 +100,7 @@ const Steps = ({ formStep1, setFormStep1, handleSend1, errorTipo, handleChange, 
                                 </span>
 
                             }
-                        </div>
+                        </div> */}
 
 
                     </div>

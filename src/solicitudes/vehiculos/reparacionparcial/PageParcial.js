@@ -29,27 +29,37 @@ const PageParcial = () => {
     const Swal = require('sweetalert2')
     const [page, setPage] = useState(1)
     const [loadingModal, setLoadingModal] = useState(false)
-    const [fileSelect, setFileSelect] = useState(new Array(3))
+    const [fileSelect, setFileSelect] = useState(new Array(5))
+    const [enteFile, setEnteFile] = useState([])
     const [urlGET, setUrlGET] = useState([])
 
     const [errorFile, setErrorFile] = useState({
-        errorInforme: false,
-        errorRecipe: false,
-        errorExamenes: false,
-        errorFactura: false,
+        cedulaConductor: false,
+        certificadoMedico: false,
+        licenciaConductor: false,
+        carnetCirculacion: false,
+        autorizacion: false,
+        fotosVehiculos: false,
+        enteFile: false,
+
     })
     const [data, setData] = useState()
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = useState('');
     const [formStep1, setFormStep1] = useState({
         tipoPoliza: '',
         titularObeneficiario: '',
-        tipoReembolso: '',
+        reparacionParcial: '',
         fileDataInformeMedico: '',
         fileDataRecipeIndicaciones: '',
         fileDataExamenesRealizados: '',
         fileDataFacturas: '',
         SioNo: '',
         intervinoSioNo: '',
+        horaOcurrencia : '',
+        tipoDeCedula: '',
+        tipoDeCedulaTitular: '',
+        tipoDeCedulaBeneficiario: '',
+        tipoDeMoneda: '',
     })
     const prevSteps = () => {
         if (page === 1) { setPage((current) => current - 1) }
@@ -59,7 +69,8 @@ const PageParcial = () => {
         if (page === 5) { setPage((current) => current - 1) }
     }
     const handleFile = (e, n) => {
-        if (e.target.name === 'informeMedico') {
+
+        if (e.target.name === 'cedulaConductor') {
             let file = e.target.files
             if (file[0].type === 'application/pdf') {
                 if (fileSelect) {
@@ -68,12 +79,15 @@ const PageParcial = () => {
                 } else {
                     setFileSelect([...fileSelect[0], e.target.files])
                 }
-                setErrorFile({ ...errorFile, errorInforme: false })
+                setErrorFile({ ...errorFile, cedulaConductor: false })
             } else {
-                setErrorFile({ ...errorFile, errorInforme: true })
+                setErrorFile({ ...errorFile, cedulaConductor: true })
             }
+
+
         }
-        if (e.target.name === 'recipeIndicaciones') {
+
+        if (e.target.name === 'certificadoMedico') {
             let file = e.target.files
             if (file[0].type === 'application/pdf') {
                 if (fileSelect) {
@@ -83,12 +97,12 @@ const PageParcial = () => {
                     setFileSelect([...fileSelect[1], e.target.files])
                     console.log('se ha agregado')
                 }
-                setErrorFile({ ...errorFile, errorRecipe: false })
+                setErrorFile({ ...errorFile, certificadoMedico: false })
             } else {
-                setErrorFile({ ...errorFile, errorRecipe: true })
+                setErrorFile({ ...errorFile, certificadoMedico: true })
             }
         }
-        if (e.target.name === 'examenesRealizados') {
+        if (e.target.name === 'licenciaConductor') {
             let file = e.target.files
             if (file[0].type === 'application/pdf') {
                 if (fileSelect) {
@@ -97,12 +111,12 @@ const PageParcial = () => {
                 } else {
                     setFileSelect([...fileSelect[2], e.target.files])
                 }
-                setErrorFile({ ...errorFile, errorExamenes: false })
+                setErrorFile({ ...errorFile, licenciaConductor: false })
             } else {
-                setErrorFile({ ...errorFile, errorExamenes: true })
+                setErrorFile({ ...errorFile, licenciaConductor: true })
             }
         }
-        if (e.target.name === 'facturas') {
+        if (e.target.name === 'carnetCirculacion') {
             let file = e.target.files
             if (file[0].type === 'application/pdf') {
                 if (fileSelect) {
@@ -111,11 +125,62 @@ const PageParcial = () => {
                 } else {
                     setFileSelect([...fileSelect[3], e.target.files])
                 }
-                setErrorFile({ ...errorFile, errorFactura: false })
+                setErrorFile({ ...errorFile, carnetCirculacion: false })
             } else {
-                setErrorFile({ ...errorFile, errorFactura: true })
+                setErrorFile({ ...errorFile, carnetCirculacion: true })
             }
         }
+        if (e.target.name === 'autorizacion') {
+            let file = e.target.files
+            if (file[0].type === 'application/pdf') {
+                if (fileSelect) {
+                    fileSelect.splice(n, 1, e.target.files)
+                    console.log(fileSelect)
+                } else {
+                    setFileSelect([...fileSelect[4], e.target.files])
+                }
+                setErrorFile({ ...errorFile, autorizacion: false })
+            } else {
+                setErrorFile({ ...errorFile, autorizacion: true })
+            }
+        }
+        if (e.target.name === 'fotosVehiculos') {
+            let file = e.target.files
+            if (file[0].type === 'application/pdf') {
+                if (fileSelect) {
+                    fileSelect.splice(n, 1, e.target.files)
+                    console.log(fileSelect)
+                } else {
+                    setFileSelect([...fileSelect[5], e.target.files])
+                }
+                setErrorFile({ ...errorFile, fotosVehiculos: false })
+            } else {
+                setErrorFile({ ...errorFile, fotosVehiculos: true })
+            }
+
+        }
+    }
+
+
+    const handleEnte = (e, n) => {
+
+
+        if (e.target.name === 'entefile') {
+            const file = e.target.files
+            if (file[0].type === 'application/pdf') {
+                if (enteFile) {
+                    enteFile.splice(n, 1, e.target.files)
+                    console.log(enteFile)
+                } else {
+                    setEnteFile([...enteFile[0], e.target.files])
+                }
+                setErrorFile({ ...errorFile, enteFile: false })
+            } else {
+                setErrorFile({ ...errorFile, enteFile: true })
+            }
+        }
+
+
     }
 
     const sendData = async () => {
@@ -123,14 +188,14 @@ const PageParcial = () => {
         const id = uuidv4()
         await Promise.all(
             fileSelect.map(async (file, i) => {
-                const storageRef = ref(storage, `/solicitudes/salud/reembolso/${id}/${file[0].name}`)
+                const storageRef = ref(storage, `/vehiculos/reparacionParcial/reembolso/${id}/${file[0].name}`)
                 const uploadResult = await uploadBytes(storageRef, file[0])
                 urlGET.push(await getDownloadURL(uploadResult.ref))
             })
         )
         setUrlGET(urlGET)
         try {
-            setDoc(doc(db, '/solicitudes/salud-reembolso/historico/', id), {
+            setDoc(doc(db, '/vehiculos/reparacion-parcial/historico/', id), {
                 Tipodepóliza: formStep1.tipoPoliza,
                 NombreDelTomador: data.nombreTomador,
                 CompañíadeSeguros: data.selectSeguro,
@@ -178,14 +243,14 @@ const PageParcial = () => {
             easing: 'ease',
             once: false
         });
-    })
+    }, [AOS])
 
     useEffect(() => {
 
-        console.log(page)
+        console.log(enteFile)
 
 
-    }, [page])
+    }, [enteFile])
 
 
     return (
@@ -202,371 +267,267 @@ const PageParcial = () => {
                                 titularObeneficiario: '',
                                 //PAGE 2
                                 nombreTitularPoliza: '',
-                                apellidoTitularPoliza: '',
-                                cedulaTitular: '',
+                                cedulaIdentidad: '',
+                                fechaNacimiento: '',
+                                gradoLicencia: '',
+                                placaVehiculo: '',
+                                modelo: '',
+                                marca: '',
+                                ano: '',
                                 emailTitular: '',
                                 celularTitular: '',
-                                nombreTitularPoliza2: '',
-                                apellidoTitularPoliza2: '',
-                                cedulaTitular2: '',
-                                emailTitular2: '',
-                                celularTitular2: '',
-                                nombreBeneficiarioPoliza: '',
-                                apellidoBeneficiarioPoliza: '',
-                                cedulaBeneficiario: '',
-                                emailBeneficiario: '',
-                                celularBeneficiario: '',
                                 //Page 3
-                                tipoReembolso: '',
-                                informeMedico: '',
-                                recipeIndicaciones: '',
-                                examenesRealizados: '',
-                                facturas: '',
-                                patologiaDiagnostico: '',
+                                siOno: '',
+                                nombreConductor: '',
+                                cedulaConductor: '',
+                                fechaConductor: '',
+                                gradoConductor: '',
+                                correoConductor: '',
+                                celularConductor: '',
+                                //PAGE  4
+                                reparacionParcial: '',
                                 fechaOcurrencia: '',
-                                montoTotal: '',
-                                siOno: ''
-
-
+                                horaOcurrencia: '',
+                                lugarOcurrencia: '',
+                                descripcionHechos: '',
+                                describirDanos: '',
+                                entefile: '',
+                                siOnoAutoridad: '',
+                                danosTerceros: '',
+                                vehiculoDetenido: '',
+                                vehiculoMoverse: '',
+                                indicarRotura: '',
+                                //Page 5
+                                cedulaConductor: '',
+                                certificadoMedico: '',
+                                licenciaConductor: '',
+                                carnetCirculacion: '',
+                                autorizacion: '',
+                                fotosVehiculos: '',
                             }}
-                            /*   validate={(valores) => {
-                                  let errores = {}
-                                  if (page === 1) {
-                                      if (!valores.selectSeguro || valores.selectSeguro === 'Selecciona') {
-                                          errores.selectSeguro = 'Obligatorio'
-                                      }
-  
-                                      if (!valores.nombreTomador && formStep1.tipoPoliza === 'Colectiva') {
-                                          errores.nombreTomador = true
-                                      } else if (valores.nombreTomador !== '' && formStep1.tipoPoliza === 'Colectiva' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.nombreTomador)) {
-                                          errores.nombreTomador = 'Solo letras y espacios'
-                                      }
-  
-  
-                                      if (!formStep1.tipoPoliza) {
-                                          errores.tipoPoliza = 'Obligatorio'
-                                      }
-                                  }
-  
-                                  if (page === 2) {
-                                      if (!formStep1.titularObeneficiario) {
-                                          errores.titularObeneficiario = 'Obligatorio'
-  
-                                      }
-                                      if (!valores.nombreTitularPoliza && formStep1.titularObeneficiario === 'titular') {
-                                          errores.nombreTitularPoliza = true
-                                      } else if (valores.nombreTitularPoliza !== '' && formStep1.titularObeneficiario === 'titular' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.nombreTitularPoliza)) {
-                                          errores.nombreTitularPoliza = 'Solo letras y espacios'
-                                      }
-  
-  
-  
-                                      if (!valores.cedulaTitular && formStep1.titularObeneficiario === 'titular') {
-                                          errores.cedulaTitular = true
-                                      } else if (valores.cedulaTitular !== '' && formStep1.titularObeneficiario === 'titular' && !/^\d*\.?\d*$/.test(valores.cedulaTitular)) {
-                                          errores.cedulaTitular = 'Solo numeros'
-                                      }
-                                      if (!valores.emailTitular && formStep1.titularObeneficiario === 'titular') {
-                                          errores.emailTitular = true
-                                      } else if (valores.emailTitular !== '' && formStep1.titularObeneficiario === 'titular' && !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.emailTitular)) {
-                                          errores.emailTitular = 'Ingrese un correo valido'
-                                      }
-  
-  
-                                      if (!valores.celularTitular && formStep1.titularObeneficiario === 'titular') {
-                                          errores.celularTitular = true
-                                      } else if (formStep1.titularObeneficiario === 'titular' && valores.celularTitular.length < 16) {
-                                          errores.celularTitular = 'Ingrese un numero de telefono valido +58 424 000 0000'
-                                      }
-  
-  
-                                      if (!valores.nombreTitularPoliza2 && formStep1.titularObeneficiario === 'beneficiario') {
-                                          errores.nombreTitularPoliza2 = true
-                                      } else if (valores.nombreTitularPoliza2 !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.nombreTitularPoliza2)) {
-                                          errores.nombreTitularPoliza2 = 'Solo letras y espacios'
-                                      }
-  
-  
-  
-  
-  
-                                      if (!valores.cedulaTitular2 && formStep1.titularObeneficiario === 'beneficiario') {
-                                          errores.cedulaTitular2 = true
-                                      } else if (valores.cedulaTitular2 !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^\d*\.?\d*$/.test(valores.cedulaTitular2)) {
-                                          errores.cedulaTitular2 = 'Solo letras y espacios'
-                                      }
-  
-  
-  
-                                      if (!valores.emailTitular2 && formStep1.titularObeneficiario === 'beneficiario') {
-                                          errores.emailTitular2 = true
-                                      } else if (valores.emailTitular2 !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.emailTitular2)) {
-                                          errores.emailTitular2 = 'Ingrese un correo valido'
-                                      }
-  
-  
-  
-                                      if (!valores.celularTitular2 && formStep1.titularObeneficiario === 'beneficiario') {
-                                          errores.celularTitular2 = true
-                                      } else if (formStep1.titularObeneficiario === 'beneficiario' && valores.celularTitular2.length < 16) {
-                                          errores.celularTitular2 = 'Ingrese un numero de telefono valido +58 424 000 0000'
-                                      }
-  
-  
-  
-                                      if (!valores.nombreBeneficiarioPoliza && formStep1.titularObeneficiario === 'beneficiario') {
-                                          errores.nombreBeneficiarioPoliza = true
-                                      } else if (valores.nombreBeneficiarioPoliza !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.nombreBeneficiarioPoliza)) {
-                                          errores.nombreBeneficiarioPoliza = 'Solo letras y espacios'
-                                      }
-  
-  
-  
-  
-                                      
-  
-  
-  
-                                      if (!valores.cedulaBeneficiario && formStep1.titularObeneficiario === 'beneficiario') {
-                                          errores.cedulaBeneficiario = true
-                                      } else if (valores.cedulaBeneficiario !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^\d*\.?\d*$/.test(valores.cedulaBeneficiario)) {
-                                          errores.cedulaBeneficiario = 'Solo numeros'
-                                      }
-  
-  
-  
-                                      if (!valores.emailBeneficiario && formStep1.titularObeneficiario === 'beneficiario') {
-                                          errores.emailBeneficiario = true
-                                      } else if (valores.emailBeneficiario !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.emailBeneficiario)) {
-                                          errores.emailBeneficiario = 'Ingrese un correo valido'
-                                      }
-  
-  
-  
-                                      if (!valores.celularBeneficiario && formStep1.titularObeneficiario === 'beneficiario') {
-                                          errores.celularBeneficiario = true
-                                      } else if (formStep1.titularObeneficiario === 'beneficiario' && valores.celularBeneficiario.length < 16) {
-                                          errores.celularBeneficiario = 'Ingrese un numero de telefono valido +58 424 000 0000'
-                                      }
-  
-  
-  
-                                  }
-  
-                                  if (page === 3) {
-  
-                                      if (formStep1.tipoReembolso === 'Consulta medica') {
-                                          if (!fileSelect[0]) {
-                                              errores.informeMedico = true
-                                          }
-  
-                                          if (fileSelect && errorFile.errorInforme) {
-                                              errores.informeMedico = false
-                                              setErrorFile({ ...errorFile, errorInforme: 'El tipo de archivo debe ser PDF' })
-                                          }
-  
-                                          if (!fileSelect[1]) {
-                                              errores.recipeIndicaciones = true
-                                          }
-  
-                                          if (fileSelect && errorFile.errorRecipe) {
-                                              errores.recipeIndicaciones = false
-                                              setErrorFile({ ...errorFile, errorRecipe: 'El tipo de archivo debe ser PDF' })
-                                          }
-  
-  
-                                          if (!fileSelect[2]) {
-                                              errores.examenesRealizados = true
-                                          }
-  
-                                          if (fileSelect && errorFile.errorExamenes) {
-                                              errores.examenesRealizados = false
-                                              setErrorFile({ ...errorFile, errorExamenes: 'El tipo de archivo debe ser PDF' })
-                                          }
-  
-                                          if (!fileSelect[3]) {
-                                              errores.facturas = true
-                                          }
-  
-                                          if (fileSelect && errorFile.errorFactura) {
-                                              errores.facturas = false
-                                              setErrorFile({ ...errorFile, errorFactura: 'El tipo de archivo debe ser PDF' })
-                                          }
-  
-  
-                                          if (!valores.patologiaDiagnostico) {
-                                              errores.patologiaDiagnostico = true
-                                          } else if (valores.patologiaDiagnostico !== '' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.patologiaDiagnostico)) {
-                                              errores.patologiaDiagnostico = 'Solo letras y espacios'
-                                          }
-  
-  
-  
-  
-                                           if (!valores.fechaOcurrencia) {
-                                               errores.fechaOcurrencia = 'Obligatorio'
-                                           }
-  
-                                          if (!valores.montoTotal) {
-                                              errores.montoTotal = true
-                                          }
-                                      }
-  
-                                      if (formStep1.tipoReembolso === 'Farmacos') {
-                                          if (!fileSelect[0]) {
-                                              errores.informeMedico = true
-                                          }
-  
-                                          if (fileSelect && errorFile.errorInforme) {
-                                              errores.informeMedico = false
-                                              setErrorFile({ ...errorFile, errorInforme: 'El tipo de archivo debe ser PDF' })
-                                          }
-  
-                                          if (!fileSelect[1]) {
-                                              errores.recipeIndicaciones = true
-                                          }
-  
-                                          if (fileSelect && errorFile.errorRecipe) {
-                                              errores.recipeIndicaciones = false
-                                              setErrorFile({ ...errorFile, errorRecipe: 'El tipo de archivo debe ser PDF' })
-                                          }
-                                          if (!fileSelect[2]) {
-                                              errores.facturas = true
-                                          }
-  
-                                          if (fileSelect && errorFile.errorFacturaOp1) {
-                                              errores.facturas = false
-                                              setErrorFile({ ...errorFile, errorFactura: 'El tipo de archivo debe ser PDF' })
-                                          }
-  
-                                          if (!valores.patologiaDiagnostico) {
-                                              errores.patologiaDiagnostico = true
-                                          } else if (valores.patologiaDiagnostico !== '' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.patologiaDiagnostico)) {
-                                              errores.patologiaDiagnostico = 'Solo letras y espacios'
-                                          }
-  
-                                            if(!valores.fechaOcurrencia){
-                                                errores.fechaOcurrencia = 'Obligatorio'
-                                            }
-  
-                                          if (!valores.montoTotal) {
-                                              errores.montoTotal = true
-                                          }
-                                      }
-                                      if (formStep1.tipoReembolso === 'Sesiones de rehabilitacion, terapias, fisioterapia') {
-  
-  
-                                          if (!fileSelect[0]) {
-                                              errores.informeMedico = true
-                                          }
-  
-                                          if (fileSelect && errorFile.errorInforme) {
-                                              errores.informeMedico = false
-                                              setErrorFile({ ...errorFile, errorInforme: 'El tipo de archivo debe ser PDF' })
-                                          }
-  
-                                          if (!fileSelect[1]) {
-                                              errores.recipeIndicaciones = true
-                                          }
-  
-                                          if (fileSelect && errorFile.errorRecipe) {
-                                              errores.recipeIndicaciones = false
-                                              setErrorFile({ ...errorFile, errorRecipe: 'El tipo de archivo debe ser PDF' })
-                                          }
-                                          if (!fileSelect[2]) {
-                                              errores.facturas = true
-                                          }
-  
-                                          if (fileSelect && errorFile.errorFactura) {
-                                              errores.facturas = false
-                                              setErrorFile({ ...errorFile, errorFactura: 'El tipo de archivo debe ser PDF' })
-                                          }
-  
-                                          if (!valores.patologiaDiagnostico) {
-                                              errores.patologiaDiagnostico = true
-                                          } else if (valores.patologiaDiagnostico !== '' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.patologiaDiagnostico)) {
-                                              errores.patologiaDiagnostico = 'Solo letras y espacios'
-                                          }
-  
-                                          if (!valores.fechaOcurrencia) {
-                                              errores.fechaOcurrencia = 'Obligatorio'
-                                          }
-  
-                                          if (!valores.montoTotal) {
-                                              errores.montoTotal = true
-                                          }
-                                      }
-  
-                                      if (formStep1.tipoReembolso === 'Emergencia') {
-  
-  
-  
-                                          if (!fileSelect[0]) {
-                                              errores.informeMedico = true
-                                          }
-  
-                                          if (fileSelect && errorFile.errorInforme) {
-                                              errores.informeMedico = false
-                                              setErrorFile({ ...errorFile, errorInforme: 'El tipo de archivo debe ser PDF' })
-                                          }
-  
-                                          if (!fileSelect[1]) {
-                                              errores.recipeIndicaciones = true
-                                          }
-  
-                                          if (fileSelect && errorFile.errorRecipe) {
-                                              errores.recipeIndicaciones = false
-                                              setErrorFile({ ...errorFile, errorRecipe: 'El tipo de archivo debe ser PDF' })
-                                          }
-  
-  
-                                          if (!fileSelect[2]) {
-                                              errores.examenesRealizados = true
-                                          }
-  
-                                          if (fileSelect && errorFile.errorExamenes) {
-                                              errores.examenesRealizados = false
-                                              setErrorFile({ ...errorFile, errorExamenes: 'El tipo de archivo debe ser PDF' })
-                                          }
-  
-                                          if (!fileSelect[3]) {
-                                              errores.facturas = true
-                                          }
-  
-                                          if (fileSelect && errorFile.errorFactura) {
-                                              errores.facturas = false
-                                              setErrorFile({ ...errorFile, errorFactura: 'El tipo de archivo debe ser PDF' })
-                                          }
-  
-                                          if (!valores.patologiaDiagnostico) {
-                                              errores.patologiaDiagnostico = true
-                                          } else if (valores.patologiaDiagnostico !== '' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.patologiaDiagnostico)) {
-                                              errores.patologiaDiagnostico = 'Solo letras y espacios'
-                                          }
-  
-  
-                                          if (!valores.fechaOcurrencia) {
-                                              errores.fechaOcurrencia = 'Obligatorio'
-                                          }
-  
-                                          if (!valores.montoTotal) {
-                                              errores.montoTotal = true
-                                          }
-                                      }
-                                  }
-                                  return errores
-                              }} */
+                            validate={(valores) => {
+                                let errores = {}
+                                if (page === 1) {
+                                    if (!valores.selectSeguro || valores.selectSeguro === 'Selecciona') {
+                                        errores.selectSeguro = 'Obligatorio'
+                                    }
+
+                                    if (!valores.nombreTomador && formStep1.tipoPoliza === 'Colectiva') {
+                                        errores.nombreTomador = true
+                                    } else if (valores.nombreTomador !== '' && formStep1.tipoPoliza === 'Colectiva' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.nombreTomador)) {
+                                        errores.nombreTomador = 'Solo letras y espacios'
+                                    }
+
+
+                                    if (!formStep1.tipoPoliza) {
+                                        errores.tipoPoliza = 'Obligatorio'
+                                    }
+                                }
+
+                                if (page === 2) {
+
+                                    if (!valores.nombreTitularPoliza) {
+                                        errores.nombreTitularPoliza = true
+                                    } else if (valores.nombreTitularPoliza !== '' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.nombreTitularPoliza)) {
+                                        errores.nombreTitularPoliza = 'Solo letras y espacios'
+                                    }
+
+                                    if (!valores.cedulaIdentidad) {
+                                        errores.cedulaIdentidad = true
+                                    }
+
+                                    if (!valores.gradoLicencia || valores.gradoLicencia === 'Selecciona') {
+                                        errores.gradoLicencia = true
+                                    }
+
+
+
+                                    if (!valores.fechaNacimiento) {
+                                        errores.fechaNacimiento = true
+                                    }
+                                    if (!valores.placaVehiculo) {
+                                        errores.placaVehiculo = true
+                                    }
+
+                                    if (!valores.modelo) {
+                                        errores.modelo = true
+                                    }
+
+                                    if (!valores.marca) {
+                                        errores.marca = true
+                                    }
+
+                                    if (!valores.ano) {
+                                        errores.ano = true
+                                    }
+                                    if (!valores.emailTitular) {
+                                        errores.emailTitular = true
+                                    } else if (valores.emailTitular !== '' && !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.emailTitular)) {
+                                        errores.emailTitular = 'Ingrese un correo valido'
+                                    }
+
+
+                                    if (!valores.celularTitular) {
+                                        errores.celularTitular = true
+                                    } else if (valores.celularTitular.length < 16) {
+                                        errores.celularTitular = 'Ingrese un numero de telefono valido +58 424 000 0000'
+                                    }
+                                }
+
+                                if (page === 3) {
+
+
+                                    if (!formStep1.SioNo) {
+                                        errores.siOno = true
+                                    }
+
+                                    if (formStep1.SioNo === 'si') {
+
+                                        if (!valores.nombreConductor) {
+                                            errores.nombreConductor = true
+                                        } else if (valores.nombreConductor !== '' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.nombreConductor)) {
+                                            errores.nombreConductor = 'Solo letras y espacios'
+                                        }
+                                        if (!valores.cedulaConductor) {
+                                            errores.cedulaConductor = true
+                                        }
+
+                                        if (!valores.gradoConductor || valores.gradoConductor === 'Selecciona') {
+                                            errores.gradoConductor = true
+                                        }
+
+                                        if (!valores.fechaConductor) {
+                                            errores.fechaConductor = true
+                                        }
+
+                                        if (!valores.correoConductor) {
+                                            errores.correoConductor = true
+                                        } else if (valores.correoConductor !== '' && !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.correoConductor)) {
+                                            errores.correoConductor = 'Ingrese un correo valido'
+                                        }
+                                        if (!valores.celularConductor) {
+                                            errores.celularConductor = true
+                                        } else if (valores.celularConductor.length < 16) {
+                                            errores.celularConductor = 'Ingrese un numero de telefono valido +58 424 000 0000'
+                                        }
+                                    }
+
+
+                                }
+
+                                if (page === 4) {
+
+                                    if (!formStep1.reparacionParcial || formStep1.reparacionParcial === 'Selecciona') {
+                                        errores.reparacionParcial = true
+                                    }
+
+                                    if (!valores.fechaOcurrencia) {
+                                        errores.fechaOcurrencia = true
+                                    }
+
+                                    if (!valores.horaOcurrencia) {
+                                        errores.horaOcurrencia = true
+                                    }/* else if(valores.horaOcurrencia.length < 6){
+                                        errores.horaOcurrencia = 'Ingrese una hora valida'
+                                    } */
+
+                                    if (!valores.lugarOcurrencia) {
+                                        errores.lugarOcurrencia = true
+                                    }
+
+
+                                    if (!valores.descripcionHechos) {
+                                        errores.descripcionHechos = true
+                                    }
+
+
+                                    if (formStep1.intervinoSioNo === '') {
+                                        errores.siOnoAutoridad = true
+                                    } else if (formStep1.intervinoSioNo === 'si') {
+
+                                        if (!enteFile[0] ) {
+                                            errores.entefile = true
+                                        }
+                                    }
+
+
+
+                                    if (!valores.describirDanos) {
+                                        errores.describirDanos = true
+                                    }
+
+
+
+
+
+                                    if (!valores.danosTerceros) {
+                                        errores.danosTerceros = true
+                                    }
+                                    if (!valores.vehiculoDetenido) {
+                                        errores.vehiculoDetenido = true
+                                    }
+                                    if (!valores.vehiculoMoverse) {
+                                        errores.vehiculoMoverse = true
+                                    }
+
+                                    if (!valores.indicarRotura) {
+                                        errores.indicarRotura = true
+                                    }
+
+
+                                }
+
+                                if (page === 5) {
+
+                                    if (!fileSelect[0]) {
+                                        errores.cedulaConductor = true
+                                    } else if (fileSelect[0] && errorFile.cedulaConductor) {
+                                        setErrorFile({ ...errorFile, cedulaConductor: 'El tipo de archivo debe ser PDF' })
+                                    }
+
+                                    if (!fileSelect[1]) {
+                                        errores.certificadoMedico = true
+                                    } else if (fileSelect[1] && errorFile.certificadoMedico) {
+                                        setErrorFile({ ...errorFile, certificadoMedico: 'El tipo de archivo debe ser PDF' })
+                                    }
+
+                                    if (!fileSelect[2]) {
+                                        errores.licenciaConductor = true
+                                    } else if (fileSelect[2] && errorFile.licenciaConductor) {
+                                        setErrorFile({ ...errorFile, licenciaConductor: 'El tipo de archivo debe ser PDF' })
+                                    }
+
+                                    if (!fileSelect[3]) {
+                                        errores.carnetCirculacion = true
+                                    } else if (fileSelect[3] && errorFile.carnetCirculacion) {
+                                        setErrorFile({ ...errorFile, carnetCirculacion: 'El tipo de archivo debe ser PDF' })
+                                    }
+
+                                    if (!fileSelect[4]) {
+                                        errores.autorizacion = true
+                                    } else if (fileSelect[4] && errorFile.autorizacion) {
+                                        setErrorFile({ ...errorFile, autorizacion: 'El tipo de archivo debe ser PDF' })
+                                    }
+
+                                    if (!fileSelect[5]) {
+                                        errores.fotosVehiculos = true
+                                    } else if (fileSelect[5] && errorFile.fotosVehiculos) {
+                                        setErrorFile({ ...errorFile, fotosVehiculos: 'El tipo de archivo debe ser PDF' })
+                                    }
+                                }
+                                return errores
+                            }}
                             onSubmit={(valores) => {
-                                /*  if (valores.selectSeguro && formStep1.tipoPoliza !== '') { */
+
                                 if (page === 1) {
                                     setPage((current) => current + 1)
                                 }
-                                /*    } */
-                                /*    if (formStep1.titularObeneficiario !== '' && valores.nombreTitularPoliza !== '' || formStep1.titularObeneficiario !== '' && valores.nombreTitularPoliza2 !== '') { */
+
+
                                 if (page === 2) {
                                     setPage((current) => current + 1)
                                 }
-                                /*   } */
+
                                 /*  if (valores.patologiaDiagnostico !== '') { */
                                 if (page === 3) {
                                     /* 
@@ -597,6 +558,8 @@ const PageParcial = () => {
                                     setPage((current) => current + 1)
                                 }
                                 if (page === 4) {
+
+
                                     setPage((current) => current + 1)
                                 }
                                 if (page === 5) {
@@ -632,7 +595,7 @@ const PageParcial = () => {
                                     <div className='luna-signup-right'>
                                         <div className="container-fluid">
                                             <div className='steps-count'>
-                                                Paso <span className="step-current"> {page} </span>/<span className="step-count"> 5 </span>
+                                                Paso <span className="step-current"> {page} </span>/<span className="step-count"> 6 </span>
                                             </div>
                                             <div className="luna-steps">
                                                 {
@@ -698,6 +661,9 @@ const PageParcial = () => {
                                                             errorFile={errorFile}
                                                             fileSelect={fileSelect}
                                                             setFileSelect={setFileSelect}
+                                                            handleEnte={handleEnte}
+                                                            enteFile={enteFile}
+                                                            setEnteFile={setEnteFile}
 
                                                         />
                                                     )

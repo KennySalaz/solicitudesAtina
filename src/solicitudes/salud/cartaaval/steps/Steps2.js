@@ -18,6 +18,9 @@ const Steps2 = ({ formStep1, setFormStep1, handleChange, handleBlur, errors, sta
     const [options3, setOptions3] = useState(false)
     const [options4, setOptions4] = useState(false)
 
+    const [optionMoneda, setOptionMoneda] = useState(false)
+
+
 
 
 
@@ -50,14 +53,22 @@ const Steps2 = ({ formStep1, setFormStep1, handleChange, handleBlur, errors, sta
 
 
     useEffect(() => {
+        if (formStep1.tipoDeMoneda === 'dolar') {
+            setOptionMoneda(true)
+
+        } else if (formStep1.tipoDeMoneda === 'bolivar') {
+            setOptionMoneda(false)
+        }
+
+    }, [formStep1.tipoDeMoneda])
+
+    useEffect(() => {
         AOS.init({
             duration: 1000,
             easing: 'ease',
             once: false
         });
-    })
-
-
+    }, [AOS])
 
 
     return (
@@ -240,20 +251,13 @@ const Steps2 = ({ formStep1, setFormStep1, handleChange, handleBlur, errors, sta
 
                             <label
                                 class="block mt-9 uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
-                                {
-                                    errors.fechaOcurrencia ?
-                                        <span style={{ color: 'red' }}>
-                                            Obligatorio
-                                        </span>
-                                        :
-                                        <span >
-                                            Fecha de ocurrencia
-                                        </span>
-                                }
+
+                                Fecha de ocurrencia
+
 
                             </label>
 
-                            <DataPicker startDate={startDate} setStartDate={setStartDate} />
+                            <DataPicker startDate={startDate} setStartDate={setStartDate} errors={errors} />
 
 
                         </div>
@@ -270,14 +274,24 @@ const Steps2 = ({ formStep1, setFormStep1, handleChange, handleBlur, errors, sta
 
                                 </label>
 
-                                <CurrencyFormat
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    placeholder="Bs"
-                                    name='montoTotal'
-                                    class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                    thousandSeparator={true} prefix={'BsF '}
-                                />
+                                <div class="flex">
+                                    <select
+                                        defaultValue={''}
+                                        onChange={e => setFormStep1({ ...formStep1, tipoDeMoneda: e.target.value })}
+                                        className={`appearance-none block w-1/6 mr-4 text-xl bg-gray-200 text-gray-700 ${errors.montoTotal ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                        aria-label="Default select example">
+                                        <option value="bolivar">BSF</option>
+                                        <option value="dolar">USD</option>
+                                    </select>
+                                    <CurrencyFormat
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        placeholder={optionMoneda ? '$ ' : 'Bsf '}
+                                        name='montoTotal'
+                                        class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                        thousandSeparator={true} prefix={optionMoneda ? '$ ' : 'BsF '}
+                                    />
+                                </div>
                                 {
                                     errors.montoTotal && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.montoTotal} </span>
                                 }

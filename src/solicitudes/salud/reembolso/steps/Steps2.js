@@ -35,7 +35,9 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
             errors.recipeIndicaciones = ''
             errors.examenesRealizados = ''
             errors.facturas = ''
-
+            errors.patologiaDiagnostico = ''
+            errors.montoTotal = ''
+            errors.fechaOcurrencia = false
 
             setOptions(true)
         } else {
@@ -58,6 +60,10 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
             errors.recipeIndicaciones = ''
             errors.examenesRealizados = ''
             errors.facturas = ''
+            errors.patologiaDiagnostico = ''
+            errors.montoTotal = ''
+            errors.fechaOcurrencia = false
+
 
             setOptions2(true)
 
@@ -78,6 +84,9 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
             errors.recipeIndicaciones = ''
             errors.examenesRealizados = ''
             errors.facturas = ''
+            errors.patologiaDiagnostico = ''
+            errors.montoTotal = ''
+            errors.fechaOcurrencia = false
 
             setOptions3(true)
         } else {
@@ -97,6 +106,9 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
             errors.recipeIndicaciones = ''
             errors.examenesRealizados = ''
             errors.facturas = ''
+            errors.patologiaDiagnostico = ''
+            errors.montoTotal = ''
+            errors.fechaOcurrencia = false
 
             setOptions4(true)
 
@@ -112,7 +124,8 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
             easing: 'ease',
             once: false
         });
-    })
+    }, [AOS])
+
 
     useEffect(() => {
         console.log('aqui la  fechaaa', startDate)
@@ -378,21 +391,16 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
                                     <label
                                         class="block mt-9 uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
-                                        {
-                                            errors.fechaOcurrencia ?
-                                                <span style={{ color: 'red' }}>
-                                                    INGRESE UNA FECHA
-                                                </span>
-                                                :
-                                                <span >
-                                                    Fecha de ocurrencia
-                                                </span>
-                                        }
+
+
+                                        Fecha de ocurrencia
+
+
 
                                     </label>
 
 
-                                    <DataPicker startDate={startDate} setStartDate={setStartDate} />
+                                    <DataPicker startDate={startDate} setStartDate={setStartDate} errors={errors} />
 
 
 
@@ -417,7 +425,7 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                             <select
                                                 defaultValue={''}
                                                 onChange={e => setFormStep1({ ...formStep1, tipoDeMoneda: e.target.value })}
-                                                className={`appearance-none block w-1/6 mr-4 text-xl bg-gray-200 text-gray-700 ${errors.cedulaTitular ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                                className={`appearance-none block w-1/6 mr-4 text-xl bg-gray-200 text-gray-700 ${errors.montoTotal ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
                                                 aria-label="Default select example">
 
                                                 <option value="bolivar">BSF</option>
@@ -429,7 +437,7 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                             <CurrencyFormat
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                placeholder={optionMoneda ? '$' : 'Bsf'}
+                                                placeholder={optionMoneda ? '$ ' : 'Bsf '}
                                                 name='montoTotal'
                                                 class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
                                                 thousandSeparator={true} prefix={optionMoneda ? '$ ' : 'BsF '}
@@ -622,34 +630,16 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
                                     <label
                                         class="block mt-9 uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
-                                        {
-                                            errors.fechaOcurrencia ?
-                                                <span style={{ color: 'red' }}>
-                                                    Obligatorio
-                                                </span>
-                                                :
-                                                <span >
-                                                    Fecha de ocurrencia
-                                                </span>
-                                        }
+
+                                        Fecha de ocurrencia
+
 
                                     </label>
-                                    <DataPicker startDate={startDate} setStartDate={setStartDate} />
+                                    <DataPicker startDate={startDate} setStartDate={setStartDate} errors={errors} />
 
 
 
-                                    {/*  <div class='input-group date' id='datetimepicker1'>
-                                            <input onBlur={handleBlur} onChange={handleChange} type='text' class="form-control" />
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
-                                        {
-                                            errors.errorFechaOcurrencia === true &&
-                                            <span style={{ color: 'red' }}>
-                                                Obligatorio
-                                            </span>
-                                        } */}
+
 
                                 </div>
                                 <div data-aos="fade-left" data-aos-offset="50" data-aos-duration="3000" data-aos-easing="ease" className="col-sm-12">
@@ -670,7 +660,7 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                             <select
                                                 defaultValue={''}
                                                 onChange={e => setFormStep1({ ...formStep1, tipoDeMoneda: e.target.value })}
-                                                className={`appearance-none block w-1/6 mr-4 text-xl bg-gray-200 text-gray-700 ${errors.cedulaTitular ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                                className={`appearance-none block w-1/6 mr-4 text-xl bg-gray-200 text-gray-700 ${errors.montoTotal ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
                                                 aria-label="Default select example">
 
                                                 <option value="bolivar">BSF</option>
@@ -682,7 +672,7 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                             <CurrencyFormat
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                placeholder={optionMoneda ? '$' : 'Bsf'}
+                                                placeholder={optionMoneda ? '$ ' : 'Bsf '}
                                                 name='montoTotal'
                                                 class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
                                                 thousandSeparator={true} prefix={optionMoneda ? '$ ' : 'BsF '}
@@ -873,35 +863,17 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
                                     <label
                                         class="block mt-9 uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
-                                        {
-                                            errors.fechaOcurrencia ?
-                                                <span style={{ color: 'red' }}>
-                                                    Obligatorio
-                                                </span>
-                                                :
-                                                <span >
-                                                    Fecha de ocurrencia
-                                                </span>
-                                        }
+
+                                        Fecha de ocurrencia
+
 
                                     </label>
 
 
-                                    <DataPicker startDate={startDate} setStartDate={setStartDate} />
+                                    <DataPicker startDate={startDate} setStartDate={setStartDate}  errors={errors}/>
 
 
-                                    {/*  <div class='input-group date' id='datetimepicker1'>
-                                            <input onBlur={handleBlur} onChange={handleChange} type='text' class="form-control" />
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
-                                        {
-                                            errors.errorFechaOcurrencia === true &&
-                                            <span style={{ color: 'red' }}>
-                                                Obligatorio
-                                            </span>
-                                        } */}
+
 
                                 </div>
                                 <div data-aos="fade-left" data-aos-offset="50" data-aos-duration="3000" data-aos-easing="ease" className="col-sm-12">
@@ -921,7 +893,7 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                             <select
                                                 defaultValue={''}
                                                 onChange={e => setFormStep1({ ...formStep1, tipoDeMoneda: e.target.value })}
-                                                className={`appearance-none block w-1/6 mr-4 text-xl bg-gray-200 text-gray-700 ${errors.cedulaTitular ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                                className={`appearance-none block w-1/6 mr-4 text-xl bg-gray-200 text-gray-700 ${errors.montoTotal ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
                                                 aria-label="Default select example">
 
                                                 <option value="bolivar">BSF</option>
@@ -936,7 +908,7 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                                 placeholder={optionMoneda ? '$ ' : 'Bsf '}
                                                 name='montoTotal'
                                                 class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                                thousandSeparator={true} prefix={optionMoneda ? '$' : 'BsF'}
+                                                thousandSeparator={true} prefix={optionMoneda ? '$ ' : 'BsF '}
                                             />
 
 
@@ -1165,33 +1137,15 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
                                     <label
                                         class="block mt-9 uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
-                                        {
-                                            errors.fechaOcurrencia ?
-                                                <span style={{ color: 'red' }}>
-                                                    Obligatorio
-                                                </span>
-                                                :
-                                                <span >
-                                                    Fecha de ocurrencia
-                                                </span>
-                                        }
+
+                                        Fecha de ocurrencia
+
 
                                     </label>
 
-                                    <DataPicker startDate={startDate} setStartDate={setStartDate} />
+                                    <DataPicker startDate={startDate} setStartDate={setStartDate} errors={errors} />
 
-                                    {/*  <div class='input-group date' id='datetimepicker1'>
-                                            <input onBlur={handleBlur} onChange={handleChange} type='text' class="form-control" />
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
-                                        {
-                                            errors.errorFechaOcurrencia === true &&
-                                            <span style={{ color: 'red' }}>
-                                                Obligatorio
-                                            </span>
-                                        } */}
+
 
                                 </div>
                                 <div data-aos="fade-left" data-aos-offset="50" data-aos-duration="3000" data-aos-easing="ease" className="col-sm-12">
@@ -1211,7 +1165,7 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                             <select
                                                 defaultValue={''}
                                                 onChange={e => setFormStep1({ ...formStep1, tipoDeMoneda: e.target.value })}
-                                                className={`appearance-none block w-1/6 mr-4 text-xl bg-gray-200 text-gray-700 ${errors.cedulaTitular ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                                                className={`appearance-none block w-1/6 mr-4 text-xl bg-gray-200 text-gray-700 ${errors.montoTotal ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
                                                 aria-label="Default select example">
 
                                                 <option value="bolivar">BSF</option>
@@ -1226,7 +1180,7 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                                 placeholder={optionMoneda ? '$ ' : 'Bsf '}
                                                 name='montoTotal'
                                                 class={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.montoTotal ? 'border-red-600' : 'border-gray-200'} border  rounded py-3 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
-                                                thousandSeparator={true} prefix={optionMoneda ? '$' : 'BsF'}
+                                                thousandSeparator={true} prefix={optionMoneda ? '$ ' : 'BsF '}
                                             />
 
 

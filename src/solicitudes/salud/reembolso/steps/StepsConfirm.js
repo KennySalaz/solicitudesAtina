@@ -9,11 +9,12 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
     const [newDate, setNewDate] = useState([])
     useEffect(() => {
         AOS.init({
-            duration: 500,
+            duration: 1000,
             easing: 'ease',
             once: false
         });
-    })
+    }, [AOS])
+
     useEffect(() => {
 
         console.log('NOMBREEEEEEEEEEE', data)
@@ -45,7 +46,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                 {
                     data.nombreTomador !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Nombre Del Tomador
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Nombre de la empresa
                             </div>
                             <div className="col-md-8 col-sm-6 col-xs-12 confirm-text ">
                                 {data.nombreTomador}
@@ -94,7 +95,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                         </div>
                     )
                 }
-                {
+               {/*  {
                     data?.apellidoTitularPoliza !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Apellido del titular de la póliza</div>
@@ -105,7 +106,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                             </div>
                         </div>
                     )
-                }
+                } */}
                 {
                     data?.cedulaTitular !== '' && (
                         <div className="row fadeTop">
@@ -133,7 +134,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                 {
                     data?.celularTitular !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Numero Telefono</div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Numero de Telefono del titular </div>
                             <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.celularTitular
@@ -161,7 +162,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                         </div>
                     )
                 }
-                {
+              {/*   {
                     data?.apellidoTitularPoliza2 !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Apellido del titular de la póliza</div>
@@ -172,7 +173,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                             </div>
                         </div>
                     )
-                }
+                } */}
                 {
                     data?.cedulaTitular2 !== '' && (
                         <div className="row fadeTop">
@@ -200,7 +201,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                 {
                     data?.celularTitular2 !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Numero Telefono</div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Numero de telefono del titular</div>
                             <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.celularTitular2
@@ -214,7 +215,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                 {
                     data?.nombreBeneficiarioPoliza !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Nombre del beneficiario de la póliza </div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Nombre del beneficiario  </div>
                             <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.nombreBeneficiarioPoliza
@@ -262,7 +263,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                 {
                     data?.celularBeneficiario !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Celular con WSP del beneficiario</div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Numero de Telefono del beneficiario</div>
                             <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.celularBeneficiario

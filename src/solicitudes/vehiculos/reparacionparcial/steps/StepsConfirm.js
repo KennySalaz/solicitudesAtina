@@ -9,11 +9,12 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
     const [newDate, setNewDate] = useState([])
     useEffect(() => {
         AOS.init({
-            duration: 500,
+            duration: 1000,
             easing: 'ease',
             once: false
         });
-    })
+    }, [AOS])
+
     useEffect(() => {
 
         console.log('NOMBREEEEEEEEEEE', data)
@@ -30,7 +31,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     <h3 className="step-sub-title">Tipo de póliza y compañía de seguros</h3>
                 </div>
                 <Modal loadingModal={loadingModal} />
-                {
+                {/* {
                     formStep1.tipoPoliza !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Tipo de póliza
@@ -375,7 +376,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                             </div>
                         </div>
                     )
-                }
+                } */}
 
 
                 {/*   <div className="fadeTop">
