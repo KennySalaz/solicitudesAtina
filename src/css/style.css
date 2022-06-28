@@ -135,10 +135,11 @@ body {
 }
 
 .btn-blue {
-    background: #0f36e5;
+    background: #C71063;
     color: #FFF;
     padding: 10px 30px !important;
     transition: all ease 0.5s;
+
 }
 
 .btn-blue:hover {
@@ -207,6 +208,13 @@ body {
     overflow-x: hidden;
 }
 
+.errrorMsg {
+    color: red;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: 700;
+}
+
 
 .luna-signup-left {
     padding: 60px 30px 30px;
@@ -215,7 +223,7 @@ body {
     width: 200px;
 }
 
-.luna-signup-left:after {
+/* .luna-signup-left:after {
     position: absolute;
     content: '';
     display: block;
@@ -225,7 +233,7 @@ body {
     background: url(../images/bg5.png);
     width: 152px;
     height: 183px;
-}
+} */
 
 .luna-signup-left-overlay {
     z-index: -1;
@@ -240,6 +248,13 @@ body {
 
 }
 
+.buttonStyle_ {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
 .luna-signup-left p {
     font-size: 18px;
     line-height: 30px;
@@ -247,7 +262,7 @@ body {
 }
 
 .luna-navigation {
-    height: calc(100% - 70px);
+    height: calc(100% - 100px);
     position: relative;
 }
 
@@ -435,8 +450,10 @@ body {
 }
 
 .text-reembolso {
-    color: white;
-    font-weight: 500;
+    color: #0f36e5;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 22px;
 }
 
 .luna-steps .checkbox-inline,
@@ -462,11 +479,53 @@ body {
     margin-top: -20px;
 }
 
+
+.step-steps1Title {
+    color: #565555;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.step-steps1Title2 {
+    color: #565555;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 23px;
+}
+
+
+.step-steps1Title3 {
+    color: #565555;
+    font-size: 19px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 23px;
+}
+
+
 .step-sub-title {
-    font-size: 20px;
+    font-size: 17px;
     border-bottom: 1px solid #EEE;
     padding-bottom: 15px;
     margin-bottom: 15px;
+}
+
+
+.step-sub-title2 {
+    color: #000000e6;
+    font-size: 14px;
+    border-bottom: 1px solid #EEE;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.hrDivider {
+    width: 70%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #98979761;
 }
 
 .step-sub-title_2 {
@@ -475,6 +534,20 @@ body {
     padding-bottom: 15px;
     margin-bottom: 15px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -579,17 +652,41 @@ body {
 }
 
 .confirm-label {
-    color: #999
+    color: #000;
+    font-weight: 700;
 }
 
 .confirm-text {
     text-transform: lowercase;
 }
 
+.confirm-text-2 {
+    text-transform: uppercase;
+}
+
 .confirm-text:first-letter {
 
     text-transform: uppercase;
 
+}
+
+.react-tel-input .form-control {
+
+    padding: 25.5px 14px 18.5px 60px !important;
+    width: 100% !important;
+    background: #e5e7eb !important;
+
+
+}
+
+.react-tel-input .selected-flag .flag {
+
+    top: 58% !important;
+
+}
+
+.rojo_erros {
+    border: solid red 1px !important;
 }
 
 
@@ -604,7 +701,8 @@ body {
     display: inline-block;
     text-align: center;
     float: right;
-    margin: 0 0 10px 10px;
+    margin: 0 10px 10px;
+    margin-top: 72px;
 
 }
 
@@ -955,4 +1053,12 @@ body {
     }
 
 
+}
+
+
+@media only screen and (min-width: 1800px) {
+
+    .luna-signup-left-overlay {
+        width: 25%;
+    }
 }

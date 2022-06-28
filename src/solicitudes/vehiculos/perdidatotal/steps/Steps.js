@@ -6,11 +6,6 @@ import 'aos/dist/aos.css';
 const Steps = ({ formStep1, setFormStep1, handleSend1, errorTipo, handleChange, handleBlur, initialValues, errors, updateData }) => {
 
     const [isActiveColective, setIsActiveColective] = useState(false)
-
-
-
-
-
     useEffect(() => {
 
         if (formStep1.tipoPoliza === 'Colectiva') {
@@ -36,10 +31,9 @@ const Steps = ({ formStep1, setFormStep1, handleSend1, errorTipo, handleChange, 
         <>
             <div data-aos="fade-up" >
                 <h6 className="step-steps1Title2">  Tipo de póliza y compañía de seguros</h6>
-
-                <div>
+                <div  >
                     <div className="col-sm-6">
-                        <ul className="grid grid-cols-2 gap-x-5 m-8  ml-0 ">
+                        <ul className="grid grid-cols-2 gap-x-5 m-8 ml-0 ">
                             <li className="relative">
                                 <input
                                     defaultChecked={formStep1?.tipoPoliza === 'Individual' && true}
@@ -71,8 +65,6 @@ const Steps = ({ formStep1, setFormStep1, handleSend1, errorTipo, handleChange, 
                             </li>
                         </ul>
                     </div>
-
-
                     {
                         isActiveColective && (
                             <div data-aos="fade-left" className="col-sm-6">

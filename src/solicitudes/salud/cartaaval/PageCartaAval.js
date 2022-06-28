@@ -27,13 +27,22 @@ const PageCartaAval = () => {
     const [page, setPage] = useState(1)
     const [loadingModal, setLoadingModal] = useState(false)
     const [data, setData] = useState()
+
+    const [updateData, setupdateData] = useState()
     const [urlCartaAval, setUrlCartaAval] = useState([])
     const [startDate, setStartDate] = useState('');
     const [fileSelect, setFileSelect] = useState(new Array(2))
+    const [phonestate, setPhonestate] = useState({
+        phoneTitular: '',
+        phoneTitular2: '',
+        phoneBeneficiario: '',
+
+    })
     const [errorFile, setErrorFile] = useState({
         errorInforme: false,
         errorPresupuesto: false,
         errorExamenes: false,
+        errorPhone: false
     })
     const [formStep1, setFormStep1] = useState({
         tipoPoliza: '',
@@ -44,7 +53,7 @@ const PageCartaAval = () => {
         tipoDeCedulaBeneficiario: '',
         tipoDeMoneda: '',
     })
-    const navigate = useNavigate()
+
 
     const prevSteps = () => {
         if (page === 1) { setPage((current) => current - 1) }
@@ -53,50 +62,52 @@ const PageCartaAval = () => {
         if (page === 4) { setPage((current) => current - 1) }
     }
 
+    /* const { cedulaTitular, celularTitular, emailTitular, montoTotal, nombreTitularPoliza, nombreTomador, patologiaDiagnostico, selectSeguro } = data */
+
     const handleFile = (e, n) => {
 
         if (e.target.name === 'informeMedico') {
             let file = e.target.files
-            if (file[0].type === 'application/pdf') {
+            if (file[0].type === 'application/pdf' || file[0].type === 'image/png' || file[0].type === 'image/jpeg') {
                 if (fileSelect) {
                     fileSelect.splice(n, 1, e.target.files)
-                    console.log(fileSelect)
+
                 } else {
                     setFileSelect([...fileSelect[0], e.target.files])
                 }
                 setErrorFile({ ...errorFile, errorInforme: false })
             } else {
+                delete fileSelect[0]
                 setErrorFile({ ...errorFile, errorInforme: true })
             }
         }
         if (e.target.name === 'examenesRealizados') {
             let file = e.target.files
-            if (file[0].type === 'application/pdf') {
+            if (file[0].type === 'application/pdf' || file[0].type === 'image/png' || file[0].type === 'image/jpeg') {
                 if (fileSelect) {
                     fileSelect.splice(n, 1, e.target.files)
-                    console.log(fileSelect)
+
                 } else {
                     setFileSelect([...fileSelect[1], e.target.files])
                 }
                 setErrorFile({ ...errorFile, errorExamenes: false })
             } else {
+                delete fileSelect[1]
                 setErrorFile({ ...errorFile, errorExamenes: true })
             }
         }
-
-
-
         if (e.target.name === 'presupuestoSalud') {
             let file = e.target.files
-            if (file[0].type === 'application/pdf') {
+            if (file[0].type === 'application/pdf' || file[0].type === 'image/png' || file[0].type === 'image/jpeg') {
                 if (fileSelect) {
                     fileSelect.splice(n, 1, e.target.files)
                 } else {
                     setFileSelect([...fileSelect[2], e.target.files])
-                    console.log('se ha agregado')
+
                 }
                 setErrorFile({ ...errorFile, errorPresupuesto: false })
             } else {
+                delete fileSelect[2]
                 setErrorFile({ ...errorFile, errorPresupuesto: true })
             }
         }
@@ -104,64 +115,90 @@ const PageCartaAval = () => {
     const onClickSplice = (n) => {
         fileSelect.splice()
     }
+
     const sendData = async () => {
-        setLoadingModal(true)
-        const id = uuidv4()
-        await Promise.all(
-            fileSelect.map(async (file, i) => {
-                const storageRef = ref(storage, `/solicitudes/salud/cartaaval/${id}/${file[0].name}`)
-                const uploadResult = await uploadBytes(storageRef, file[0])
-                urlCartaAval.push(await getDownloadURL(uploadResult.ref))
+
+        Swal.fire(
+            {
+                width: '400px',
+                icon: 'question',
+                title: '¿Está seguro que todos los datos son correctos? ',
+                showCancelButton: true,
+                confirmButtonText: "Sí",
+                confirmButtonColor: "blue",
+                cancelButtonText: "No",
+                cancelButtonColor: 'red',
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+
+                    setLoadingModal(true)
+                    const id = uuidv4()
+                    await Promise.all(
+                        fileSelect.map(async (file, i) => {
+                            const storageRef = ref(storage, `/solicitudes/salud/cartaaval/${id}/${file[0].name}`)
+                            const uploadResult = await uploadBytes(storageRef, file[0])
+                            urlCartaAval.push(await getDownloadURL(uploadResult.ref))
+                        })
+                    )
+                    setUrlCartaAval(urlCartaAval)
+                    try {
+                        setDoc(doc(db, '/solicitudes/salud-cartaaval/historico/', id), {
+                            Tipodepóliza: formStep1.tipoPoliza,
+                            NombreDelaEmpresa: data.nombreTomador,
+                            CompañíadeSeguros: data.selectSeguro,
+                            TitularOBeneficiario: formStep1.titularObeneficiario,
+                            Nombredeltitulardelapóliza: data.nombreTitularPoliza || data.nombreTitularPoliza2,
+                            CéduladeidentidadTitular: data.cedulaTitular || data.cedulaTitular2,
+                            CorreoElectrónicoTitular: data.emailTitular || data.emailTitular2,
+                            NumeroTelefonoTitular: data.celularTitular || data.celularTitular2,
+                            NombredelBeneficiariodelapóliza: data.nombreBeneficiarioPoliza,
+                            CéduladeidentidadBeneficiario: data.cedulaBeneficiario,
+                            CorreoElectrónicoBeneficiario: data.emailBeneficiario,
+                            NumeroTelefonoBeneficiario: data.celularBeneficiario,
+                            PatologíaoDiagnóstico: data.patologiaDiagnostico,
+                            Fechadeocurrencia: startDate,
+                            Monto: data.montoTotal,
+                            documentosPdf: urlCartaAval,
+                        })
+                        setLoadingModal(false)
+                        Swal.fire({
+                            width: '500px',
+                            icon: 'success',
+                            title: `Sus datos han sido enviados con éxito y entrarán en proceso de análisis.`,
+                            text: '¿Desea agregar otra solicitud?',
+                            showCancelButton: true,
+                            confirmButtonText: "Sí",
+                            confirmButtonColor: "blue",
+                            cancelButtonText: "No",
+                            cancelButtonColor: 'red',
+                        }).then((result) => {
+
+                            if (result.isConfirmed) {
+                                window.location.href = 'https://atinaseguros.com/solicitudes/'
+                            } else if (result.dismiss) {
+
+                                window.location.href = 'https://atinaseguros.com/'
+                            }
+                        })
+
+                    } catch (error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error...',
+                            text: 'No se pudo mandar su solicitud',
+
+                        })
+                        setLoadingModal(false)
+                        alert(error)
+                    }
+                } else if (result.isDenied) {
+                    Swal.fire('Changes are not saved', 'info')
+                }
             })
-        )
-        setUrlCartaAval(urlCartaAval)
-        try {
-            setDoc(doc(db, '/solicitudes/salud-cartaaval/historico/', id), {
-                Tipodepóliza: formStep1.tipoPoliza,
-                NombreDelTomador: data.nombreTomador,
-                CompañíadeSeguros: data.selectSeguro,
-                TitularOBeneficiario: formStep1.titularObeneficiario,
-                Nombredeltitulardelapóliza: data.nombreTitularPoliza || data.nombreTitularPoliza2,
-                Appellidodeltitulardelapóliza: data.apellidoTitularPoliza || data.apellidoTitularPoliza2,
-                CéduladeidentidadTitular: data.cedulaTitular || data.cedulaTitular2,
-                CorreoElectrónicoTitular: data.emailTitular || data.emailTitular2,
-                NumeroTelefonoTitular: data.celularTitular || data.celularTitular2,
-                NombredelBeneficiariodelapóliza: data.nombreBeneficiarioPoliza,
-                AppellidodelBeneficiariodelapóliza: data.apellidoBeneficiarioPoliza,
-                CéduladeidentidadBeneficiario: data.cedulaBeneficiario,
-                CorreoElectrónicoBeneficiario: data.emailBeneficiario,
-                NumeroTelefonoBeneficiario: data.celularBeneficiario,
-                PatologíaoDiagnóstico: data.patologiaDiagnostico,
-                Fechadeocurrencia: startDate,
-                Monto: data.montoTotal,
-                documentosPdf: urlCartaAval,
-            })
-        } catch (error) {
-            alert(error)
-        }
-        setTimeout(() => {
-            setLoadingModal(false)
-            Swal.fire(
-                'Solicitud enviada',
-                ` Gracias por iniciar el trámite de su solicitud, en Atina estaremos canalizando la misma y 
-                validando que todos los soportes estén bien. <br/> En caso de duda, alguna aclaración, o solicitud 
-                de información adicional, uno de nuestros asesores te estará contactando. Gracias`,
-            )
-            setFileSelect([''])
-            setErrorFile({
-                errorInformeOp1: false,
-                errorRecipeOp1: false,
-                errorExamenesOp1: false,
-                errorFacturaOp1: false,
-            })
-            window.location.href = 'https://atinaseguros.com/'
-        }, 5000);
+
+
     }
-    useEffect(() => {
-        console.log(
-            page
-        )
-    }, [page])
+
     useEffect(() => {
         AOS.init({
             duration: 1000,
@@ -171,12 +208,14 @@ const PageCartaAval = () => {
     }, [AOS])
 
     useEffect(() => {
-        console.log(' imagenes ', fileSelect)
-    }, [fileSelect])
+        if (data) {
+            setupdateData(data)
+        }
+    }, [data])
 
     return (
         <>
-            <div className='container mx-auto' >
+            <div /* className='container mx-auto' */ >
                 <div className="h_total luna-signup-left-overlay" ></div>
                 <div className='container'>
                     <div className="row">
@@ -188,12 +227,12 @@ const PageCartaAval = () => {
                                 titularObeneficiario: '',
                                 //PAGE 2
                                 nombreTitularPoliza: '',
-                                apellidoTitularPoliza: '',
+
                                 cedulaTitular: '',
                                 emailTitular: '',
                                 celularTitular: '',
                                 nombreTitularPoliza2: '',
-                                apellidoTitularPoliza2: '',
+
                                 cedulaTitular2: '',
                                 emailTitular2: '',
                                 celularTitular2: '',
@@ -236,11 +275,7 @@ const PageCartaAval = () => {
                                     } else if (valores.nombreTitularPoliza !== '' && formStep1.titularObeneficiario === 'titular' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.nombreTitularPoliza)) {
                                         errores.nombreTitularPoliza = 'Solo letras y espacios'
                                     }
-                                    /*  if (!valores.apellidoTitularPoliza && formStep1.titularObeneficiario === 'titular') {
-                                         errores.apellidoTitularPoliza = true
-                                     } else if (valores.apellidoTitularPoliza !== '' && formStep1.titularObeneficiario === 'titular' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.apellidoTitularPoliza)) {
-                                         errores.apellidoTitularPoliza = 'Solo letras y espacios'
-                                     } */
+
                                     if (!valores.cedulaTitular && formStep1.titularObeneficiario === 'titular') {
                                         errores.cedulaTitular = true
                                     } /* else if (valores.cedulaTitular !== '' && formStep1.titularObeneficiario === 'titular' && !/^\d*\.?\d*$/.test(valores.cedulaTitular)) {
@@ -251,15 +286,28 @@ const PageCartaAval = () => {
                                     } else if (valores.emailTitular !== '' && formStep1.titularObeneficiario === 'titular' && !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.emailTitular)) {
                                         errores.emailTitular = 'Ingrese un correo valido'
                                     }
-                                    if (!valores.celularTitular && formStep1.titularObeneficiario === 'titular') {
+
+                                    if (!phonestate.phoneTitular && formStep1.titularObeneficiario === 'titular' || phonestate.phoneTitular === '' && formStep1.titularObeneficiario === 'titular') {
                                         errores.celularTitular = true
-                                    } else if (formStep1.titularObeneficiario === 'titular' && valores.celularTitular.length < 16) {
-                                        errores.celularTitular = 'Ingrese un numero de telefono valido +58 424 000 0000'
                                     }
+                                    /*  if (!valores.celularTitular && formStep1.titularObeneficiario === 'titular') {
+                                         errores.celularTitular = true
+                                     } else if (formStep1.titularObeneficiario === 'titular' && valores.celularTitular.length < 16) {
+                                         errores.celularTitular = ' INGRESE UN NÚMERO DE TELÉFONO VÁLIDO +58 424 000 0000'
+                                     } */
                                     /*  if (!formStep1.titularObeneficiario && formStep1.titularObeneficiario === 'beneficiario') {
                                          errores.titularObeneficiario = 'Obligatorio'
- 
+     
                                      } */
+
+
+
+
+
+
+
+
+
                                     if (!valores.nombreTitularPoliza2 && formStep1.titularObeneficiario === 'beneficiario') {
                                         errores.nombreTitularPoliza2 = true
                                     } else if (valores.nombreTitularPoliza2 !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.nombreTitularPoliza2)) {
@@ -280,21 +328,21 @@ const PageCartaAval = () => {
                                     } else if (valores.emailTitular2 !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.emailTitular2)) {
                                         errores.emailTitular2 = 'Ingrese un correo valido'
                                     }
-                                    if (!valores.celularTitular2 && formStep1.titularObeneficiario === 'beneficiario') {
+
+                                    if (phonestate.phoneTitular2 === '' && formStep1.titularObeneficiario === 'beneficiario') {
+                                        errores.celularTitular2 = true
+                                    }
+                                    /* if (!valores.celularTitular2 && formStep1.titularObeneficiario === 'beneficiario') {
                                         errores.celularTitular2 = true
                                     } else if (formStep1.titularObeneficiario === 'beneficiario' && valores.celularTitular2.length < 16) {
-                                        errores.celularTitular2 = 'Ingrese un numero de telefono valido +58 424 000 0000'
-                                    }
+                                        errores.celularTitular2 = ' INGRESE UN NÚMERO DE TELÉFONO VÁLIDO +58 424 000 0000'
+                                    } */
                                     if (!valores.nombreBeneficiarioPoliza && formStep1.titularObeneficiario === 'beneficiario') {
                                         errores.nombreBeneficiarioPoliza = true
                                     } else if (valores.nombreBeneficiarioPoliza !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.nombreBeneficiarioPoliza)) {
                                         errores.nombreBeneficiarioPoliza = 'Solo letras y espacios'
                                     }
-                                    /*  if (!valores.apellidoBeneficiarioPoliza && formStep1.titularObeneficiario === 'beneficiario') {
-                                         errores.apellidoBeneficiarioPoliza = true
-                                     } else if (valores.apellidoBeneficiarioPoliza !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.apellidoBeneficiarioPoliza)) {
-                                         errores.apellidoBeneficiarioPoliza = 'Solo letras y espacios'
-                                     } */
+
                                     if (!valores.cedulaBeneficiario && formStep1.titularObeneficiario === 'beneficiario') {
                                         errores.cedulaBeneficiario = true
                                     }/*  else if (valores.cedulaBeneficiario !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^\d*\.?\d*$/.test(valores.cedulaBeneficiario)) {
@@ -305,11 +353,17 @@ const PageCartaAval = () => {
                                     } else if (valores.emailBeneficiario !== '' && formStep1.titularObeneficiario === 'beneficiario' && !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.emailBeneficiario)) {
                                         errores.emailBeneficiario = 'Ingrese un correo valido'
                                     }
-                                    if (!valores.celularBeneficiario && formStep1.titularObeneficiario === 'beneficiario') {
+
+                                    if (phonestate.phoneBeneficiario === '' && formStep1.titularObeneficiario === 'beneficiario') {
                                         errores.celularBeneficiario = true
-                                    } else if (formStep1.titularObeneficiario === 'beneficiario' && valores.celularBeneficiario.length < 16) {
-                                        errores.celularBeneficiario = 'Ingrese un numero de telefono valido +58 424 000 0000'
                                     }
+                                    /*  if (!valores.celularBeneficiario && formStep1.titularObeneficiario === 'beneficiario') {
+                                         errores.celularBeneficiario = true
+                                     } else if (formStep1.titularObeneficiario === 'beneficiario' && valores.celularBeneficiario.length < 16) {
+                                         errores.celularBeneficiario = ' INGRESE UN NÚMERO DE TELÉFONO VÁLIDO +58 424 000 0000'
+                                     } */
+
+
 
 
 
@@ -317,9 +371,7 @@ const PageCartaAval = () => {
 
                                 if (page === 3) {
 
-                                    if (!fileSelect[0]) {
-                                        errores.informeMedico = true
-                                    }
+                                    if (!fileSelect[0]) { errores.informeMedico = true }
 
                                     if (fileSelect && errorFile.errorInforme) {
                                         errores.informeMedico = false
@@ -327,14 +379,14 @@ const PageCartaAval = () => {
                                     }
 
 
-                                    if (!fileSelect[1]) {
+                                    /* if (!fileSelect[1]) {
                                         errores.examenesRealizados = true
                                     }
 
                                     if (errorFile.errorExamenes) {
                                         errores.examenesRealizados = false
                                         setErrorFile({ ...errorFile, errorExamenes: 'El tipo de archivo debe ser PDF' })
-                                    }
+                                    } */
 
 
                                     if (!fileSelect[2]) {
@@ -346,26 +398,6 @@ const PageCartaAval = () => {
                                         setErrorFile({ ...errorFile, errorPresupuesto: 'El tipo de archivo debe ser PDF' })
                                     }
 
-
-                                    /*  if (fileSelect.length === 0) {
-                                         errores.informeMedico = true
-                                         errores.examenesRealizados = true
-                                         errores.informeMedico = true
-                                     } else if (fileSelect[0] && errorFile.errorInforme) {
-                                         setErrorFile({ ...errorFile, errorInforme: 'El tipo de archivo debe ser PDF' })
-                                     } else if (fileSelect[1] && errorFile.errorExamenes) {
-                                         setErrorFile({ ...errorFile, errorExamenes: 'El tipo de archivo debe ser PDF' })
-                                     } else if (fileSelect[2] && errorFile.errorPresupuesto) {
-                                         setErrorFile({ ...errorFile, errorPresupuesto: 'El tipo de archivo debe ser PDF' })
-                                     } */
-
-
-
-
-                                    /*   if (!fileSelect || fileSelect.length < 3) {
-                                          errores.informeMedico = true
-                                        }
-                                       */
                                     if (!valores.patologiaDiagnostico) {
                                         errores.patologiaDiagnostico = true
                                     } /* else if (valores.patologiaDiagnostico !== '' && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.patologiaDiagnostico)) {
@@ -385,23 +417,85 @@ const PageCartaAval = () => {
                             onSubmit={(valores) => {
                                 if (valores.selectSeguro && formStep1.tipoPoliza !== '') {
                                     if (page === 1) {
+
+                                        if (formStep1.tipoPoliza === 'Individual') {
+
+                                            valores.nombreTomador = ''
+                                            setupdateData({
+                                                ...updateData,
+                                                nombreTomador: '',
+                                            })
+
+                                        }
+                                        setData({ ...valores })
+
+
                                         setPage((current) => current + 1)
                                     }
                                 }
                                 if (formStep1.titularObeneficiario !== '' && valores.nombreTitularPoliza !== '' || formStep1.titularObeneficiario !== '' && valores.nombreTitularPoliza2 !== '') {
                                     if (page === 2) {
+
+
+
+                                        if (formStep1.titularObeneficiario === 'beneficiario') {
+                                            valores.nombreTitularPoliza = ''
+                                            valores.cedulaTitular = ''
+                                            valores.emailTitular = ''
+                                            valores.celularTitular = ''
+                                            setupdateData({
+                                                ...updateData,
+                                                nombreTitularPoliza: '',
+                                                cedulaTitular: '',
+                                                emailTitular: '',
+                                                celularTitular: '',
+                                            })
+                                            setFormStep1({ ...formStep1, titularObeneficiario: 'beneficiario' })
+                                            setPhonestate({ ...phonestate, phoneTitular: '' })
+
+                                        }
+
+                                        if (formStep1.titularObeneficiario === 'titular') {
+                                            valores.cedulaBeneficiario = ''
+                                            valores.cedulaTitular2 = ''
+                                            valores.celularBeneficiario = ''
+                                            valores.celularTitular2 = ''
+                                            valores.emailBeneficiario = ''
+                                            valores.emailTitular2 = ''
+                                            valores.nombreBeneficiarioPoliza = ''
+                                            valores.nombreTitularPoliza2 = ''
+                                            setupdateData({
+                                                ...updateData,
+                                                cedulaBeneficiario: '',
+                                                cedulaTitular2: '',
+                                                celularBeneficiario: '',
+                                                celularTitular2: '',
+                                                emailBeneficiario: '',
+                                                emailTitular2: '',
+                                                nombreBeneficiarioPoliza: '',
+                                                nombreTitularPoliza2: '',
+                                            })
+                                            setFormStep1({ ...formStep1, titularObeneficiario: 'titular' })
+                                            setPhonestate({
+                                                ...phonestate,
+                                                phoneTitular2: '',
+                                                phoneBeneficiario: ''
+                                            })
+                                        }
+                                        setData({ ...valores, })
                                         setPage((current) => current + 1)
+
                                     }
 
                                 }
                                 if (valores.patologiaDiagnostico !== '') {
                                     if (page === 3) {
 
-                                        if (formStep1.tipoPoliza === 'Individual') {
+                                        /* if (formStep1.tipoPoliza === 'Individual') {
                                             valores.nombreTomador = ''
-                                        }
+                                        } */
 
-                                        if (formStep1.titularObeneficiario === 'titular') {
+                                        /* if (formStep1.titularObeneficiario === 'titular') {
                                             valores.nombreTitularPoliza2 = ''
                                             valores.apellidoTitularPoliza2 = ''
                                             valores.cedulaTitular2 = ''
@@ -412,14 +506,14 @@ const PageCartaAval = () => {
                                             valores.cedulaBeneficiario = ''
                                             valores.emailBeneficiario = ''
                                             valores.celularBeneficiario = ''
-
+            
                                         } else if (formStep1.titularObeneficiario === 'beneficiario') {
                                             valores.nombreTitularPoliza = ''
                                             valores.apellidoTitularPoliza = ''
                                             valores.cedulaTitular = ''
                                             valores.emailTitular = ''
                                             valores.celularTitular = ''
-                                        }
+                                        } */
                                         setData({ ...valores })
                                         setPage((current) => current + 1)
                                     }
@@ -433,7 +527,7 @@ const PageCartaAval = () => {
                                     <div className='h_total luna-signup-left'>
                                         <img className='luna-signup-logo img-responsive'
                                             src={imgLogo} alt="logo" />
-                                        <h3 className='text-reembolso' >Carta Aval </h3>
+
                                         <div className="luna-navigation">
                                             <a
                                                 style={{ display: page <= 1 && 'none' }}
@@ -451,6 +545,7 @@ const PageCartaAval = () => {
                                     </div>
                                     <div className='luna-signup-right'>
                                         <div className="container-fluid">
+                                            <h3 className='text-reembolso' >Carta Aval </h3>
                                             <div className='steps-count'>
                                                 Paso <span className="step-current"> {page} </span>/<span className="step-count"> 4 </span>
                                             </div>
@@ -464,6 +559,12 @@ const PageCartaAval = () => {
                                                             handleBlur={handleBlur}
                                                             errors={errors}
                                                             initialValues={initialValues}
+                                                            updateData={updateData}
+                                                            setupdateData={setupdateData}
+                                                        /*   nombreTomador={nombreTomador}
+                                                          selectSeguro={selectSeguro} */
+
+
                                                         />
                                                     )
                                                 }
@@ -476,6 +577,13 @@ const PageCartaAval = () => {
                                                             handleBlur={handleBlur}
                                                             errors={errors}
                                                             initialValues={initialValues}
+                                                            updateData={updateData}
+                                                            setupdateData={setupdateData}
+                                                            setData={setData}
+                                                            data={data}
+
+                                                            phonestate={phonestate}
+                                                            setPhonestate={setPhonestate}
 
                                                         />
                                                     )
@@ -495,7 +603,9 @@ const PageCartaAval = () => {
                                                             onClickSplice={onClickSplice}
                                                             errorFile={errorFile}
                                                             setErrorFile={setErrorFile}
-
+                                                            updateData={updateData}
+                                                            data={data}
+                                                            fileSelect={fileSelect}
                                                         />
                                                     )
                                                 }
@@ -507,6 +617,8 @@ const PageCartaAval = () => {
                                                             loadingModal={loadingModal}
                                                             data={data}
                                                             startDate={startDate}
+                                                            fileSelect={fileSelect}
+                                                            phonestate={phonestate}
                                                         />
                                                     )
                                                 }
@@ -514,7 +626,7 @@ const PageCartaAval = () => {
                                         </div>
 
                                     </div>
-                                    <div class='button-container'>
+                                    <div className='button-container'>
                                         <div style={{ display: page >= 4 && 'none' }} onClick={handleSubmit} className="btn btn-blue ">
                                             Continuar
                                         </div>

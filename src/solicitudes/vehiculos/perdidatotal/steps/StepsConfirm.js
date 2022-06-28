@@ -4,7 +4,7 @@ import 'aos/dist/aos.css';
 import Modal from '../../../../Componentes/Modal';
 
 
-const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, enteFile, fileSelect, phonestate }) => {
+const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, enteFile, fileSelect, updateData, phonestate }) => {
 
 
 
@@ -20,16 +20,14 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
 
 
 
-
-
-
     return (
         <>
             <div data-aos="fade-up" >
+
                 <h6 className="step-steps1Title3  " > Confirmar datos </h6>
                 <hr className='hrDivider' />
                 <div className="fadeTop">
-                    <h3 className="step-sub-title">Tipo de póliza y compañía de seguros</h3>
+                    <h3 className="step-sub-title">Tipo de póliza y Compañía de seguro</h3>
                 </div>
                 <Modal loadingModal={loadingModal} />
                 {
@@ -47,7 +45,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                 {
                     data?.nombreTomador !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Nombre De LA empresa
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Nombre de la empresa
                             </div>
                             <div className="col-md-8 col-sm-6 col-xs-12 confirm-text ">
                                 {data?.nombreTomador}
@@ -58,7 +56,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                 {
                     data?.selectSeguro !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">compañía de seguro</div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Compañía de seguro</div>
                             <div className="col-md-8 col-sm-6 col-xs-12 confirm-text ">
 
                                 {data?.selectSeguro}
@@ -72,7 +70,9 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                     <h3 className="step-sub-title">Datos personales</h3>
                 </div>
 
-
+                <div className="fadeTop">
+                    <h3 className="step-sub-title2">Datos del titular</h3>
+                </div>
 
 
                 {
@@ -189,7 +189,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                         </div>
                     )
                 }
-                {/*  {
+                {/* {
                     data?.celularTitular !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Número de teléfono del titular</div>
@@ -216,10 +216,9 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                 }
 
 
-
-
-
-
+                <div className="fadeTop">
+                    <h3 className="step-sub-title2">Datos del conductor</h3>
+                </div>
 
                 {
                     data?.nombreConductor !== '' && (
@@ -296,6 +295,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                         </div>
                     )
                 } */}
+
                 {
                     phonestate?.phoneTitular2 !== '' && (
                         <div className="row fadeTop">
@@ -311,8 +311,21 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                 <hr className='hrDivider' />
 
                 <div className="fadeTop">
-                    <h3 className="step-sub-title">Reparación parcial </h3>
+                    <h3 className="step-sub-title">Reparacion parcial</h3>
                 </div>
+
+                {
+                    formStep1?.reparacionParcial !== '' && (
+                        <div className="row fadeTop">
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Pérdida total</div>
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                {
+                                    formStep1?.reparacionParcial
+                                }
+                            </div>
+                        </div>
+                    )
+                }
                 {
                     data?.fechaOcurrencia !== '' && (
                         <div className="row fadeTop">
@@ -320,6 +333,30 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                             <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.fechaOcurrencia
+                                }
+                            </div>
+                        </div>
+                    )
+                }
+                {
+                    data?.fechaOcurrencia2 !== '' && (
+                        <div className="row fadeTop">
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Fecha de ocurrencia</div>
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                {
+                                    data?.fechaOcurrencia2
+                                }
+                            </div>
+                        </div>
+                    )
+                }
+                {
+                    data?.fechaOcurrencia3 !== '' && (
+                        <div className="row fadeTop">
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Fecha de ocurrencia</div>
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                {
+                                    data?.fechaOcurrencia3
                                 }
                             </div>
                         </div>
@@ -338,12 +375,61 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                     )
                 }
                 {
+                    data?.horaOcurrencia2 !== '' && (
+                        <div className="row fadeTop">
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Hora de ocurrencia</div>
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                {
+                                    data?.horaOcurrencia2
+                                }
+                            </div>
+                        </div>
+                    )
+                }
+
+                {
+                    data?.horaOcurrencia3 !== '' && (
+                        <div className="row fadeTop">
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Hora de ocurrencia</div>
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                {
+                                    data?.horaOcurrencia3
+                                }
+                            </div>
+                        </div>
+                    )
+                }
+                {
                     data?.lugarOcurrencia !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Lugar de ocurrencia</div>
                             <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.lugarOcurrencia
+                                }
+                            </div>
+                        </div>
+                    )
+                }
+                {
+                    data?.lugarOcurrencia2 !== '' && (
+                        <div className="row fadeTop">
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Lugar de ocurrencia</div>
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                {
+                                    data?.lugarOcurrencia2
+                                }
+                            </div>
+                        </div>
+                    )
+                }
+                {
+                    data?.lugarOcurrencia3 !== '' && (
+                        <div className="row fadeTop">
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Lugar de ocurrencia</div>
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                {
+                                    data?.lugarOcurrencia3
                                 }
                             </div>
                         </div>
@@ -362,9 +448,33 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                     )
                 }
                 {
+                    data?.descripcionHechos2 !== '' && (
+                        <div className="row fadeTop">
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Descripción de los hechos</div>
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                {
+                                    data?.descripcionHechos2
+                                }
+                            </div>
+                        </div>
+                    )
+                }
+                {
+                    data?.descripcionHechos3 !== '' && (
+                        <div className="row fadeTop">
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Descripción de los hechos</div>
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                {
+                                    data?.descripcionHechos3
+                                }
+                            </div>
+                        </div>
+                    )
+                }
+                {
                     data?.describirDanos !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Descripción de los daños del vehículo </div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Descripcion de los daños del vehículo</div>
                             <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     data?.describirDanos
@@ -373,11 +483,24 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                         </div>
                     )
                 }
+                {
+                    data?.describirDanos3 !== '' && (
+                        <div className="row fadeTop">
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Descripcion de los daños del vehículo</div>
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                {
+                                    data?.describirDanos3
+                                }
+                            </div>
+                        </div>
+                    )
+                }
+
 
                 {
                     formStep1.intervinoSioNo !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Intervino alguna autoridad</div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">¿Intervino alguna autoridad?</div>
                             <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     formStep1.intervinoSioNo
@@ -390,7 +513,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                 {
                     formStep1.danosSioNo !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">¿Hubo daños a terceros? </div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">¿Hubo danos a terceros?</div>
                             <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     formStep1.danosSioNo
@@ -401,9 +524,22 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                 }
 
                 {
+                    formStep1.danosSioNo2 !== '' && (
+                        <div className="row fadeTop">
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">¿Hubo danos a terceros?</div>
+                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                {
+                                    formStep1.danosSioNo2
+                                }
+                            </div>
+                        </div>
+                    )
+                }
+
+                {
                     formStep1.vehiculoDetenidoSioNo !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">¿El vehículo está detenido?</div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">¿El vehiculo esta detenido?</div>
                             <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
                                     formStep1.vehiculoDetenidoSioNo
@@ -413,13 +549,14 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                     )
                 }
 
-                {
-                    formStep1.vehiculomoverseSioNo !== '' && (
+
+                {/*  {
+                    data?.danosTerceros !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">¿El vehículo puede moverse?</div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">¿Hubo daños a terceros?</div>
                             <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
-                                    formStep1.vehiculomoverseSioNo
+                                    data?.danosTerceros
                                 }
                             </div>
                         </div>
@@ -427,21 +564,18 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                 }
 
                 {
-                    formStep1.roturasSioNo !== '' && (
+                    data?.danosTerceros3 !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">¿Indicar si hay roturas de vidrios?</div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">¿Hubo daños a terceros?</div>
                             <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                 {
-                                    formStep1.roturasSioNo
+                                    data?.danosTerceros3
                                 }
                             </div>
                         </div>
                     )
-                }
-
-
-
-                {/* {
+                } */}
+                {/*   {
                     data?.vehiculoDetenido !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">¿El vehiculo esta detenido?</div>
@@ -454,76 +588,95 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                     )
                 } */}
 
-                {/*  {
-                    data?.vehiculoMoverse !== '' && (
-                        <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">¿El vehiculo puede moverse?</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
-                                {
-                                    data?.vehiculoMoverse
-                                }
-                            </div>
-                        </div>
-                    )
-                } */}
 
-                {/*  {
-                    data?.indicarRotura !== '' && (
-                        <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">¿Indicar si hay roturas de vidrios?</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
-                                {
-                                    data?.indicarRotura
-                                }
-                            </div>
-                        </div>
-                    )
-                } */}
-                {/* 
-                <h1>
-                    {
-                        fileSelect[0]?.name
-                    }
-                </h1> */}
-                <hr className='hrDivider' />
 
-                <div className="fadeTop">
-                    <h3 className="step-sub-title">Documentos</h3>
-                </div>
+
+
 
                 {
-                    enteFile[0] !== '' && (
-                        <> {
-                            enteFile?.map((dataFile, index) => (
-                                <>
-                                    {
-                                        index === 0 && (
-                                            <div className="row fadeTop">
-                                                <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Inspeccion del ente </div>
-                                                <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
-                                                    {
-                                                        dataFile[0]?.name.substr(0, 12)
-                                                    }
-                                                    {
-                                                        dataFile[0]?.type.substr(5)
-                                                    }
+                    enteFile && (
+                        <>
+                            <hr className='hrDivider' />
+                            <div className="fadeTop">
+                                <h3 className="step-sub-title">Documentos</h3>
+                            </div>
 
+                            {
+                                enteFile?.map((dataFile, index) => (
+                                    <>
+
+                                        {
+                                            index === 0 && (
+                                                <div className="row fadeTop">
+                                                    <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Inspeccion de la autoridad </div>
+                                                    <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                                        {
+                                                            dataFile[0]?.name.substr(0, 12)
+                                                        }
+                                                        {
+                                                            dataFile[0]?.type.substr(5)
+                                                        }
+
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        )
-                                    }
-                                </>
-                            ))
-                        }
+                                            )
+                                        }
+
+                                        {
+                                            index === 3 && (
+                                                <div className="row fadeTop">
+                                                    <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Inspeccion de la autoridad </div>
+                                                    <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                                        {
+                                                            dataFile[0]?.name.substr(0, 12)
+                                                        }
+                                                        {
+                                                            dataFile[0]?.type.substr(5)
+                                                        }
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+                                        {
+                                            index === 1 && (
+                                                <div className="row fadeTop">
+                                                    <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Denuncia de las autoridades </div>
+                                                    <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                                        {
+                                                            dataFile[0]?.name.substr(0, 12)
+                                                        }
+                                                        {
+                                                            dataFile[0]?.type.substr(5)
+                                                        }
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+                                        {
+                                            index === 2 && (
+                                                <div className="row fadeTop">
+                                                    <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Informe bomberos o autoridad competente </div>
+                                                    <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                                        {
+                                                            dataFile[0]?.name.substr(0, 12)
+                                                        }
+                                                        {
+                                                            dataFile[0]?.type.substr(5)
+                                                        }
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+                                    </>
+                                ))
+                            }
                         </>
                     )
                 }
 
-                {
-
+                {/*  {
                     fileSelect.map((dataFile, index) => (
                         <>
-
                             {
                                 index === 0 && (
                                     <div className="row fadeTop">
@@ -532,9 +685,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                                             {
                                                 dataFile[0].name.substr(0, 12)
                                             }
-                                            {
-                                                dataFile[0]?.type.substr(5)
-                                            }
+                                            ... (.pdf)
 
                                         </div>
                                     </div>
@@ -548,9 +699,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                                         <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                             {dataFile[0].name.substr(0, 12)
                                             }
-                                            {
-                                                dataFile[0]?.type.substr(5)
-                                            }
+                                            ... (.pdf)
                                         </div>
                                     </div>
 
@@ -563,9 +712,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                                         <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                             {dataFile[0].name.substr(0, 12)
                                             }
-                                            {
-                                                dataFile[0]?.type.substr(5)
-                                            }
+                                            ... (.pdf)
                                         </div>
                                     </div>
 
@@ -578,9 +725,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                                         <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                             {dataFile[0].name.substr(0, 12)
                                             }
-                                            {
-                                                dataFile[0]?.type.substr(5)
-                                            }
+                                            ... (.pdf)
                                         </div>
                                     </div>
 
@@ -593,9 +738,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                                         <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                             {dataFile[0].name.substr(0, 12)
                                             }
-                                            {
-                                                dataFile[0]?.type.substr(5)
-                                            }
+                                            ... (.pdf)
                                         </div>
                                     </div>
 
@@ -608,225 +751,22 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, ente
                                         <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
                                             {dataFile[0].name.substr(0, 12)
                                             }
-                                            {
-                                                dataFile[0]?.type.substr(5)
-                                            }
+                                            ... (.pdf)
                                         </div>
                                     </div>
 
                                 )
                             }
-
-
-
-
                         </>
-
-
                     )
-                    )
-                }
-
-
-
-
-
-
-
-
-
-                {/*
-                {
-                    data?.nombreBeneficiarioPoliza !== '' && (
-                        <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Nombre del beneficiario de la póliza </div>
-                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
-                                {
-                                    data?.nombreBeneficiarioPoliza
-                                }
-                            </div>
-                        </div>
-                    )
-                }
-                {
-                    data?.apellidoBeneficiarioPoliza !== '' && (
-                        <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Apellido del beneficiario de la póliza</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
-                                {
-                                    data?.apellidoBeneficiarioPoliza
-                                }
-                            </div>
-                        </div>
-                    )
-                }
-                {
-                    data?.cedulaBeneficiario !== '' && (
-                        <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Cédula de identidad del beneficiario</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
-                                {
-                                    data?.cedulaBeneficiario
-                                }
-                            </div>
-                        </div>
-                    )
-                }
-                {
-                    data?.emailBeneficiario !== '' && (
-                        <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Correo electrónico del beneficiario</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
-                                {
-                                    data?.emailBeneficiario
-                                }
-                            </div>
-                        </div>
-                    )
-                }
-                {
-                    data?.celularBeneficiario !== '' && (
-                        <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Celular con WSP del beneficiario</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
-                                {
-                                    data?.celularBeneficiario
-                                }
-                            </div>
-                        </div>
-                    )
-                }
-
-
-
-                <div className="fadeTop">
-                    <h3 className="step-sub-title">Reembolso</h3>
-                </div>
-
-
-
-                {
-                    formStep1?.tipoReembolso !== '' && (
-                        <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Tipo de Reembolso</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
-                                {
-                                    formStep1?.tipoReembolso
-                                }
-                            </div>
-                        </div>
-                    )
-                }
-                {
-                    data?.informeMedico !== '' && (
-                        <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Informe médico</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
-                                {
-                                    data?.informeMedico
-                                }
-                            </div>
-                        </div>
-                    )
-                }
-                {
-                    data?.recipeIndicaciones !== '' && (
-                        <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Récipe e indicaciones</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
-                                {
-                                    data?.recipeIndicaciones
-                                }
-                            </div>
-                        </div>
-                    )
-                }
-                {
-                    data?.examenesRealizados !== '' && (
-                        <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Exámenes realizados</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
-                                {
-                                    data?.examenesRealizados
-                                }
-                            </div>
-                        </div>
-                    )
-                }
-                {
-                    data?.facturas !== '' && (
-                        <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Facturas </div>
-                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
-                                {
-                                    data?.facturas
-                                }
-                            </div>
-                        </div>
-                    )
-                }
-                {
-                    data?.patologiaDiagnostico !== '' && (
-                        <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Patología o Diagnóstico</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
-                                {
-                                    data?.patologiaDiagnostico
-                                }
-                            </div>
-                        </div>
-                    )
-                }
-                {
-                    startDate !== '' && (
-                        <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Fecha de ocurrencia</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
-                                {
-                                    startDate.toISOString().slice(0, 10)
-                                }
-                            </div>
-                        </div>
-                    )
-                }
-                {
-                    data?.montoTotal !== '' && (
-                        <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Monto</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
-                                {
-                                    data?.montoTotal
-                                }
-                            </div>
-                        </div>
                     )
                 } */}
-
-
-                {/*   <div className="fadeTop">
-                    <h3 className="step-sub-title">Datos del Titular / Beneficiario</h3>
-                </div>
-
- */}
-
-
-
-
-
-
-
-
-
-
-
-
                 <div className="fadeTop">
                     <div className='buttonStyle_'>
                         <div onClick={sendData} className="btn btn-blue ">
                             Enviar Solicitud
                         </div>
                     </div>
-
 
                 </div>
             </div>

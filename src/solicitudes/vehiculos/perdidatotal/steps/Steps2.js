@@ -44,7 +44,6 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
         }
     }, [formStep1.SioNo])
 
-
     useEffect(() => {
         AOS.init({
             duration: 1000,
@@ -53,11 +52,15 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
         });
     }, [])
 
-    useEffect(() => {
-        if (phonestate.phoneTitular2 !== '') {
-            errors.celularConductor = false
-        }
-    }, [phonestate.phoneTitular2])
+    /*  useEffect(() => {
+         if (phonestate.phoneTitular2 !== '') {
+             errors.celularConductor = false
+         }
+     }, [phonestate.phoneTitular2]) */
+
+
+
+
 
     return (
         <>
@@ -71,9 +74,7 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                             className="sr-only peer" type="radio" value="si" name="siOno" id="answer_yes" onChange={e => setFormStep1({ ...formStep1, SioNo: e.target.value })} />
                         <label className={` ${errors.siOno ? 'border-red-500' : 'border-gray-300'}  flex justify-center p-5 bg-white border  rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-blue-700 peer-checked:ring-2 peer-checked:border-transparent `} for="answer_yes">Sí</label>
 
-                        <div className="absolute hidden w-5 h-5 peer-checked:block top-5 right-3">
-                            👍
-                        </div>
+
                     </li>
 
                     <li className="relative">
@@ -82,9 +83,7 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                             className="sr-only peer" type="radio" value="no" name="siOno" id="answer_no" onChange={e => setFormStep1({ ...formStep1, SioNo: e.target.value })} />
                         <label className={` ${errors.siOno ? 'border-red-500' : 'border-gray-300'}  flex justify-center p-5 bg-white border  rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-blue-700 peer-checked:ring-2 peer-checked:border-transparent `} for="answer_no">No</label>
 
-                        <div className="absolute hidden w-5 h-5 peer-checked:block top-5 right-3">
-                            👎
-                        </div>
+
                     </li>
 
 
@@ -93,9 +92,12 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                 {
                     options && (
                         <div data-aos="fade-up">
+
+
+
                             <div className="row">
 
-                                <div data-aos="fade-left" data-aos-offset="100" data-aos-duration="500" data-aos-easing="ease" className="col-sm-6">
+                                <div data-aos="fade-left" className="col-sm-6">
                                     <div className="form-group">
                                         <label
                                             className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
@@ -124,7 +126,7 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
                                 </div>
 
-                                <div data-aos="fade-left" data-aos-offset="100" data-aos-duration="1000" data-aos-easing="ease" className="col-sm-6">
+                                <div data-aos="fade-left" className="col-sm-6">
                                     <div className="form-group">
                                         <label
                                             className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
@@ -155,7 +157,7 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                                 className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.cedulaConductor ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
                                                 decimalSeparator={false}
                                                 thousandSeparator={'.'}
-                                                prefix={optionCI ? 'E ' : 'CI '}
+                                                prefix={optionCI ? 'E ' : 'C.I '}
                                                 placeholder="Cédula de identidad del titular"
                                             />
                                         </div>
@@ -167,7 +169,7 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                             </div>
                             <div className="row">
 
-                                <div data-aos="fade-left" data-aos-offset="100" data-aos-duration="1500" data-aos-easing="ease" className="col-sm-6">
+                                <div data-aos="fade-left" className="col-sm-6">
 
 
 
@@ -195,7 +197,7 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
                                 </div>
 
-                                <div data-aos="fade-left" data-aos-offset="100" data-aos-duration="1800" data-aos-easing="ease" className="col-sm-6">
+                                <div data-aos="fade-left" className="col-sm-6">
                                     <div className="form-group">
                                         <label
                                             className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
@@ -204,7 +206,6 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
                                         </label>
                                         <select
-
                                             defaultValue={updateData?.gradoConductor}
                                             name='gradoConductor'
                                             onChange={handleChange}
@@ -224,12 +225,12 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
 
                             <div className="row">
-                                <div data-aos="fade-left" data-aos-offset="50" data-aos-duration="2000" data-aos-easing="ease" className="col-sm-6">
+                                <div data-aos="fade-left" className="col-sm-6">
                                     <div className="form-group">
                                         <label
                                             className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
 
-                                            CORREO ELECTRÓNICO  del conductor
+                                            CORREO ELECTRÓNICO DEL CONDUCTOR
 
                                         </label>
                                         <input
@@ -240,7 +241,7 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                             className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.correoConductor ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
                                             id="grid-last-name"
                                             type="text"
-                                            placeholder="Correo electronico"
+                                            placeholder="Correo Electronico"
                                         />
                                         {
                                             errors.correoConductor && <span data-aos="zoom-in" className='errrorMsg'> {errors.correoConductor}  </span>
@@ -250,7 +251,7 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
                                 </div>
 
-                                <div data-aos="fade-left" data-aos-offset="50" data-aos-duration="2200" data-aos-easing="ease" className="col-sm-6">
+                                <div data-aos="fade-left" className="col-sm-6">
                                     <div className="form-group">
 
                                         <label
@@ -271,11 +272,7 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                         /> */}
 
                                         <PhoneInput
-
-
-
                                             country={'ve'}
-
                                             name='celularConductor'
                                             placeholder=''
                                             inputClass={`${errors.celularConductor && "rojo_erros"} `}

@@ -3,7 +3,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 
-const Steps = ({ formStep1, setFormStep1, handleSend1, errorTipo, handleChange, handleBlur, initialValues, errors }) => {
+const Steps = ({ formStep1, setFormStep1, handleSend1, errorTipo, handleChange, handleBlur, initialValues, errors, updateData }) => {
 
     const [isActiveColective, setIsActiveColective] = useState(false)
     useEffect(() => {
@@ -16,52 +16,50 @@ const Steps = ({ formStep1, setFormStep1, handleSend1, errorTipo, handleChange, 
     }, [formStep1.tipoPoliza])
 
 
-       useEffect(() => {
+    useEffect(() => {
         AOS.init({
             duration: 1000,
             easing: 'ease',
-            once: false
+            once: true
         });
-    }, [AOS])
+    }, [])
 
-    useEffect(() => {
-        console.log(errors.nombreTomador)
-    }, [errors.nombreTomador])
 
     return (
         <>
             <div data-aos="fade-up" >
+                <h6 className="step-steps1Title">  Tipo de póliza y compañía de seguros </h6>
 
-                <h2 className="step-title">  Tipo de póliza y compañía de seguros</h2>
-                <div className="row">
+                <div className="">
+
                     <div className="col-sm-6">
-                        <ul class="grid grid-cols-3 gap-x-5 m-8   ">
-                            <li class="relative">
+                        <ul className="grid grid-cols-3 gap-x-5 m-8 ml-0  ">
+                            <li className="relative">
                                 <input
-                                    class="sr-only peer"
+                                    defaultChecked={formStep1?.tipoPoliza === 'Individual' && true}
+                                    className="sr-only peer"
                                     type="radio"
                                     value='Individual'
                                     name='tipoPoliza'
                                     id="answer_yes"
                                     onChange={(e) => setFormStep1({ ...formStep1, tipoPoliza: e.target.value })}
                                 />
-                                <label class={` ${errors.tipoPoliza ? 'border-red-500' : 'border-gray-300'} flex justify-center  p-5 ali bg-white border  rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-blue-700 peer-checked:ring-2 peer-checked:border-transparent`} for="answer_yes">
+                                <label className={` ${errors.tipoPoliza ? 'border-red-500' : 'border-gray-300'} flex justify-center  p-5 ali bg-white border  rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-blue-700 peer-checked:ring-2 peer-checked:border-transparent`} for="answer_yes">
                                     Individual
                                 </label>
-
-
                             </li>
 
-                            <li class="relative">
+                            <li className="relative">
                                 <input
-                                    class="sr-only peer"
+                                    defaultChecked={formStep1?.tipoPoliza === 'Colectiva' && true}
+                                    className="sr-only peer"
                                     type="radio"
                                     value='Colectiva'
                                     name='tipoPoliza'
                                     id="answer_no"
                                     onChange={(e) => setFormStep1({ ...formStep1, tipoPoliza: e.target.value })}
                                 />
-                                <label class={`${errors.tipoPoliza ? 'border-red-500' : 'border-gray-300'} flex justify-center p-5 bg-white border  rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-blue-700 peer-checked:ring-2 peer-checked:border-transparent`} for="answer_no">
+                                <label className={`${errors.tipoPoliza ? 'border-red-500' : 'border-gray-300'} flex justify-center p-5 bg-white border  rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-blue-700 peer-checked:ring-2 peer-checked:border-transparent`} for="answer_no">
                                     Colectiva
                                 </label>
 
@@ -110,13 +108,13 @@ const Steps = ({ formStep1, setFormStep1, handleSend1, errorTipo, handleChange, 
                                 <div className="form-group">
 
                                     <label
-                                        class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
+                                        className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
 
                                         Nombre De La Empresa
 
                                     </label>
                                     <input
-
+                                        defaultValue={updateData?.nombreTomador}
                                         name='nombreTomador'
                                         onChange={handleChange}
                                         onBlur={handleBlur}
@@ -126,24 +124,25 @@ const Steps = ({ formStep1, setFormStep1, handleSend1, errorTipo, handleChange, 
                                         placeholder="Nombre de la empresa"
                                     />
                                     {
-                                        errors.nombreTomador && <span data-aos="zoom-in" style={{ color: 'red' }}> {errors.nombreTomador} </span>
+                                        errors.nombreTomador && <span data-aos="zoom-in" className='errrorMsg'> {errors.nombreTomador} </span>
                                     }
                                 </div>
                             </div>
                         )
                     }
                 </div>
+
                 <div className="col-sm-12">
                     <label
-                        class="block uppercase tracking-wide text-gray-400 text-sm font-bold mb-2" for="grid-last-name"> Compañía de Seguros
+                        className="block uppercase tracking-wide text-gray-400 text-sm font-bold mb-2" for="grid-last-name"> Compañía de Seguros
                     </label>
                     <select
-
+                        defaultValue={updateData?.selectSeguro}
                         name='selectSeguro'
                         onChange={handleChange}
                         onBlur={handleBlur}
 
-                        class={`form-select appearance-none block w-full px-5 py-4 text-md font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid  ${errors.selectSeguro ? 'border-red-600' : 'border-gray-300'}  rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none`}>
+                        className={`form-select appearance-none block w-full px-5 py-4 text-md font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid  ${errors.selectSeguro ? 'border-red-600' : 'border-gray-300'}  rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none`}>
                         <option value={'Selecciona'}>Selecciona </option>
                         <option value={'Mercantil Seguros'}>Mercantil Seguros</option>
                         <option value={'Mapfre'}>Mapfre</option>

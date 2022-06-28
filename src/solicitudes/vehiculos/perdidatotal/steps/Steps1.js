@@ -63,13 +63,13 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
             once: true
         });
     }, [])
-
     useEffect(() => {
         if (phonestate.phoneTitular !== '') {
             errors.celularTitular = false
+        } else {
+            errors.celularTitular = true
         }
     }, [phonestate.phoneTitular])
-
 
 
     return (
@@ -77,7 +77,6 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
 
             <div data-aos="fade-up">
                 <h4 className="step-steps1Title2">  Datos personales y del vehículo</h4>
-
                 <div className="row">
 
                     <div data-aos="fade-left" className="col-sm-6">
@@ -130,6 +129,7 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                     <option value="extranjero">E</option>
 
                                 </select>
+
                                 <CurrencyFormat
                                     defaultValue={updateData?.cedulaIdentidad}
                                     decimalScale={2}
@@ -274,8 +274,8 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
 
 
                         <CurrencyFormat
-                            defaultValue={updateData?.ano}
                             format="####"
+                            defaultValue={updateData?.ano}
                             placeholder="Año del vehiculo"
                             name='ano'
                             inputMode='numeric'
@@ -354,8 +354,8 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
 
                             </label>
 
-
                             <PhoneInput
+                                handleBlur={handleBlur}
                                 country={'ve'}
                                 name='celularTitular'
                                 placeholder=''
@@ -363,7 +363,17 @@ const Steps1 = ({ formStep1, setFormStep1, errorTipo, handleChange, handleBlur, 
                                 onChange={(v, c, e, f) => setPhonestate({ ...phonestate, phoneTitular: e.target.value })}
                                 masks={{ ve: '(...) ...-....' }}
                             />
-
+                            {/* <InputMask
+                                defaultValue={updateData?.celularTitular}
+                                onChange={handleChange}
+                                placeholder="+58 000 000 0000"
+                                maskPlaceholder={null}
+                                name='celularTitular'
+                                mask="+5\8 999 999 9999"
+                                onBlur={handleBlur}
+                                className={`appearance-none block w-full bg-gray-200 text-gray-700 ${errors.celularTitular ? "border-2 border-red-500" : 'border border-gray-200'}   rounded py-5 px-4 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+                            />
+ */}
 
                             {
                                 errors.celularTitular && <span data-aos="zoom-in" className='errrorMsg'> {errors.celularTitular}  </span>

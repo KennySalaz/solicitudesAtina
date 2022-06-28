@@ -19,219 +19,6 @@ const Steps4 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
 
 
-
-
-    const ArchivoCargado0 = () => {
-        return (
-            <>
-                {
-                    fileSelect.map((fileNAME, index) => (
-                        <>
-                            {
-                                !errorFile.cedulaConductor && (
-                                    <>
-                                        {
-                                            index === 0 && (
-                                                <div className="bg-blue-100 w-7/12  p-5 hover:bg-blue-200 text-blue-800 text-sm font-semibold mr-2 mt-4 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 dark:hover:bg-blue-300">
-
-                                                    <span style={{ color: 'black', paddingRight: '15px' }}>   Archivo Cargado  </span>
-                                                    {fileNAME[0]?.name.substr(0, 10)}{fileNAME[0]?.type.substr(5)}
-                                                    <span className="bg-slate-50 ml-8 text-blue-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full dark:bg-blue-200 dark:text-blue-800">
-                                                        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                                    </span>
-                                                </div>
-
-                                            )
-                                        }
-                                    </>
-
-                                )
-                            }
-
-
-                        </>
-                    ))
-                }
-            </>
-        )
-    }
-
-    const ArchivoCargado1 = () => {
-        return (
-            <>
-                {
-                    fileSelect.map((fileNAME, index) => (
-                        <>
-                            {
-                                !errorFile.certificadoMedico && (
-                                    <>
-                                        {
-                                            index === 1 && (
-                                                <div className="bg-blue-100 w-7/12  p-5 hover:bg-blue-200 text-blue-800 text-sm font-semibold mr-2 mt-4 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 dark:hover:bg-blue-300">
-
-                                                    <span style={{ color: 'black', paddingRight: '15px' }}>   Archivo Cargado  </span>
-                                                    {fileNAME[0]?.name.substr(0, 10)}{fileNAME[0]?.type.substr(5)}
-                                                    <span className="bg-slate-50 ml-8 text-blue-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full dark:bg-blue-200 dark:text-blue-800">
-                                                        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                                    </span>
-                                                </div>
-
-                                            )
-                                        }
-                                    </>
-
-                                )
-                            }
-
-
-                        </>
-                    ))
-                }
-            </>
-        )
-    }
-
-    const ArchivoCargado2 = () => {
-        return (
-            <>
-                {
-                    fileSelect.map((fileNAME, index) => (
-                        <>
-                            {
-                                !errorFile.licenciaConductor && (
-                                    <>
-                                        {
-                                            index === 2 && (
-                                                <div className="bg-blue-100 w-7/12  p-5 hover:bg-blue-200 text-blue-800 text-sm font-semibold mr-2 mt-4 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 dark:hover:bg-blue-300">
-
-                                                    <span style={{ color: 'black', paddingRight: '15px' }}>   Archivo Cargado  </span>
-                                                    {fileNAME[0]?.name.substr(0, 10)}{fileNAME[0]?.type.substr(5)}
-                                                    <span className="bg-slate-50 ml-8 text-blue-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full dark:bg-blue-200 dark:text-blue-800">
-                                                        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                                    </span>
-                                                </div>
-
-                                            )
-                                        }
-                                    </>
-
-                                )
-                            }
-
-
-                        </>
-                    ))
-                }
-            </>
-        )
-    }
-
-    const ArchivoCargado3 = () => {
-        return (
-            <>
-                {
-                    fileSelect.map((fileNAME, index) => (
-                        <>
-                            {
-                                !errorFile.carnetCirculacion && (
-                                    <>
-                                        {
-                                            index === 3 && (
-                                                <div className="bg-blue-100 w-7/12  p-5 hover:bg-blue-200 text-blue-800 text-sm font-semibold mr-2 mt-4 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 dark:hover:bg-blue-300">
-
-                                                    <span style={{ color: 'black', paddingRight: '15px' }}>   Archivo Cargado  </span>
-                                                    {fileNAME[0]?.name.substr(0, 10)}{fileNAME[0]?.type.substr(5)}
-                                                    <span className="bg-slate-50 ml-8 text-blue-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full dark:bg-blue-200 dark:text-blue-800">
-                                                        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                                    </span>
-                                                </div>
-
-                                            )
-                                        }
-                                    </>
-
-                                )
-                            }
-
-
-                        </>
-                    ))
-                }
-            </>
-        )
-    }
-    const ArchivoCargado4 = () => {
-        return (
-            <>
-                {
-                    fileSelect.map((fileNAME, index) => (
-                        <>
-                            {
-                                !errorFile.autorizacion && (
-                                    <>
-                                        {
-                                            index === 4 && (
-                                                <div className="bg-blue-100 w-7/12  p-5 hover:bg-blue-200 text-blue-800 text-sm font-semibold mr-2 mt-4 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 dark:hover:bg-blue-300">
-
-                                                    <span style={{ color: 'black', paddingRight: '15px' }}>   Archivo Cargado  </span>
-                                                    {fileNAME[0]?.name.substr(0, 10)}{fileNAME[0]?.type.substr(5)}
-                                                    <span className="bg-slate-50 ml-8 text-blue-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full dark:bg-blue-200 dark:text-blue-800">
-                                                        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                                    </span>
-                                                </div>
-
-                                            )
-                                        }
-                                    </>
-
-                                )
-                            }
-
-
-                        </>
-                    ))
-                }
-            </>
-        )
-    }
-
-    const ArchivoCargado5 = () => {
-        return (
-            <>
-                {
-                    fileSelect.map((fileNAME, index) => (
-                        <>
-                            {
-                                !errorFile.fotosVehiculos && (
-                                    <>
-                                        {
-                                            index === 5 && (
-                                                <div className="bg-blue-100 w-7/12  p-5 hover:bg-blue-200 text-blue-800 text-sm font-semibold mr-2 mt-4 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 dark:hover:bg-blue-300">
-
-                                                    <span style={{ color: 'black', paddingRight: '15px' }}>   Archivo Cargado  </span>
-                                                    {fileNAME[0]?.name.substr(0, 10)}{fileNAME[0]?.type.substr(5)}
-                                                    <span className="bg-slate-50 ml-8 text-blue-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full dark:bg-blue-200 dark:text-blue-800">
-                                                        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                                    </span>
-                                                </div>
-
-                                            )
-                                        }
-                                    </>
-
-                                )
-                            }
-
-
-                        </>
-                    ))
-                }
-            </>
-        )
-    }
-
-
-
     useEffect(() => {
         AOS.init({
             duration: 1000,
@@ -242,17 +29,17 @@ const Steps4 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
 
 
 
+
     return (
         <>
             <div data-aos="fade-up" >
                 {/*    <h2 className="step-title">Tipo de reembolso</h2> */}
-
                 <div data-aos="fade-left" className='row'>
                     <div className="col-sm-6">
                         <div data-aos="fade-left" data-aos-offset="100" data-aos-duration="500" data-aos-easing="ease" className=" col-sm-12">
                             {/*  <div className="step-label">Informe médico</div> */}
                             <div className="form-group">
-                                <label className="block mt-10 text-md font-medium text-gray-900 dark:text-gray-300"
+                                <label className="block mt-7 text-md font-medium text-gray-900 dark:text-gray-300"
                                     for="default_size">
                                     Cédula de identidad del conductor
                                 </label>
@@ -283,9 +70,8 @@ const Steps4 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                     onChange={e => handleFile(e, 0)}
 
                                 />
-                                <ArchivoCargado0 />
                                 {
-                                    errorFile.cedulaConductor && <span data-aos="zoom-in" style={{ color: 'red', fontSize: '10px' }}>  El tipo de archivo debe ser PDF/JPG/PNG </span>
+                                    errorFile.cedulaConductor && <span data-aos="zoom-in" style={{ color: 'red', fontSize: '10px' }}>  {errorFile.cedulaConductor} </span>
                                 }
                                 {
                                     errors.cedulaConductor && <span data-aos="zoom-in" style={{ color: 'red', fontSize: '10px' }}>  Obligatorio </span>
@@ -328,7 +114,6 @@ const Steps4 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                     onBlur={handleBlur}
                                     onChange={e => handleFile(e, 1)}
                                 />
-                                <ArchivoCargado1 />
                                 {
                                     errorFile.certificadoMedico && <span data-aos="zoom-in" style={{ color: 'red', fontSize: '10px' }}>  {errorFile.certificadoMedico} </span>
                                 }
@@ -373,7 +158,6 @@ const Steps4 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                     onBlur={handleBlur}
                                     onChange={e => handleFile(e, 2)}
                                 />
-                                <ArchivoCargado2 />
                                 {
                                     errorFile.licenciaConductor && <span data-aos="zoom-in" style={{ color: 'red', fontSize: '10px' }}> {errorFile.licenciaConductor} </span>
                                 }
@@ -389,7 +173,7 @@ const Steps4 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                         <div data-aos="fade-left" data-aos-offset="100" data-aos-duration="1500" data-aos-easing="ease" className="col-sm-12">
                             {/*  <div className="step-label">Exámenes realizados opcional</div> */}
                             <div className="form-group">
-                                <label className="block mt-10 text-md font-medium text-gray-900 dark:text-gray-300"
+                                <label className="block mb-2 text-md font-medium text-gray-900 dark:text-gray-300"
                                     for="default_size">
                                     Carnet de circulación
                                 </label>
@@ -420,7 +204,6 @@ const Steps4 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                     onBlur={handleBlur}
                                     onChange={e => handleFile(e, 3)}
                                 />
-                                <ArchivoCargado3 />
                                 {
                                     errorFile.carnetCirculacion && <span data-aos="zoom-in" style={{ color: 'red', fontSize: '10px' }}> {errorFile.carnetCirculacion} </span>
                                 }
@@ -466,7 +249,6 @@ const Steps4 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                     onBlur={handleBlur}
                                     onChange={e => handleFile(e, 4)}
                                 />
-                                <ArchivoCargado4 />
                                 {
                                     errorFile.autorizacion && <span data-aos="zoom-in" style={{ color: 'red', fontSize: '10px' }}>  {errorFile.autorizacion} </span>
                                 }
@@ -511,8 +293,6 @@ const Steps4 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                     onBlur={handleBlur}
                                     onChange={e => handleFile(e, 5)}
                                 />
-
-                                <ArchivoCargado5 />
                                 {
                                     errorFile.fotosVehiculos && <span data-aos="zoom-in" style={{ color: 'red', fontSize: '10px' }}>  {errorFile.fotosVehiculos} </span>
                                 }

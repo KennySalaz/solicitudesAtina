@@ -2,24 +2,29 @@ import React, { useState, useEffect } from 'react'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Modal from '../../../../Componentes/Modal';
+import { format } from 'date-fns';
 
 
-const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) => {
+const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate, fileSelect, phonestate }) => {
     const [newDate, setNewDate] = useState([])
+
     useEffect(() => {
         AOS.init({
             duration: 1000,
             easing: 'ease',
-            once: false
+            once: true
         });
-    }, [AOS])
+    }, [])
+
+
 
     return (
         <>
             <div data-aos="fade-up" >
-                <h2 className="step-title">Confirmar Datos </h2>
+                <h6 className="step-steps1Title3  " > Confirmar datos </h6>
+                <hr className='hrDivider' />
                 <div className="fadeTop">
-                    <h3 className="step-sub-title">Tipo de póliza</h3>
+                    <h3 className="step-sub-title">Tipo de póliza y compañía de seguros</h3>
                 </div>
                 <Modal loadingModal={loadingModal} />
                 {
@@ -48,7 +53,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                 {
                     data?.selectSeguro !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Compañia de seguro</div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Compañía de seguro</div>
                             <div className="col-md-8 col-sm-6 col-xs-12 confirm-text ">
 
                                 {data?.selectSeguro}
@@ -56,6 +61,10 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                         </div>
                     )
                 }
+                <hr className='hrDivider' />
+                <div className="fadeTop">
+                    <h3 className="step-sub-title">Datos personales</h3>
+                </div>
                 {
                     formStep1?.titularObeneficiario !== '' && (
                         <div className="row fadeTop">
@@ -69,7 +78,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                 {
                     data?.nombreTitularPoliza !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Nombre del Titular de la Poliza</div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Nombre del Titular de la Póliza</div>
                             <div className="col-md-8 col-sm-6 col-xs-12 confirm-text">
                                 {
                                     data?.nombreTitularPoliza
@@ -94,7 +103,8 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.cedulaTitular !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Cédula de identidad del titular</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12 confirm-text">
+                            <div className="col-md-8 col-sm-6 col-xs-12 confirm-text-2">
+
                                 {
                                     data?.cedulaTitular
                                 }
@@ -114,10 +124,25 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                         </div>
                     )
                 }
+
+                {
+                    phonestate?.phoneTitular !== '' && (
+                        <div className="row fadeTop">
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Número de teléfono del titular </div>
+                            <div className="col-md-8 col-sm-6 col-xs-12 confirm-text">
+                                {
+                                    phonestate?.phoneTitular
+                                }
+                            </div>
+                        </div>
+                    )
+                }
+
+
                 {
                     data?.celularTitular !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Numero Telefono</div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Número de teléfono del titular </div>
                             <div className="col-md-8 col-sm-6 col-xs-12 confirm-text">
                                 {
                                     data?.celularTitular
@@ -129,7 +154,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                 {
                     data?.nombreTitularPoliza2 !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Nombre del Titular de la Poliza</div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Nombre del Titular de la Póliza</div>
                             <div className="col-md-8 col-sm-6 col-xs-12 confirm-text">
                                 {
                                     data?.nombreTitularPoliza2
@@ -154,7 +179,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.cedulaTitular2 !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Cédula de identidad del titular</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12 confirm-text">
+                            <div className="col-md-8 col-sm-6 col-xs-12 confirm-text-2">
                                 {
                                     data?.cedulaTitular2
                                 }
@@ -177,7 +202,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                 {
                     data?.celularTitular2 !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Numero de Telefono</div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Número de teléfono del titular </div>
                             <div className="col-md-8 col-sm-6 col-xs-12 confirm-text">
                                 {
                                     data?.celularTitular2
@@ -186,6 +211,21 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                         </div>
                     )
                 }
+
+                {
+                    phonestate?.phoneTitular2 !== '' && (
+                        <div className="row fadeTop">
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Número de teléfono del titular </div>
+                            <div className="col-md-8 col-sm-6 col-xs-12 confirm-text">
+                                {
+                                    phonestate?.phoneTitular2
+                                }
+                            </div>
+                        </div>
+                    )
+                }
+
+
                 {
                     data?.nombreBeneficiarioPoliza !== '' && (
                         <div className="row fadeTop">
@@ -214,7 +254,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     data?.cedulaBeneficiario !== '' && (
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Cédula de identidad del beneficiario</div>
-                            <div className="col-md-8 col-sm-6 col-xs-12 confirm-text">
+                            <div className="col-md-8 col-sm-6 col-xs-12 confirm-text-2">
                                 {
                                     data?.cedulaBeneficiario
                                 }
@@ -237,7 +277,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                 {
                     data?.celularBeneficiario !== '' && (
                         <div className="row fadeTop">
-                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Numero de Telefono del beneficiario</div>
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Número de teléfono  del beneficiario</div>
                             <div className="col-md-8 col-sm-6 col-xs-12 confirm-text">
                                 {
                                     data?.celularBeneficiario
@@ -246,6 +286,20 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                         </div>
                     )
                 }
+
+                {
+                    phonestate?.phoneBeneficiario !== '' && (
+                        <div className="row fadeTop">
+                            <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Número de teléfono del beneficiario </div>
+                            <div className="col-md-8 col-sm-6 col-xs-12 confirm-text">
+                                {
+                                    phonestate?.phoneBeneficiario
+                                }
+                            </div>
+                        </div>
+                    )
+                }
+
 
                 {
                     data?.informeMedico !== '' && (
@@ -301,9 +355,10 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Fecha de ocurrencia</div>
                             <div className="col-md-8 col-sm-6 col-xs-12 confirm-text">
-                                {
+                                {format(startDate, 'dd/MM/yyyy')}
+                                {/*  {
                                     startDate.toISOString().slice(0, 10)
-                                }
+                                } */}
                             </div>
                         </div>
                     )
@@ -313,6 +368,7 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                         <div className="row fadeTop">
                             <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Monto</div>
                             <div className="col-md-8 col-sm-6 col-xs-12 confirm-text">
+
                                 {
                                     data?.montoTotal
                                 }
@@ -321,28 +377,93 @@ const StepsConfirm = ({ formStep1, sendData, loadingModal, data, startDate }) =>
                     )
                 }
 
-
-                {/*   <div className="fadeTop">
-                    <h3 className="step-sub-title">Datos del Titular / Beneficiario</h3>
+                <hr className='hrDivider' />
+                <div className="fadeTop">
+                    <h6 className="step-sub-title">Documentos </h6>
                 </div>
 
- */}
+                {
+                    fileSelect.map((dateFile, i) => (
+
+                        <>
+                            {
+                                i === 0 && (
+                                    <div className="row fadeTop">
+                                        <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Informe médico</div>
+                                        <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                            {
+                                                dateFile[0]?.name.substr(0, 10)
+                                            }
+                                            {
+                                                dateFile[0]?.type.substr(5)
+                                            }
 
 
+                                        </div>
+                                    </div>
+                                )
+                            }
+                            {
+                                i === 1 && (
+                                    <div className="row fadeTop">
+                                        <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Exámenes que corroboren patología</div>
+                                        <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                            {
+                                                dateFile[0]?.name.substr(0, 10)
+                                            }
+                                            {
+                                                dateFile[0]?.type.substr(5)
+                                            }
 
+                                        </div>
+                                    </div>
+                                )
+                            }
+                            {
+                                i === 2 && (
+                                    <div className="row fadeTop">
+                                        <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Presupuesto de la institución de salud (vigente)</div>
+                                        <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                            {
+                                                dateFile[0]?.name.substr(0, 10)
+                                            }
+                                            {
+                                                dateFile[0]?.type.substr(5)
+                                            }
 
+                                        </div>
+                                    </div>
+                                )
+                            }
+                            {
+                                i === 3 && (
+                                    <div className="row fadeTop">
+                                        <div className="col-md-4 col-sm-6 col-xs-12  confirm-label">Facturas (Con los requerimientos del Seniat y sello húmedo de pagado)</div>
+                                        <div className="col-md-8 col-sm-6 col-xs-12  confirm-text">
+                                            {
+                                                dateFile[0]?.name.substr(0, 10)
+                                            }
+                                            {
+                                                dateFile[0]?.type.substr(5)
+                                            }
 
+                                        </div>
+                                    </div>
+                                )
+                            }
 
+                        </>
 
-
-
-
-
-
+                    ))
+                }
                 <div className="fadeTop">
-                    <div onClick={sendData} className="btn btn-blue ">
-                        Enviar Solicitud
+
+                    <div className='buttonStyle_'>
+                        <div onClick={sendData} className="btn btn-blue ">
+                            Enviar Solicitud
+                        </div>
                     </div>
+
                 </div>
             </div>
         </>

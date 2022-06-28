@@ -7,7 +7,7 @@ import range from "lodash/range";
 
 
 
-const DataPicker = ({ startDate, setStartDate,errors }) => {
+const DataPicker = ({ startDate, setStartDate, errors }) => {
 
 
     const years = range(1990, getYear(new Date()) + 1, 1);
@@ -29,13 +29,13 @@ const DataPicker = ({ startDate, setStartDate,errors }) => {
 
     useEffect(() => {
 
-        console.log('aqui esta la FECHA', errors.fechaOcurrencia )
+        console.log('aqui esta la FECHA', errors.fechaOcurrencia)
 
-    }, [errors.fechaOcurrencia ])
+    }, [errors.fechaOcurrencia])
 
     return (
         <DatePicker
-            className={`appearance-none block w-2/4 mr-4 text-xl bg-gray-200 text-gray-700    ${errors.fechaOcurrencia ? 'border-2 border-red-500' : 'border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
+            className={`appearance-none block w-full mr-4 text-xl bg-gray-200 text-gray-700    ${errors.fechaOcurrencia ? 'border-2 border-red-500' : 'border-gray-200'}   rounded py-5 pl-6 leading-tight focus:outline-nonefocus:bg-white focus:border-gray-500`}
             /*   withPortal */
             renderCustomHeader={({
                 date,
