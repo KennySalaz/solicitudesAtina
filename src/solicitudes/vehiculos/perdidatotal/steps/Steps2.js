@@ -52,11 +52,11 @@ const Steps2 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
         });
     }, [])
 
-    /*  useEffect(() => {
+     useEffect(() => {
          if (phonestate.phoneTitular2 !== '') {
              errors.celularConductor = false
          }
-     }, [phonestate.phoneTitular2]) */
+     }, [phonestate.phoneTitular2])
 
 
 

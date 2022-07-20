@@ -105,7 +105,7 @@ const Steps3 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
                                     <>
                                         {
                                             index === 2 && (
-                                                <div className="bg-blue-100 w-7/12  p-5 hover:bg-blue-200 text-blue-800 text-sm font-semibold mr-2 mt-4 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 dark:hover:bg-blue-300">
+                                                <div key={index} className="bg-blue-100 w-7/12  p-5 hover:bg-blue-200 text-blue-800 text-sm font-semibold mr-2 mt-4 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 dark:hover:bg-blue-300">
 
                                                     <span style={{ color: 'black', paddingRight: '8px' }}>   Archivo Cargado  </span>
                                                     {fileNAME[0]?.name.substr(0, 10)}{fileNAME[0]?.type.substr(5)}
@@ -286,6 +286,11 @@ const Steps3 = ({ setFileSelect, fileSelect, formStep1, setFormStep1, handleChan
             once: true
         });
     }, [])
+
+    useEffect(() => {
+     console.log('enteFile', enteFile)
+    }, [enteFile])
+    
 
 
 
