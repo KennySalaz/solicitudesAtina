@@ -188,9 +188,31 @@ const PageCartaAval = () => {
           const documentosAdjuntos = `
           ${ urlCartaAval[0] !==  undefined ? `<div > <a href="${urlCartaAval[0]}">Documento 1 </a>  </div>` : ''}
           ${ urlCartaAval[1] !==  undefined ? `<div > <a href="${urlCartaAval[1]}">Documento 2 </a>  </div>` : ''}
-          ${ urlCartaAval[2] !==  undefined ? `<div > <a href="${urlCartaAval[2]}">Documento 3 </a>  </div>` : ''}
-         
-        `;
+          ${ urlCartaAval[2] !==  undefined ? `<div > <a href="${urlCartaAval[2]}">Documento 3 </a>  </div>` : ''}`
+          ;
+
+          const compa = `
+          ${data.selectSeguro !== ''? `<h4 >Compañía de seguro  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.selectSeguro} </span></h4>` : ''}
+          ${data.nombreTomador !== ''? `<h4 >Nombre de la empresa  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.nombreTomador} </span></h4>` : ''}
+          
+          `
+          ;
+
+          const dataBeneficiario = `
+          ${data.nombreTitularPoliza !== '' || data.nombreTitularPoliza2 !== '' ? `<h4 >Nombre del titular de la Póliza : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.nombreTitularPoliza || data.nombreTitularPoliza2} </span></h4>` : ''}
+          ${data.cedulaTitular !== '' || data.cedulaTitular2 !== '' ? `<h4 >Cédula de identidad del titular :  <span  style="font-weight: 800; color: #6e6e6e; font-size: 13px; text-transform: uppercase; margin-left: 10px;">  ${data.cedulaTitular || data.cedulaTitular2} </span>  </h4>` : ''}
+          ${data.emailTitular !== '' || data.emailTitular2 !== '' ? `<h4 >Correo electrónico del titular :  <span  style="font-weight: 800; color: #6e6e6e; font-size: 13px; text-transform: uppercase; margin-left: 10px;">  ${data.emailTitular || data.emailTitular2} </span>  </h4>` : ''}
+          ${phonestate.phoneTitular !== '' || phonestate.phoneTitular2 !== '' ? `<h4 >Número de teléfono del titular :  <span  style="font-weight: 800; color: #6e6e6e; font-size: 13px; text-transform: uppercase; margin-left: 10px;">  ${phonestate.phoneTitular || phonestate.phoneTitular2} </span>  </h4>` : ''}
+          ${data.cedulaTitular !== '' || data.cedulaTitular2 !== '' ? `<h4 >Cédula de identidad del titular :  <span  style="font-weight: 800; color: #6e6e6e; font-size: 13px; text-transform: uppercase; margin-left: 10px;">  ${data.cedulaTitular || data.cedulaTitular2} </span>  </h4>` : ''}
+
+          ${data.nombreBeneficiarioPoliza !== ''? `<h4 >Nombre del beneficiario : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.nombreBeneficiarioPoliza} </span></h4>` : ''}
+          ${data.cedulaBeneficiario !== ''? `<h4 >Cédula de identidad del beneficiario : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.cedulaBeneficiario} </span></h4>` : ''}
+          ${data.emailBeneficiario !== ''? `<h4 >Correo electrónico del beneficiario : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.emailBeneficiario} </span></h4>` : ''}
+          ${phonestate.phoneBeneficiario !== ''? `<h4 >Número de teléfono del beneficiario : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${phonestate.phoneBeneficiario} </span></h4>` : ''}
+        
+          
+          `
+          ;
           addDoc(collection(db, "mail"), {
             to: "mipto.kenny@gmail.com",
             message: {
@@ -204,16 +226,8 @@ const PageCartaAval = () => {
     font-size: 13px;
     text-transform: uppercase;
     margin-left: 10px;">  ${formStep1.tipoPoliza} </span>   </h4>
-               <h4 s>Nombre de la empresa : <span  style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;">  ${data.nombreTomador} </span>   </h4>
-               <h4 s>Compañía de seguro : <span  style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;"> ${data.selectSeguro} </span>    </h4>
+              
+               ${compa}
                </div>
                 </li>
                  <li >
@@ -224,46 +238,11 @@ const PageCartaAval = () => {
     font-size: 13px;
     text-transform: uppercase;
     margin-left: 10px;">  ${formStep1.titularObeneficiario} </span>   </h4>
-              <h4 s>Nombre del titular de la Póliza : <span  style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;"> ${data.nombreTitularPoliza || data.nombreTitularPoliza2} </span>    </h4>
-              <h4 s>Cédula de identidad del titular :  <span  style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;">  ${data.cedulaTitular || data.cedulaTitular2} </span>  </h4>
-              <h4 s>Correo electrónico del titular : <span  style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;"> ${data.emailTitular || data.emailTitular2}  </span>   </h4>
-              <h4 s>Número de teléfono del titular : <span  style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;"> ${phonestate.phoneTitular || phonestate.phoneTitular2} </span>    </h4>
-              <h4 s>Nombre del beneficiario :  <span  style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;">  ${data.nombreBeneficiarioPoliza} </span>  </h4>
-              <h4 s>Cédula de identidad del beneficiario : <span  style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;">  ${data.cedulaBeneficiario} </span>   </h4>
-              <h4 s>Correo electrónico del beneficiario : <span  style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;">  ${data.emailBeneficiario}  </span>   </h4>
-              <h4 s>WhNúmero de teléfono del beneficiario : <span  style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;">  ${phonestate.phoneBeneficiario}  </span>    </h4>
+
+    ${dataBeneficiario}
+            
+            
+            
               </div>
             </li>
             <li >

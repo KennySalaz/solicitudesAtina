@@ -332,13 +332,35 @@ const PagePerdidaTotal = () => {
             documentosPDF: enteUrl,
           });
 
+          const dataBeneficiario = `
+          ${data.nombreConductor !== '' ? `<h4 >Nombre del conductor : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.nombreConductor} </span></h4>` : ''}
+          ${data.cedulaConductor !== '' ? `<h4 >Cédula de identidad del conductor : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.cedulaConductor} </span></h4>` : ''}
+          ${data.fechaConductor !== '' ? `<h4 >Fecha de nacimiento del conductor  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.fechaConductor} </span></h4>` : ''}
+          ${data.gradoConductor !== '' ? `<h4 >Grado de licencia del conductor : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.gradoConductor} </span></h4>` : ''}
+          ${data.correoConductor !== '' ? `<h4 >Correo electrónico del conductor : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.correoConductor} </span></h4>` : ''}
+          ${phonestate.phoneTitular2 !== '' ? `<h4 >Número de teléfono del conductor : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${phonestate.phoneTitular2} </span></h4>` : ''}`;
+          
+          
+          const compa = `
+          ${data.selectSeguro !== ''? `<h4 >Compañía de seguro  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.selectSeguro} </span></h4>` : ''}
+          ${data.nombreTomador !== ''? `<h4 >Nombre de la empresa  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.nombreTomador} </span></h4>` : ''}`;
+
+          const dataSioNo = `
+          ${data.fechaOcurrencia  !== ''  || data.fechaOcurrencia2  !== '' || data.fechaOcurrencia3 !== ''  ? `<h4 >Fecha de ocurrencia : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.fechaOcurrencia || data.fechaOcurrencia2 || data.fechaOcurrencia3} </span></h4>` : ''}
+          ${data.horaOcurrencia  !== ''  || data.horaOcurrencia2  !== '' || data.horaOcurrencia3 !== ''  ? `<h4 >Hora de ocurrencia  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.horaOcurrencia || data.horaOcurrencia2 || data.horaOcurrencia3} </span></h4>` : ''}
+          ${data.lugarOcurrencia  !== ''  || data.lugarOcurrencia2  !== '' || data.lugarOcurrencia3 !== ''  ? `<h4 >Lugar de ocurrencia : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.lugarOcurrencia || data.lugarOcurrencia2 || data.lugarOcurrencia3} </span></h4>` : ''}
+          ${data.descripcionHechos  !== ''  || data.descripcionHechos2  !== '' || data.descripcionHechos3 !== ''  ? `<h4 >Descripción de los hechos : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.descripcionHechos || data.descripcionHechos2 || data.descripcionHechos3} </span></h4>` : ''}
+          ${ data.describirDanos  !== ''  ||  data.describirDanos3 !== ''  ? `<h4 >Descripcion de los daños del vehículo : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${ data.describirDanos ||  data.describirDanos3} </span></h4>` : ''}
+          ${formStep1.intervinoSioNo !== ''  ? `<h4 >¿Intervino alguna autoridad? : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${formStep1.intervinoSioNo} </span></h4>` : ''}
+          ${formStep1.danosSioNo !== '' || formStep1.danosSioNo2 !== ''  ? `<h4 >¿Hubo daños a terceros? : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${formStep1.danosSioNo || formStep1.danosSioNo2} </span></h4>` : ''}
+          ${formStep1.vehiculoDetenidoSioNo !== ''  ? `<h4 >¿El vehiculo esta detenido? : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${formStep1.vehiculoDetenidoSioNo} </span></h4>` : ''}
+`;
+
           const documentosAdjuntos = `
           ${ enteUrl[0] !==  undefined ? `<div > <a href="${enteUrl[0]}">Documento 1 </a>  </div>` : ''}
           ${ enteUrl[1] !==  undefined ? `<div > <a href="${enteUrl[1]}">Documento 2 </a>  </div>` : ''}
           ${ enteUrl[2] !==  undefined ? `<div > <a href="${enteUrl[2]}">Documento 3 </a>  </div>` : ''}
-          ${ enteUrl[3] !==  undefined ? `<div > <a href="${enteUrl[3]}">Documento 3 </a>  </div>` : ''}
-         
-        `;
+          ${ enteUrl[3] !==  undefined ? `<div > <a href="${enteUrl[3]}">Documento 3 </a>  </div>` : ''}`;
 
           addDoc(collection(db, "mail"), {
             to: "mipto.kenny@gmail.com",
@@ -356,17 +378,9 @@ const PagePerdidaTotal = () => {
     text-transform: uppercase;
     margin-left: 10px;" > ${formStep1.tipoPoliza} </span> </h4>
                                
-                                 <h4> Nombre de la empresa : <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;" > ${data.nombreTomador} </span> </h4>
+                                
+                               ${compa}
                                
-                                <h4> Compañía de seguro  :  <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;" > ${data.selectSeguro} </span></h4>
                                <li>
 
                                 <h2>Datos personales</h2> 
@@ -436,94 +450,13 @@ const PagePerdidaTotal = () => {
 
                                 <h2>Datos del conductor</h2> 
                                
-                                <h4>Nombre del conductor :  <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;" > ${data.nombreConductor} </span></h4>
-                               
-                                <h4>Cédula de identidad del conductor :  <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;" > ${data.cedulaConductor} </span></h4>
-                               
-                                <h4>Fecha de nacimiento del conductor :  <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;" > ${data.fechaConductor} </span></h4>
-                               
-                                <h4>Grado de licencia del conductor : <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;" > ${data.gradoConductor} </span></h4>
-                               
-                                <h4>Correo electrónico del conductor :  <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;" > ${data.correoConductor} </span></h4>
-                               
-                                <h4>Número de teléfono del conductor :  <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;" > ${phonestate.phoneTitular2} </span></h4>
+                             ${dataBeneficiario}
                                
 
                                 </li>
                                 <li>
                                 <h2>Reparacion parcial</h2> 
-
-                                <h4>Fecha de ocurrencia : <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;" > ${data.fechaOcurrencia || data.fechaOcurrencia2 || data.fechaOcurrencia3} </span></h4>
-                               
-                                <h4>Hora de ocurrencia : <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;" > ${data.horaOcurrencia ||  data.horaOcurrencia2 ||  data.horaOcurrencia3} </span></h4>
-                               
-                                <h4>Lugar de ocurrencia : <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;" > ${data.lugarOcurrencia || data.lugarOcurrencia2 || data.lugarOcurrencia3} </span></h4>
-                               
-                                <h4>Descripción de los hechos : <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;" > ${data.descripcionHechos || data.descripcionHechos2 || data.descripcionHechos3} </span></h4>
-                               
-                                <h4>Descripcion de los daños del vehículo :  <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;" > ${ data.describirDanos ||   data.describirDanos2 ||   data.describirDanos3} </span> </h4>
-                               
-                                <h4>¿Intervino alguna autoridad? :   <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;" > ${formStep1.intervinoSioNo} </span></h4>
-                               
-                                <h4>¿Hubo danos a terceros? : <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;" > ${formStep1.danosSioNo || formStep1.danosSioNo2} </span></h4>
-                               
-                                <h4>¿El vehiculo esta detenido? : <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;" > ${formStep1.vehiculoDetenidoSioNo} </span></h4>
+${dataSioNo}
                                 </li>
                                 <li>
                                 

@@ -315,6 +315,25 @@ const PageParcial = () => {
             }
           );
 
+          const compa = `
+          ${data.selectSeguro !== ''? `<h4 >Compañía de seguro  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.selectSeguro} </span></h4>` : ''}
+          ${data.nombreTomador !== ''? `<h4 >Nombre de la empresa  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.nombreTomador} </span></h4>` : ''}
+          
+          `
+          ;
+
+
+          const dataBeneficiario = `
+          ${data.nombreConductor !== '' ? `<h4 >Nombre del conductor : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.nombreConductor} </span></h4>` : ''}
+          ${data.cedulaConductor !== '' ? `<h4 >Cédula de identidad del conductor : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.cedulaConductor} </span></h4>` : ''}
+          ${data.fechaConductor !== '' ? `<h4 >Fecha de nacimiento del conductor  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.fechaConductor} </span></h4>` : ''}
+          ${data.gradoConductor !== '' ? `<h4 >Grado de licencia del conductor : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.gradoConductor} </span></h4>` : ''}
+          ${data.correoConductor !== '' ? `<h4 >Correo electrónico del conductor : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.correoConductor} </span></h4>` : ''}
+          ${phonestate.phoneTitular2 !== '' ? `<h4 >Número de teléfono del conductor : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${phonestate.phoneTitular2} </span></h4>` : ''}
+         
+          
+          `;
+
           const documentosAdjuntos = `
           ${ urlGET[0] !==  undefined ? `<div > <a href="${urlGET[0]}">Documento 1 </a>  </div>` : ''}
           ${ urlGET[1] !==  undefined ? `<div > <a href="${urlGET[1]}">Documento 2 </a>  </div>` : ''}
@@ -342,17 +361,7 @@ const PageParcial = () => {
     text-transform: uppercase;
     margin-left: 10px;"> ${formStep1.tipoPoliza} </span > </h4>
 
-                                 <h4> Nombre de la empresa : <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;"> ${data.nombreTomador} </span > </h4>
-
-                                <h4> Compañía de seguro  :  <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;"> ${data.selectSeguro} </span ></h4>
+                                ${compa}
 
 
 
@@ -424,41 +433,10 @@ const PageParcial = () => {
 
                                 <h2>Datos del conductor</h2> 
 
-                                <h4>Nombre del conductor :  <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;"> ${data.nombreConductor} </span ></h4>
 
-                                <h4>Cédula de identidad del conductor :  <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;"> ${data.cedulaConductor} </span ></h4>
+                                ${dataBeneficiario}
 
-                                <h4>Fecha de nacimiento del conductor :  <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;"> ${data.fechaConductor} </span ></h4>
-
-                                <h4>Grado de licencia del conductor : <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;"> ${data.gradoConductor} </span ></h4>
-
-                                <h4>Correo electrónico del conductor :  <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;"> ${data.correoConductor} </span ></h4>
-
-                                <h4>Número de teléfono del conductor :  <span style="font-weight: 800;
-    color: #6e6e6e;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-left: 10px;"> ${data.phoneTitular2} </span ></h4>
+                              
 </li>
 <li>
 
