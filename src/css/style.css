@@ -218,9 +218,9 @@ body {
 
 .luna-signup-left {
     padding: 60px 30px 30px;
-    background: #0f36e5;
+   /*  background: #0f36e5; */
     position: fixed;
-    width: 200px;
+    width: 30px;
 }
 
 /* .luna-signup-left:after {
@@ -244,9 +244,25 @@ body {
     top: 0;
     left: 0;
     width: 19%;
-    background: url("../images/bg-left.png") right bottom no-repeat #0f36e5;
+    background: url("../images/fondo-atina1.png") no-repeat #0f36e5;
+    background-size: cover;
 
 }
+
+.luna-signup-left-overlay2 {
+    z-index: -1;
+    position: fixed;
+    height: auto;
+    display: block;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 30%;
+    background: url("../images/fondo-atina2.png") no-repeat #0f36e5;
+    background-size: cover;
+
+}
+
 
 .buttonStyle_ {
     width: 100%;
@@ -347,6 +363,17 @@ body {
     margin-bottom: 20px;
     max-width: 200px;
     width: 100%;
+    position: absolute;
+    right: 50%;
+    left: 59%;
+    top: 14%;
+}
+
+.luna-signup-logo2 {
+    margin-bottom: 20px;
+    max-width: 200px;
+    width: 100%;
+   
 }
 
 
@@ -918,6 +945,42 @@ body {
         margin-bottom: 0px !important;
     }
 
+    .luna-signup-left {
+     
+        background: #0f36e5;
+        padding: 95px;
+      
+    }
+
+    .luna-signup-left-overlay {
+      
+       background: #0f36e5;
+    }
+
+    .item_table{
+        position: relative;
+        width: 100%;
+    }
+
+    .luna-signup-logo3 {
+         
+    max-width: 139px;
+    width: -7%;
+    left: -83px;
+    top: 94px;
+    position: absolute;
+       
+      
+    }
+
+    .tainer__{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      margin: 20px 0px 20px 0px ;
+    }
+
 }
 
 @media only screen and (max-width: 767px) {
@@ -1059,6 +1122,6 @@ body {
 @media only screen and (min-width: 1800px) {
 
     .luna-signup-left-overlay {
-        width: 25%;
+        width: 30%;
     }
 }

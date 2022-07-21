@@ -31,6 +31,7 @@ const storage = getStorage(firebaseApp);
 
 const PageReembolso = () => {
   const navigate = useNavigate();
+  
   const Swal = require("sweetalert2");
   const [page, setPage] = useState(1);
   const [loadingModal, setLoadingModal] = useState(false);
@@ -158,6 +159,10 @@ const PageReembolso = () => {
     }
   };
 
+
+
+
+
   const sendData = async () => {
     Swal.fire({
       width: "400px",
@@ -205,8 +210,17 @@ const PageReembolso = () => {
             Monto: data.montoTotal,
             documentosPdf: urlGET,
           });
+          
+
+          
+  const documentosAdjuntos = `
+    ${ urlGET[0] !==  undefined ? `<div > <a href="${urlGET[0]}">Documento 1 </a>  </div>` : ''}
+    ${ urlGET[1] !==  undefined ? `<div > <a href="${urlGET[1]}">Documento 2 </a>  </div>` : ''}
+    ${ urlGET[2] !==  undefined ? `<div > <a href="${urlGET[2]}">Documento 3 </a>  </div>` : ''}
+    ${ urlGET[3] !==  undefined ? `<div > <a href="${urlGET[3]}">Documento 4 </a>  </div> ` : ''}
+  `;
           addDoc(collection(db, "mail"), {
-            to: "info@atinaseguros.com",
+            to: "mipto.kenny@gmail.com",
             message: {
               subject: "Solicitud Atina Reembolso!",
               html: `	
@@ -310,12 +324,8 @@ const PageReembolso = () => {
             <li >
             <h2>Adjuntos</h2>
               <div class="content">
-          
-
-            <div > <a href="${urlGET[0]}">Documento 1 </a>     </div>
-            <div > <a href="${urlGET[1]}">Documento 2 </a>  </div>
-            <div > <a href="${urlGET[2]}">Documento 3 </a>  </div>
-            <div > <a href="${urlGET[4]}">Documento 4 </a>  </div>
+              ${documentosAdjuntos}
+           
             </div>
             </li>
               </ul>`,
@@ -371,7 +381,16 @@ const PageReembolso = () => {
   return (
     <>
       <div /* className='container mx-auto'  */>
-        <div className="h_total luna-signup-left-overlay"></div>
+        <div className="h_total luna-signup-left-overlay2">
+          <div>
+          <img
+                      className="luna-signup-logo img-responsive"
+                      src={imgLogo}
+                      alt="logo"
+                    />
+          </div>
+       
+        </div>
         <div className="container">
           <div className="row">
             <Formik
@@ -962,12 +981,22 @@ const PageReembolso = () => {
               }) => (
                 <>
                   <div className="h_total luna-signup-left">
+                    <div className="tainer__">
                     <img
-                      className="luna-signup-logo img-responsive"
+                      className="luna-signup-logo2 "
                       src={imgLogo}
                       alt="logo"
                     />
-
+                    </div>
+                    <div className="item_table">
+                    <img
+                      className="luna-signup-logo3"
+                      src={imgLogo}
+                      alt="logo"
+                    />
+                    </div>
+                    
+                 
                     <div className="luna-navigation">
                       <a
                         style={{ display: page <= 1 && "none" }}

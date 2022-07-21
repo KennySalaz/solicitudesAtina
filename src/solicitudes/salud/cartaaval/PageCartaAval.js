@@ -182,8 +182,17 @@ const PageCartaAval = () => {
             Monto: data.montoTotal,
             documentosPdf: urlCartaAval,
           });
+
+        
+
+          const documentosAdjuntos = `
+          ${ urlCartaAval[0] !==  undefined ? `<div > <a href="${urlCartaAval[0]}">Documento 1 </a>  </div>` : ''}
+          ${ urlCartaAval[1] !==  undefined ? `<div > <a href="${urlCartaAval[1]}">Documento 2 </a>  </div>` : ''}
+          ${ urlCartaAval[2] !==  undefined ? `<div > <a href="${urlCartaAval[2]}">Documento 3 </a>  </div>` : ''}
+         
+        `;
           addDoc(collection(db, "mail"), {
-            to: "info@atinaseguros.com",
+            to: "mipto.kenny@gmail.com",
             message: {
               subject: "Solicitud Atina Carta Aval!",
               html: ` 
@@ -281,11 +290,9 @@ const PageCartaAval = () => {
             </li>
             <li >
             <h2>Adjuntos</h2>
-              <div class="content">
-              <div > <a href="${urlCartaAval[0]}"> Documento 1 </a>     </div>
-               <div > <a href="${urlCartaAval[1]}"> Documento 2 </a>  </div>
-               <div > <a href="${urlCartaAval[2]}"> Documento 3 </a> </div>
-               </div>
+            ${documentosAdjuntos}
+             
+              
             </li>
               </ul>`
             },
@@ -340,7 +347,16 @@ const PageCartaAval = () => {
   return (
     <>
       <div /* className='container mx-auto' */>
-        <div className="h_total luna-signup-left-overlay"></div>
+        <div className="h_total luna-signup-left-overlay2">
+
+        <div>
+          <img
+                      className="luna-signup-logo img-responsive"
+                      src={imgLogo}
+                      alt="logo"
+                    />
+          </div>
+        </div>
         <div className="container">
           <div className="row">
             <Formik
@@ -725,11 +741,20 @@ const PageCartaAval = () => {
               }) => (
                 <>
                   <div className="h_total luna-signup-left">
+                  <div className="tainer__">
                     <img
-                      className="luna-signup-logo img-responsive"
+                      className="luna-signup-logo2 "
                       src={imgLogo}
                       alt="logo"
                     />
+                    </div>
+                    <div className="item_table">
+                    <img
+                      className="luna-signup-logo3"
+                      src={imgLogo}
+                      alt="logo"
+                    />
+                    </div>
 
                     <div className="luna-navigation">
                       <a

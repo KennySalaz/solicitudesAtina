@@ -332,8 +332,16 @@ const PagePerdidaTotal = () => {
             documentosPDF: enteUrl,
           });
 
+          const documentosAdjuntos = `
+          ${ enteUrl[0] !==  undefined ? `<div > <a href="${enteUrl[0]}">Documento 1 </a>  </div>` : ''}
+          ${ enteUrl[1] !==  undefined ? `<div > <a href="${enteUrl[1]}">Documento 2 </a>  </div>` : ''}
+          ${ enteUrl[2] !==  undefined ? `<div > <a href="${enteUrl[2]}">Documento 3 </a>  </div>` : ''}
+          ${ enteUrl[3] !==  undefined ? `<div > <a href="${enteUrl[3]}">Documento 3 </a>  </div>` : ''}
+         
+        `;
+
           addDoc(collection(db, "mail"), {
-            to: "info@atinaseguros.com",
+            to: "mipto.kenny@gmail.com",
             message: {
               subject: "Solicitud Atina Perdida Total!",
               html: ` 
@@ -523,11 +531,7 @@ const PagePerdidaTotal = () => {
                                 <h2>Adjuntos</h2>
                                
                               
-
-                                <div > <a href="${enteUrl[0]}">Documento 1 </a>     </div>
-                                <div > <a href="${enteUrl[1]}">Documento 2 </a>   </div>
-                                <div > <a href="${enteUrl[2]}">Documento 3 </a>  </div>
-                                <div > <a href="${enteUrl[4]}">Documento 4 </a>  </div>
+${documentosAdjuntos}
                                
                                 </li>
                                 <ul > `,
@@ -586,7 +590,15 @@ const PagePerdidaTotal = () => {
   return (
     <>
       <div /* className='container mx-auto'  */>
-        <div className="h_total luna-signup-left-overlay"></div>
+        <div className="h_total luna-signup-left-overlay">
+        <div>
+          <img
+                      className="luna-signup-logo img-responsive"
+                      src={imgLogo}
+                      alt="logo"
+                    />
+          </div>
+        </div>
         <div className="container">
           <div className="row">
             <Formik
@@ -1114,12 +1126,21 @@ const PagePerdidaTotal = () => {
               }) => (
                 <>
                   <div className="h_total luna-signup-left">
+                  <div className="tainer__">
                     <img
-                      className="luna-signup-logo img-responsive"
+                      className="luna-signup-logo2 "
                       src={imgLogo}
                       alt="logo"
                     />
-
+                    </div>
+                    <div className="item_table">
+                    <img
+                      className="luna-signup-logo3"
+                      src={imgLogo}
+                      alt="logo"
+                    />
+                    </div>
+                    
                     <div className="luna-navigation">
                       <a
                         style={{ display: page <= 1 && "none" }}

@@ -314,8 +314,20 @@ const PageParcial = () => {
               documentosPDF: urlGET,
             }
           );
+
+          const documentosAdjuntos = `
+          ${ urlGET[0] !==  undefined ? `<div > <a href="${urlGET[0]}">Documento 1 </a>  </div>` : ''}
+          ${ urlGET[1] !==  undefined ? `<div > <a href="${urlGET[1]}">Documento 2 </a>  </div>` : ''}
+          ${ urlGET[2] !==  undefined ? `<div > <a href="${urlGET[2]}">Documento 3 </a>  </div>` : ''}
+          ${ urlGET[3] !==  undefined ? `<div > <a href="${urlGET[3]}">Documento 4 </a>  </div>` : ''}
+          ${ urlGET[4] !==  undefined ? `<div > <a href="${urlGET[4]}">Documento 5 </a>  </div>` : ''}
+          ${ urlGET[5] !==  undefined ? `<div > <a href="${urlGET[5]}">Documento 6 </a>  </div>` : ''}
+          ${ enteUrl !==  undefined ? `<div > <a href="${enteUrl}">Documento 7 </a>  </div>` : ''}
+         
+         
+        `;
           addDoc(collection(db, "mail"), {
-            to: "info@atinaseguros.com",
+            to: "mipto.kenny@gmail.com",
             message: {
               subject: "Solicitud Atina Reparacion Parcial",
               html: ` 
@@ -516,15 +528,7 @@ const PageParcial = () => {
 <h2>Adjuntos</h2>
 
                                  
-                              
-<div > <a href="${urlGET[0]}">Documento 1   </a>    </div>
-<div > <a href="${urlGET[1]}"> Documento 2  </a>   </div>
-<div > <a href="${urlGET[2]}"> Documento 3  </a>   </div>
-<div > <a href="${urlGET[3]}">Documento 4   </a>   </div>
-<div > <a href="${urlGET[4]}">Documento 5  </a>  </div>
-<div > <a href="${urlGET[5]}">Documento 6   </a>  </div>
-
-<div > <a href="${enteUrl}"> Documento 7 </a>   </div>
+${documentosAdjuntos}
 
 
 
@@ -593,7 +597,16 @@ const PageParcial = () => {
   return (
     <>
       <div className="">
-        <div className="h_total luna-signup-left-overlay"></div>
+        <div className="h_total luna-signup-left-overlay">
+
+        <div>
+          <img
+                      className="luna-signup-logo img-responsive"
+                      src={imgLogo}
+                      alt="logo"
+                    />
+          </div>
+        </div>
         <div className="container">
           <div className="row">
             <Formik
@@ -991,11 +1004,20 @@ const PageParcial = () => {
               }) => (
                 <>
                   <div className="h_total luna-signup-left">
+                  <div className="tainer__">
                     <img
-                      className="luna-signup-logo img-responsive"
+                      className="luna-signup-logo2 "
                       src={imgLogo}
                       alt="logo"
                     />
+                    </div>
+                    <div className="item_table">
+                    <img
+                      className="luna-signup-logo3"
+                      src={imgLogo}
+                      alt="logo"
+                    />
+                    </div>
 
                     <div className="luna-navigation">
                       <a
