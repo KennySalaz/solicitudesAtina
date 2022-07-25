@@ -280,7 +280,7 @@ const PageParcial = () => {
               Tipodepóliza: formStep1.tipoPoliza,
               NombreDelTomador: data.nombreTomador,
               CompañíadeSeguros: data.selectSeguro,
-           
+
               Nombredeltitulardelapóliza: data.nombreTitularPoliza,
               CéduladeidentidadTitular: data.cedulaIdentidad,
               FechaNacimiento: data.fechaNacimiento,
@@ -316,11 +316,11 @@ const PageParcial = () => {
           );
 
           const compa = `
-          ${data.selectSeguro !== ''? `<h4 >Compañía de seguro  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.selectSeguro} </span></h4>` : ''}
-          ${data.nombreTomador !== ''? `<h4 >Nombre de la empresa  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.nombreTomador} </span></h4>` : ''}
+          ${data.selectSeguro !== '' ? `<h4 >Compañía de seguro  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.selectSeguro} </span></h4>` : ''}
+          ${data.nombreTomador !== '' ? `<h4 >Nombre de la empresa  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.nombreTomador} </span></h4>` : ''}
           
           `
-          ;
+            ;
 
 
           const dataBeneficiario = `
@@ -338,18 +338,18 @@ const PageParcial = () => {
           `;
 
           const documentosAdjuntos = `
-          ${ urlGET[0] !==  undefined ? `<div > <a href="${urlGET[0]}">Documento 1 </a>  </div>` : ''}
-          ${ urlGET[1] !==  undefined ? `<div > <a href="${urlGET[1]}">Documento 2 </a>  </div>` : ''}
-          ${ urlGET[2] !==  undefined ? `<div > <a href="${urlGET[2]}">Documento 3 </a>  </div>` : ''}
-          ${ urlGET[3] !==  undefined ? `<div > <a href="${urlGET[3]}">Documento 4 </a>  </div>` : ''}
-          ${ urlGET[4] !==  undefined ? `<div > <a href="${urlGET[4]}">Documento 5 </a>  </div>` : ''}
-          ${ urlGET[5] !==  undefined ? `<div > <a href="${urlGET[5]}">Documento 6 </a>  </div>` : ''}
-          ${ enteUrl !==  undefined ? `<div > <a href="${enteUrl}">Documento 7 </a>  </div>` : ''}
+          ${urlGET[0] !== undefined ? `<div > <a href="${urlGET[0]}">Documento 1 </a>  </div>` : ''}
+          ${urlGET[1] !== undefined ? `<div > <a href="${urlGET[1]}">Documento 2 </a>  </div>` : ''}
+          ${urlGET[2] !== undefined ? `<div > <a href="${urlGET[2]}">Documento 3 </a>  </div>` : ''}
+          ${urlGET[3] !== undefined ? `<div > <a href="${urlGET[3]}">Documento 4 </a>  </div>` : ''}
+          ${urlGET[4] !== undefined ? `<div > <a href="${urlGET[4]}">Documento 5 </a>  </div>` : ''}
+          ${urlGET[5] !== undefined ? `<div > <a href="${urlGET[5]}">Documento 6 </a>  </div>` : ''}
+          ${enteUrl !== undefined ? `<div > <a href="${enteUrl}">Documento 7 </a>  </div>` : ''}
          
          
         `;
           addDoc(collection(db, "mail"), {
-            to: "mipto.kenny@gmail.com",
+            to: "info@atinaseguros.com",
             message: {
               subject: "Solicitud Atina Reparacion Parcial",
               html: ` 
@@ -497,12 +497,12 @@ const PageParcial = () => {
     color: #6e6e6e;
     font-size: 13px;
     text-transform: uppercase;
-    margin-left: 10px;"> ${  formStep1.vehiculomoverseSioNo} </span ></h4>
+    margin-left: 10px;"> ${formStep1.vehiculomoverseSioNo} </span ></h4>
                                 <h4>¿Indicar si hay roturas de vidrios? : <span style="font-weight: 800;
     color: #6e6e6e;
     font-size: 13px;
     text-transform: uppercase;
-    margin-left: 10px;"> ${ formStep1.roturasSioNo} </span ></h4>
+    margin-left: 10px;"> ${formStep1.roturasSioNo} </span ></h4>
 </li>
 
 <li>
@@ -580,12 +580,12 @@ ${documentosAdjuntos}
       <div className="">
         <div className="h_total luna-signup-left-overlay">
 
-        <div>
-          <img
-                      className="luna-signup-logo img-responsive"
-                      src={imgLogo}
-                      alt="logo"
-                    />
+          <div>
+            <img
+              className="luna-signup-logo img-responsive"
+              src={imgLogo}
+              alt="logo"
+            />
           </div>
         </div>
         <div className="container">
@@ -985,19 +985,19 @@ ${documentosAdjuntos}
               }) => (
                 <>
                   <div className="h_total luna-signup-left">
-                  <div className="tainer__">
-                    <img
-                      className="luna-signup-logo2 "
-                      src={imgLogo}
-                      alt="logo"
-                    />
+                    <div className="tainer__">
+                      <img
+                        className="luna-signup-logo2 "
+                        src={imgLogo}
+                        alt="logo"
+                      />
                     </div>
                     <div className="item_table">
-                    <img
-                      className="luna-signup-logo3"
-                      src={imgLogo}
-                      alt="logo"
-                    />
+                      <img
+                        className="luna-signup-logo3"
+                        src={imgLogo}
+                        alt="logo"
+                      />
                     </div>
 
                     <div className="luna-navigation">

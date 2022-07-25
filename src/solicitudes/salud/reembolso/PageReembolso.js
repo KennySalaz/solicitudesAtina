@@ -31,7 +31,7 @@ const storage = getStorage(firebaseApp);
 
 const PageReembolso = () => {
   const navigate = useNavigate();
-  
+
   const Swal = require("sweetalert2");
   const [page, setPage] = useState(1);
   const [loadingModal, setLoadingModal] = useState(false);
@@ -210,13 +210,13 @@ const PageReembolso = () => {
             Monto: data.montoTotal,
             documentosPdf: urlGET,
           });
-          
+
           const compa = `
-          ${data.selectSeguro !== ''? `<h4 >Compañía de seguro  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.selectSeguro} </span></h4>` : ''}
-          ${data.nombreTomador !== ''? `<h4 >Nombre de la empresa  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.nombreTomador} </span></h4>` : ''}
+          ${data.selectSeguro !== '' ? `<h4 >Compañía de seguro  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.selectSeguro} </span></h4>` : ''}
+          ${data.nombreTomador !== '' ? `<h4 >Nombre de la empresa  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.nombreTomador} </span></h4>` : ''}
           
           `
-          ;
+            ;
 
 
 
@@ -227,23 +227,23 @@ const PageReembolso = () => {
           ${phonestate.phoneTitular !== '' || phonestate.phoneTitular2 !== '' ? `<h4 >Número de teléfono del titular :  <span  style="font-weight: 800; color: #6e6e6e; font-size: 13px; text-transform: uppercase; margin-left: 10px;">  ${phonestate.phoneTitular || phonestate.phoneTitular2} </span>  </h4>` : ''}
           ${data.cedulaTitular !== '' || data.cedulaTitular2 !== '' ? `<h4 >Cédula de identidad del titular :  <span  style="font-weight: 800; color: #6e6e6e; font-size: 13px; text-transform: uppercase; margin-left: 10px;">  ${data.cedulaTitular || data.cedulaTitular2} </span>  </h4>` : ''}
 
-          ${data.nombreBeneficiarioPoliza !== ''? `<h4 >Nombre del beneficiario : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.nombreBeneficiarioPoliza} </span></h4>` : ''}
-          ${data.cedulaBeneficiario !== ''? `<h4 >Cédula de identidad del beneficiario : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.cedulaBeneficiario} </span></h4>` : ''}
-          ${data.emailBeneficiario !== ''? `<h4 >Correo electrónico del beneficiario : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.emailBeneficiario} </span></h4>` : ''}
-          ${phonestate.phoneBeneficiario !== ''? `<h4 >Número de teléfono del beneficiario : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${phonestate.phoneBeneficiario} </span></h4>` : ''}
+          ${data.nombreBeneficiarioPoliza !== '' ? `<h4 >Nombre del beneficiario : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.nombreBeneficiarioPoliza} </span></h4>` : ''}
+          ${data.cedulaBeneficiario !== '' ? `<h4 >Cédula de identidad del beneficiario : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.cedulaBeneficiario} </span></h4>` : ''}
+          ${data.emailBeneficiario !== '' ? `<h4 >Correo electrónico del beneficiario : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.emailBeneficiario} </span></h4>` : ''}
+          ${phonestate.phoneBeneficiario !== '' ? `<h4 >Número de teléfono del beneficiario : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${phonestate.phoneBeneficiario} </span></h4>` : ''}
         
           
           `
-          ;
-          
-  const documentosAdjuntos = `
-    ${ urlGET[0] !==  undefined ? `<div > <a href="${urlGET[0]}">Documento 1 </a>  </div>` : ''}
-    ${ urlGET[1] !==  undefined ? `<div > <a href="${urlGET[1]}">Documento 2 </a>  </div>` : ''}
-    ${ urlGET[2] !==  undefined ? `<div > <a href="${urlGET[2]}">Documento 3 </a>  </div>` : ''}
-    ${ urlGET[3] !==  undefined ? `<div > <a href="${urlGET[3]}">Documento 4 </a>  </div> ` : ''}
+            ;
+
+          const documentosAdjuntos = `
+    ${urlGET[0] !== undefined ? `<div > <a href="${urlGET[0]}">Documento 1 </a>  </div>` : ''}
+    ${urlGET[1] !== undefined ? `<div > <a href="${urlGET[1]}">Documento 2 </a>  </div>` : ''}
+    ${urlGET[2] !== undefined ? `<div > <a href="${urlGET[2]}">Documento 3 </a>  </div>` : ''}
+    ${urlGET[3] !== undefined ? `<div > <a href="${urlGET[3]}">Documento 4 </a>  </div> ` : ''}
   `;
           addDoc(collection(db, "mail"), {
-            to: "mipto.kenny@gmail.com",
+            to: "info@atinaseguros.com",
             message: {
               subject: "Solicitud Atina Reembolso!",
               html: `	
@@ -359,13 +359,13 @@ const PageReembolso = () => {
       <div /* className='container mx-auto'  */>
         <div className="h_total luna-signup-left-overlay2">
           <div>
-          <img
-                      className="luna-signup-logo img-responsive"
-                      src={imgLogo}
-                      alt="logo"
-                    />
+            <img
+              className="luna-signup-logo img-responsive"
+              src={imgLogo}
+              alt="logo"
+            />
           </div>
-       
+
         </div>
         <div className="container">
           <div className="row">
@@ -605,7 +605,7 @@ const PageReembolso = () => {
                   if (
                     !formStep1.tipoReembolso &&
                     formStep1.tipoReembolso ===
-                      "Selecciona el tipo de reembolso"
+                    "Selecciona el tipo de reembolso"
                   ) {
                     errores.tipoReembolso = true;
                   }
@@ -917,7 +917,7 @@ const PageReembolso = () => {
                   if (
                     formStep1.tipoReembolso &&
                     formStep1.tipoReembolso !==
-                      "Selecciona el tipo de reembolso"
+                    "Selecciona el tipo de reembolso"
                   ) {
                     /* if (formStep1.tipoPoliza === 'Individual') {
                                             valores.nombreTomador = ''
@@ -958,21 +958,21 @@ const PageReembolso = () => {
                 <>
                   <div className="h_total luna-signup-left">
                     <div className="tainer__">
-                    <img
-                      className="luna-signup-logo2 "
-                      src={imgLogo}
-                      alt="logo"
-                    />
+                      <img
+                        className="luna-signup-logo2 "
+                        src={imgLogo}
+                        alt="logo"
+                      />
                     </div>
                     <div className="item_table">
-                    <img
-                      className="luna-signup-logo3"
-                      src={imgLogo}
-                      alt="logo"
-                    />
+                      <img
+                        className="luna-signup-logo3"
+                        src={imgLogo}
+                        alt="logo"
+                      />
                     </div>
-                    
-                 
+
+
                     <div className="luna-navigation">
                       <a
                         style={{ display: page <= 1 && "none" }}

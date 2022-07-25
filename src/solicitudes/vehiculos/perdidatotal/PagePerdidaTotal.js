@@ -320,11 +320,11 @@ const PagePerdidaTotal = () => {
             CorreoDelConductor: data.correoConductor,
             TelefonoDelConductor: phonestate.phoneTitular2,
 
-            FechaDeOcurrencia: data.fechaOcurrencia || data.fechaOcurrencia2 || data.fechaOcurrencia3 ,
-            HoraAproxima: data.horaOcurrencia ||  data.horaOcurrencia2 ||  data.horaOcurrencia3 ,
-            LugarOcurrencia: data.lugarOcurrencia || data.lugarOcurrencia2 || data.lugarOcurrencia3 ,
-            DescripciónDeLosHechos: data.descripcionHechos || data.descripcionHechos2 || data.descripcionHechos3 ,
-            DescribirLosDañosAlVehículo: data.describirDanos ||   data.describirDanos2 ||   data.describirDanos3 ,
+            FechaDeOcurrencia: data.fechaOcurrencia || data.fechaOcurrencia2 || data.fechaOcurrencia3,
+            HoraAproxima: data.horaOcurrencia || data.horaOcurrencia2 || data.horaOcurrencia3,
+            LugarOcurrencia: data.lugarOcurrencia || data.lugarOcurrencia2 || data.lugarOcurrencia3,
+            DescripciónDeLosHechos: data.descripcionHechos || data.descripcionHechos2 || data.descripcionHechos3,
+            DescribirLosDañosAlVehículo: data.describirDanos || data.describirDanos2 || data.describirDanos3,
             IntervinoAlgunaAutoridad: formStep1.intervinoSioNo,
             /* InpeccionDelEntePDF: enteUrl, */
             HuboDañosATerceros: formStep1.danosSioNo || formStep1.danosSioNo2,
@@ -339,31 +339,31 @@ const PagePerdidaTotal = () => {
           ${data.gradoConductor !== '' ? `<h4 >Grado de licencia del conductor : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.gradoConductor} </span></h4>` : ''}
           ${data.correoConductor !== '' ? `<h4 >Correo electrónico del conductor : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.correoConductor} </span></h4>` : ''}
           ${phonestate.phoneTitular2 !== '' ? `<h4 >Número de teléfono del conductor : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${phonestate.phoneTitular2} </span></h4>` : ''}`;
-          
-          
+
+
           const compa = `
-          ${data.selectSeguro !== ''? `<h4 >Compañía de seguro  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.selectSeguro} </span></h4>` : ''}
-          ${data.nombreTomador !== ''? `<h4 >Nombre de la empresa  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.nombreTomador} </span></h4>` : ''}`;
+          ${data.selectSeguro !== '' ? `<h4 >Compañía de seguro  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.selectSeguro} </span></h4>` : ''}
+          ${data.nombreTomador !== '' ? `<h4 >Nombre de la empresa  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.nombreTomador} </span></h4>` : ''}`;
 
           const dataSioNo = `
-          ${data.fechaOcurrencia  !== ''  || data.fechaOcurrencia2  !== '' || data.fechaOcurrencia3 !== ''  ? `<h4 >Fecha de ocurrencia : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.fechaOcurrencia || data.fechaOcurrencia2 || data.fechaOcurrencia3} </span></h4>` : ''}
-          ${data.horaOcurrencia  !== ''  || data.horaOcurrencia2  !== '' || data.horaOcurrencia3 !== ''  ? `<h4 >Hora de ocurrencia  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.horaOcurrencia || data.horaOcurrencia2 || data.horaOcurrencia3} </span></h4>` : ''}
-          ${data.lugarOcurrencia  !== ''  || data.lugarOcurrencia2  !== '' || data.lugarOcurrencia3 !== ''  ? `<h4 >Lugar de ocurrencia : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.lugarOcurrencia || data.lugarOcurrencia2 || data.lugarOcurrencia3} </span></h4>` : ''}
-          ${data.descripcionHechos  !== ''  || data.descripcionHechos2  !== '' || data.descripcionHechos3 !== ''  ? `<h4 >Descripción de los hechos : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.descripcionHechos || data.descripcionHechos2 || data.descripcionHechos3} </span></h4>` : ''}
-          ${ data.describirDanos  !== ''  ||  data.describirDanos3 !== ''  ? `<h4 >Descripcion de los daños del vehículo : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${ data.describirDanos ||  data.describirDanos3} </span></h4>` : ''}
-          ${formStep1.intervinoSioNo !== ''  ? `<h4 >¿Intervino alguna autoridad? : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${formStep1.intervinoSioNo} </span></h4>` : ''}
-          ${formStep1.danosSioNo !== '' || formStep1.danosSioNo2 !== ''  ? `<h4 >¿Hubo daños a terceros? : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${formStep1.danosSioNo || formStep1.danosSioNo2} </span></h4>` : ''}
-          ${formStep1.vehiculoDetenidoSioNo !== ''  ? `<h4 >¿El vehiculo esta detenido? : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${formStep1.vehiculoDetenidoSioNo} </span></h4>` : ''}
+          ${data.fechaOcurrencia !== '' || data.fechaOcurrencia2 !== '' || data.fechaOcurrencia3 !== '' ? `<h4 >Fecha de ocurrencia : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.fechaOcurrencia || data.fechaOcurrencia2 || data.fechaOcurrencia3} </span></h4>` : ''}
+          ${data.horaOcurrencia !== '' || data.horaOcurrencia2 !== '' || data.horaOcurrencia3 !== '' ? `<h4 >Hora de ocurrencia  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.horaOcurrencia || data.horaOcurrencia2 || data.horaOcurrencia3} </span></h4>` : ''}
+          ${data.lugarOcurrencia !== '' || data.lugarOcurrencia2 !== '' || data.lugarOcurrencia3 !== '' ? `<h4 >Lugar de ocurrencia : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.lugarOcurrencia || data.lugarOcurrencia2 || data.lugarOcurrencia3} </span></h4>` : ''}
+          ${data.descripcionHechos !== '' || data.descripcionHechos2 !== '' || data.descripcionHechos3 !== '' ? `<h4 >Descripción de los hechos : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.descripcionHechos || data.descripcionHechos2 || data.descripcionHechos3} </span></h4>` : ''}
+          ${data.describirDanos !== '' || data.describirDanos3 !== '' ? `<h4 >Descripcion de los daños del vehículo : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.describirDanos || data.describirDanos3} </span></h4>` : ''}
+          ${formStep1.intervinoSioNo !== '' ? `<h4 >¿Intervino alguna autoridad? : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${formStep1.intervinoSioNo} </span></h4>` : ''}
+          ${formStep1.danosSioNo !== '' || formStep1.danosSioNo2 !== '' ? `<h4 >¿Hubo daños a terceros? : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${formStep1.danosSioNo || formStep1.danosSioNo2} </span></h4>` : ''}
+          ${formStep1.vehiculoDetenidoSioNo !== '' ? `<h4 >¿El vehiculo esta detenido? : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${formStep1.vehiculoDetenidoSioNo} </span></h4>` : ''}
 `;
 
           const documentosAdjuntos = `
-          ${ enteUrl[0] !==  undefined ? `<div > <a href="${enteUrl[0]}">Documento 1 </a>  </div>` : ''}
-          ${ enteUrl[1] !==  undefined ? `<div > <a href="${enteUrl[1]}">Documento 2 </a>  </div>` : ''}
-          ${ enteUrl[2] !==  undefined ? `<div > <a href="${enteUrl[2]}">Documento 3 </a>  </div>` : ''}
-          ${ enteUrl[3] !==  undefined ? `<div > <a href="${enteUrl[3]}">Documento 3 </a>  </div>` : ''}`;
+          ${enteUrl[0] !== undefined ? `<div > <a href="${enteUrl[0]}">Documento 1 </a>  </div>` : ''}
+          ${enteUrl[1] !== undefined ? `<div > <a href="${enteUrl[1]}">Documento 2 </a>  </div>` : ''}
+          ${enteUrl[2] !== undefined ? `<div > <a href="${enteUrl[2]}">Documento 3 </a>  </div>` : ''}
+          ${enteUrl[3] !== undefined ? `<div > <a href="${enteUrl[3]}">Documento 3 </a>  </div>` : ''}`;
 
           addDoc(collection(db, "mail"), {
-            to: "mipto.kenny@gmail.com",
+            to: "info@atinaseguros.com",
             message: {
               subject: "Solicitud Atina Perdida Total!",
               html: ` 
@@ -490,8 +490,8 @@ ${documentosAdjuntos}
             }
           });
         } catch (error) {
-          
-         
+
+
           Swal.fire({
             icon: "error",
             title: "Error...",
@@ -524,12 +524,12 @@ ${documentosAdjuntos}
     <>
       <div /* className='container mx-auto'  */>
         <div className="h_total luna-signup-left-overlay">
-        <div>
-          <img
-                      className="luna-signup-logo img-responsive"
-                      src={imgLogo}
-                      alt="logo"
-                    />
+          <div>
+            <img
+              className="luna-signup-logo img-responsive"
+              src={imgLogo}
+              alt="logo"
+            />
           </div>
         </div>
         <div className="container">
@@ -1059,21 +1059,21 @@ ${documentosAdjuntos}
               }) => (
                 <>
                   <div className="h_total luna-signup-left">
-                  <div className="tainer__">
-                    <img
-                      className="luna-signup-logo2 "
-                      src={imgLogo}
-                      alt="logo"
-                    />
+                    <div className="tainer__">
+                      <img
+                        className="luna-signup-logo2 "
+                        src={imgLogo}
+                        alt="logo"
+                      />
                     </div>
                     <div className="item_table">
-                    <img
-                      className="luna-signup-logo3"
-                      src={imgLogo}
-                      alt="logo"
-                    />
+                      <img
+                        className="luna-signup-logo3"
+                        src={imgLogo}
+                        alt="logo"
+                      />
                     </div>
-                    
+
                     <div className="luna-navigation">
                       <a
                         style={{ display: page <= 1 && "none" }}
