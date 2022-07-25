@@ -324,6 +324,9 @@ const PageParcial = () => {
 
 
           const dataBeneficiario = `
+
+
+          
           ${data.nombreConductor !== '' ? `<h4 >Nombre del conductor : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.nombreConductor} </span></h4>` : ''}
           ${data.cedulaConductor !== '' ? `<h4 >Cédula de identidad del conductor : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.cedulaConductor} </span></h4>` : ''}
           ${data.fechaConductor !== '' ? `<h4 >Fecha de nacimiento del conductor  : <span  style="font-weight: 800; color: #6e6e6e;font-size: 13px;text-transform: uppercase;margin-left: 10px;"> ${data.fechaConductor} </span></h4>` : ''}
