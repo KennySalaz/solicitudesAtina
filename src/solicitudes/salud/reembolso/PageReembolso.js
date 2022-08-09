@@ -17,7 +17,7 @@ import "../../../css/Loading.css";
 import "../../../css/Modals.css";
 import "../../../css/plugins.css";
 import "../../../css/style.css";
-import imgLogo from "../../../images/atinaL.png";
+import imgLogo from "../../../images/logowhite.png";
 import { Formik } from "formik";
 import Steps1 from "./steps/Steps1";
 import Steps from "./steps/Steps";
@@ -243,7 +243,7 @@ const PageReembolso = () => {
     ${urlGET[3] !== undefined ? `<div > <a href="${urlGET[3]}">Documento 4 </a>  </div> ` : ''}
   `;
           addDoc(collection(db, "mail"), {
-            to: "info@atinaseguros.com",
+            to: "atinagestionreclamos@gmail.com",
             message: {
               subject: "Solicitud Atina Reembolso!",
               html: `	
